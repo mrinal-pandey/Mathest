@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mathest</string>
+    <string name="login">Login</string>
+    <string name="uid">UID</string>
 </resources>

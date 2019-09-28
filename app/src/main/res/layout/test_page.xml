@@ -7,10 +7,11 @@
     android:background="#DCDCDC"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".TestPage">
 <LinearLayout
     android:layout_width="match_parent"
     android:background="#DCDCDC"
+    android:padding="10dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -32,13 +33,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="50dp"
+            android:textSize="40sp"
             android:text="Question 1" />
     </androidx.cardview.widget.CardView>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="20dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_gravity="center"
@@ -56,7 +57,7 @@
             android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:textSize="30sp"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi etiam dignissim diam quis. Nulla facilisi etiam dignissim diam quis." />
     </androidx.cardview.widget.CardView>
@@ -65,42 +66,40 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"/>
 
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ans 1"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ans 2"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ans 3"/>
-        <RadioButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ans 4"/>
-    </RadioGroup>
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter numeric answer if required"
-        android:layout_gravity="center"/>
+        android:hint="Enter numeric answer"
+        android:inputType="numberDecimal"
+        android:layout_gravity="center"
+        android:importantForAutofill="no" />
 
     <Space
         android:layout_width="match_parent"
         android:layout_height="30dp"/>
-    <Button
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Next"/>
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:text="Previous" />
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:text="Next" />
+    </LinearLayout>
 
 
 </LinearLayout>
