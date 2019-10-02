@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".StudentHome" />
         <activity android:name=".TestPage" />
+        <activity android:name=".Signup" />
     </application>
 
     <dist:module dist:instant="true" />
