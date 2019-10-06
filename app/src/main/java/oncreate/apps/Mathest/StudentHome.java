@@ -37,7 +37,7 @@ public class StudentHome extends AppCompatActivity {
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     Log.d(TAG, "Doc snapshot: " + documentSnapshot.toString());
                     User m_user = documentSnapshot.toObject(User.class);
-                    Log.d(TAG, m_user.getClassName());
+                    Log.d(TAG, "Class name: " + m_user.getClassName());
                     String name = m_user.getName();
                     String className = m_user.getClassName();
                     String school = m_user.getSchool();
@@ -50,6 +50,14 @@ public class StudentHome extends AppCompatActivity {
         }
 
 
+    }
+
+    public void getData() {
+    /*
+        TODO
+        Access the drive sheet, get the number of questions answered so far, no. correct and no. wrong.
+
+     */
     }
 
     public void launchTest(View view) {

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "187994688805",
+    "firebase_url": "https://mathest-b9d83.firebaseio.com",
+    "project_id": "mathest-b9d83",
+    "storage_bucket": "mathest-b9d83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:187994688805:android:5cf32652083f490ee39ecc",
+        "android_client_info": {
+          "package_name": "oncreate.apps.Mathest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "187994688805-bikdupfa240s9v4bo3fguj41do1gnveu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "oncreate.apps.Mathest",
+            "certificate_hash": "0d191270dab3b7db73f8beb4663e53ddedaca8f0"
+          }
+        },
+        {
+          "client_id": "187994688805-tqaedt1jdqqghgquu1kokt5fjd7apj8i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDx5ktkuuOHEXQfoHBSVtavR-4e8z96d5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "187994688805-tqaedt1jdqqghgquu1kokt5fjd7apj8i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

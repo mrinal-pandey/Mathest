@@ -12,7 +12,7 @@
         android:ems="10"
         android:hint="@string/uid"
         android:textAlignment="center"
-        android:inputType="text"
+        android:inputType="number"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

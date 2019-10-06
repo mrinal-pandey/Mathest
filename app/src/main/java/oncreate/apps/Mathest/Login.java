@@ -1,6 +1,8 @@
 package oncreate.apps.Mathest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +18,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import oncreate.apps.Mathest.UI.DialogHandler;
+
 public class Login extends AppCompatActivity {
 
     final private String TAG = "Login_Mathest";
     FirebaseFirestore firestoreDatabase;
     EditText UIDInput;
     String UID;
+    DialogHandler dialogHandler;
     String sheetLink;
 
     @Override
@@ -31,6 +36,8 @@ public class Login extends AppCompatActivity {
         firestoreDatabase = FirebaseFirestore.getInstance();
         UIDInput = findViewById(R.id.UID_input);
 
+        dialogHandler = new DialogHandler(this);
+
     }
 
     public void loginUser(View view) {
@@ -38,36 +45,43 @@ public class Login extends AppCompatActivity {
         UID = UIDInput.getText().toString();
 
         if (!UID.isEmpty()) {
-            firestoreDatabase.collection(getString(R.string.node_users))
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Log.d(TAG, "UID entered: " + UID + " UID from database: " + document.getId());
-                                    if (document.getId().equals(UID)) {
-                                        try {
-                                            sheetLink = document.getData().get("Sheet link").toString();
-                                        } catch (NullPointerException e) {
-                                            sheetLink = "";
-                                        }
-                                        Log.d(TAG, "Sheet link: " + sheetLink);
+            if (isNetworkConnected()) {
+                dialogHandler.showDialog();
+                firestoreDatabase.collection(getString(R.string.node_users))
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Log.d(TAG, "UID entered: " + UID + " UID from database: " + document.getId());
+                                        if (document.getId().equals(UID)) {
+                                            try {
+                                                sheetLink = document.getData().get("Sheet link").toString();
+                                            } catch (NullPointerException e) {
+                                                sheetLink = "";
+                                            }
+                                            Log.d(TAG, "Sheet link: " + sheetLink);
+                                            dialogHandler.hideDialog();
 
-                                        Intent in = new Intent(getApplicationContext(), StudentHome.class);
-                                        in.putExtra("link", sheetLink);
-                                        in.putExtra("uid", UID);
-                                        startActivity(in);
-                                        //TODO implement finish after implementing a cached sign-in system.
-                                        //finish();
-                                        break;
+                                            Intent in = new Intent(getApplicationContext(), StudentHome.class);
+                                            in.putExtra("link", sheetLink);
+                                            in.putExtra("uid", UID);
+                                            startActivity(in);
+                                            //TODO implement finish after implementing a cached sign-in system.
+                                            //finish();
+                                            break;
+                                        }
                                     }
+                                } else {
+                                    Log.w(TAG, "Error getting documents.", task.getException());
+                                    dialogHandler.hideDialog();
                                 }
-                            } else {
-                                Log.w(TAG, "Error getting documents.", task.getException());
                             }
-                        }
-                    });
+                        });
+            } else {
+                Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            }
         } else {
             Toast.makeText(this, "Please enter a valid UID", Toast.LENGTH_LONG).show();
         }
@@ -78,6 +92,13 @@ public class Login extends AppCompatActivity {
     public void signupUser(View view) {
         //Screen to sign-up a new user.
         startActivity(new Intent(this, Signup.class));
+    }
+
+    private boolean isNetworkConnected() {
+
+        //Checks for network connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
 

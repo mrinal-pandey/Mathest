@@ -2,24 +2,24 @@ package oncreate.apps.Mathest.Wrappers;
 
 public class User {
 
-    String Name;
-    String School;
-    String ClassName;
+    String name;
+    String school;
+    String className;
     String sheetLink;
-    int questions_answered = 0;
+    int questionsAnswered = 0;
 
     public User() {
     }
 
     public User(String name, String sheetLink, String school, String Class) {
-        this.Name = name;
+        this.name = name;
         this.sheetLink = sheetLink;
-        this.School = school;
-        this.ClassName = Class;
+        this.school = school;
+        this.className = Class;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public String getSheetLink() {
@@ -27,14 +27,14 @@ public class User {
     }
 
     public int getQuestions_answered() {
-        return questions_answered;
+        return questionsAnswered;
     }
 
     public String getSchool() {
-        return School;
+        return school;
     }
 
     public String getClassName() {
-        return ClassName;
+        return className;
     }
 }
