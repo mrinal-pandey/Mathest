@@ -53,9 +53,11 @@ public class Login extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
+                                    boolean uidNotFound = true;
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         Log.d(TAG, "UID entered: " + UID + " UID from database: " + document.getId());
                                         if (document.getId().equals(UID)) {
+                                            uidNotFound = false;
                                             try {
                                                 sheetLink = document.getData().get("Sheet link").toString();
                                             } catch (NullPointerException e) {
@@ -72,6 +74,11 @@ public class Login extends AppCompatActivity {
                                             //finish();
                                             break;
                                         }
+                                    }
+                                    if (uidNotFound) {
+                                        Log.w(TAG, "UID not found: " + UID);
+                                        Toast.makeText(getApplicationContext(), "Invalid UID , please try again", Toast.LENGTH_LONG).show();
+                                        dialogHandler.hideDialog();
                                     }
                                 } else {
                                     Log.w(TAG, "Error getting documents.", task.getException());
