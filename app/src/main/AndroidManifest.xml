@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".StudentHome" />
         <activity android:name=".TestPage" />
-        <activity android:name=".Signup" />
+        <activity android:name=".Signup"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
     <dist:module dist:instant="true" />
