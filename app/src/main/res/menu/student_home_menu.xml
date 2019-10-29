@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/addition_icon"
+        android:icon="@drawable/addition"/>
+    <item
+        android:id="@+id/subtraction_icon"
+        android:icon="@drawable/subtraction"/>
+    <item
+        android:id="@+id/multiplication_icon"
+        android:icon="@drawable/multiplication"/>
+    <item
+        android:id="@+id/division_icon"
+        android:icon="@drawable/division"/>
+</menu>
