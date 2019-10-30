@@ -9,6 +9,19 @@
     android:layout_gravity="center"
     android:gravity="center">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/student_home_toolbar"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#ffffff"
+        android:padding="5dp" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
@@ -138,7 +151,8 @@
                 android:layout_height="wrap_content"
                 android:onClick="launchTest"
                 android:text="Take test"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorTextPrimary"
+                android:background="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.784"

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,15 +33,15 @@ public class StudentHome extends AppCompatActivity {
     int wrongAns;
 
     TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt;
-    private ActionBar actionBar;
+    private Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
-
-        actionBar = getSupportActionBar();
-        actionBar.setTitle("Addition");
+        toolBar = findViewById(R.id.student_home_toolbar);
+        setSupportActionBar(toolBar);
+        toolBar.setTitle("Addition");
 
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
@@ -89,16 +90,16 @@ public class StudentHome extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()){
                 case R.id.addition_icon:
-                    actionBar.setTitle("Addition");
+                    toolBar.setTitle("Addition");
                     break;
                 case R.id.subtraction_icon:
-                    actionBar.setTitle("Subtraction");
+                    toolBar.setTitle("Subtraction");
                     break;
                 case R.id.multiplication_icon:
-                    actionBar.setTitle("Multiplication");
+                    toolBar.setTitle("Multiplication");
                     break;
                 case R.id.division_icon:
-                    actionBar.setTitle("Division");
+                    toolBar.setTitle("Division");
                     break;
             }
             return false;
