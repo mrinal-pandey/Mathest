@@ -3,12 +3,19 @@ package oncreate.apps.Mathest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,11 +33,18 @@ public class StudentHome extends AppCompatActivity {
     int wrongAns;
 
     TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt;
+    private Toolbar toolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
+        toolBar = findViewById(R.id.student_home_toolbar);
+        setSupportActionBar(toolBar);
+        toolBar.setTitle("Addition");
+
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+        navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
         nameTxt = findViewById(R.id.name_txt);
         classNameTxt = findViewById(R.id.class_txt);
@@ -70,6 +84,27 @@ public class StudentHome extends AppCompatActivity {
 
 
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navigationListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            switch (menuItem.getItemId()){
+                case R.id.addition_icon:
+                    toolBar.setTitle("Addition");
+                    break;
+                case R.id.subtraction_icon:
+                    toolBar.setTitle("Subtraction");
+                    break;
+                case R.id.multiplication_icon:
+                    toolBar.setTitle("Multiplication");
+                    break;
+                case R.id.division_icon:
+                    toolBar.setTitle("Division");
+                    break;
+            }
+            return false;
+        }
+    };
 
     public void getData() {
     /*

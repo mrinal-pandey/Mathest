@@ -98,7 +98,11 @@ public class Login extends AppCompatActivity {
 
     public void signupUser(View view) {
         //Screen to sign-up a new user.
-        startActivity(new Intent(this, Signup.class));
+        if(isNetworkConnected()) {
+            startActivity(new Intent(this, Signup.class));
+        }else {
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+        }
     }
 
     private boolean isNetworkConnected() {

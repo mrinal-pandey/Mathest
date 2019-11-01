@@ -55,13 +55,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:padding="5dp"
+            android:id="@+id/questionBody_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="30sp"
-            android:id="@+id/questionBody_txt"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Facilisi etiam dignissim diam quis. Nulla facilisi etiam dignissim diam quis." />
+            android:padding="5dp"
+            android:text="Add 5 and 5"
+            android:textSize="30sp" />
     </androidx.cardview.widget.CardView>
 
     <Space

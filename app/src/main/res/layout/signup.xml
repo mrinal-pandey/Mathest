@@ -14,7 +14,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/signup_bg_image"
     android:layout_height="match_parent"
     android:scrollbars="none">
 
@@ -24,6 +24,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:orientation="vertical">
+
 
         <Space
             android:layout_width="match_parent"
@@ -43,6 +44,7 @@
             android:padding="5dp"
             android:text="Your UID Is: "
             android:textAlignment="center"
+            android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -62,8 +64,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:ems="10"
+            android:textColor="@color/colorPrimary"
             android:hint="Full Name"
             android:inputType="textPersonName"
+            android:textColorHint="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
@@ -84,6 +88,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
+            android:textColor="@color/colorPrimary"
+            android:textColorHint="@color/colorPrimary"
             android:hint="Grade"
             android:inputType="number"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -106,6 +112,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
+            android:textColorHint="@color/colorPrimary"
+            android:textColor="@color/colorPrimary"
             android:hint="School"
             android:inputType="text"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -115,10 +123,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.581" />
 
-        <Space
+
+            <Space
             android:layout_width="match_parent"
             android:layout_height="30dp" />
 
+        <!--
         <Button
             android:id="@+id/submit"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -135,5 +145,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.982" />
+        -->
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="submitDetails"
+            android:text="Submit"
+            android:textColor="@color/colorTextPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintVertical_bias="0.055" />
+
     </LinearLayout>
 </ScrollView>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg_image"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/UID_input"
@@ -11,16 +12,19 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/uid"
-        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:importantForAutofill="no"
         android:inputType="number"
+        android:textAlignment="center"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
-        android:importantForAutofill="no" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <Button
         android:id="@+id/button"
@@ -29,7 +33,7 @@
         android:background="@drawable/rounded_button"
         android:onClick="loginUser"
         android:text="@string/login"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorTextPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -44,7 +48,7 @@
         android:background="@drawable/rounded_button"
         android:onClick="signupUser"
         android:text="sign up"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorTextPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
