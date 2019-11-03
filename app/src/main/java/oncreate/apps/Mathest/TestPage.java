@@ -295,6 +295,7 @@ public class TestPage extends AppCompatActivity {
 
     public void goToPreviousActivity(){
         Intent intent = new Intent(this, StudentHome.class);
+        intent.putExtra("uid", UID);
         startActivity(intent);
     }
 
