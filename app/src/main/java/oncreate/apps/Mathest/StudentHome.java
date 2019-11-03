@@ -1,28 +1,28 @@
 package oncreate.apps.Mathest;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import oncreate.apps.Mathest.Wrappers.User;
+
 
 public class StudentHome extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
@@ -35,10 +35,8 @@ public class StudentHome extends AppCompatActivity {
     int wrongAns;
     int sheetNo;
 
-    TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt, readyTxt, accuracyTxt, progressTxt;
+    TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt;
     private Toolbar toolBar;
-    private ProgressBar accuracyBar, progressBar;
-    private ObjectAnimator objectAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,17 +48,13 @@ public class StudentHome extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
-       /* nameTxt = findViewById(R.id.name_txt);
+        nameTxt = findViewById(R.id.name_txt);
         classNameTxt = findViewById(R.id.class_txt);
         schoolTxt = findViewById(R.id.school_txt);
         questionAnsweredTxt = findViewById(R.id.questionsAnswered_txt);
-        correctAnswersTxt = findVieyId(R.id.progress_bar);
-        accuracyBar.setMax(100);
-        progressBar.setMax(10+(wrongAns*3));
-        animateProgressBar(accuracyBar,accuracyPercent);
-        animateProgressBar(progwById(R.id.correctAnswers_txt);
-        wrongAnswersTxt = findViewById(R.id.wrongAnswers_txt);*/
-        readyTxt = findViewById(R.id.ready_txt);
+        correctAnswersTxt = findViewById(R.id.correctAnswers_txt);
+        wrongAnswersTxt = findViewById(R.id.wrongAnswers_txt);
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         String UID = getIntent().getStringExtra("uid");
         if (!UID.isEmpty()) {
@@ -75,9 +69,9 @@ public class StudentHome extends AppCompatActivity {
                     grade = m_user.getGrade();
                     school = m_user.getSchool();
 
-                    //nameTxt.setText(name);
-                    //classNameTxt.setText("Class: " + grade);
-                    //schoolTxt.setText("School: " + school);
+                    nameTxt.setText(name);
+                    classNameTxt.setText("Class: " + grade);
+                    schoolTxt.setText("School: " + school);
 
                 }
             });
@@ -85,31 +79,6 @@ public class StudentHome extends AppCompatActivity {
         setAttributes(R.id.addition_icon);
     }
 
-    public void defineProgress(){
-        accuracyTxt = findViewById(R.id.accuracy_percent_txt);
-        progressTxt = findViewById(R.id.progress_txt);
-        int accuracyPercent;
-        if(totalAns == 0) {
-            accuracyPercent = 0;
-        }
-        else {
-            accuracyPercent = (int) (((float)correctAns / totalAns) * 100);
-        }
-        accuracyTxt.setText("Your accuracy: " + accuracyPercent + "%");
-        progressTxt.setText("Your progress: " + totalAns+"/"+(10+wrongAns*3));
-        accuracyBar = findViewById(R.id.accuracy_bar);
-        progressBar = findViewById(R.id.progress_bar);
-        accuracyBar.setMax(100);
-        progressBar.setMax(10+(wrongAns*3));
-        animateProgressBar(accuracyBar,accuracyPercent);
-        animateProgressBar(progressBar,totalAns);
-    }
-
-    public void animateProgressBar(ProgressBar progressBar, int value){
-        objectAnimator = ObjectAnimator.ofInt(progressBar,"progress",0,value);
-        objectAnimator.setDuration(3000);
-        objectAnimator.start();
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.student_home_profile_menu, menu);
@@ -144,48 +113,46 @@ public class StudentHome extends AppCompatActivity {
                     switch (iconID) {
                         case R.id.addition_icon:
                             toolBar.setTitle("Addition");
-                            textAnimation("Add");
                             totalAns = m_user.getAdditionQuestionsAnswered();
                             correctAns = m_user.getAdditionCorrectAnswers();
                             sheetNo = 1;
                             break;
                         case R.id.subtraction_icon:
                             toolBar.setTitle("Subtraction");
-                            textAnimation("Subtract");
                             totalAns = m_user.getSubtractionQuestionsAnswered();
                             correctAns = m_user.getSubtractionCorrectAnswers();
                             sheetNo = 2;
                             break;
                         case R.id.multiplication_icon:
                             toolBar.setTitle("Multiplication");
-                            textAnimation("Multiply");
                             totalAns = m_user.getMultiplicationQuestionsAnswered();
                             correctAns = m_user.getMultiplicationCorrectAnswers();
                             sheetNo = 3;
                             break;
                         case R.id.division_icon:
                             toolBar.setTitle("Division");
-                            textAnimation("Divide");
                             totalAns = m_user.getDivisionQuestionsAnswered();
                             correctAns = m_user.getDivisionCorrectAnswers();
                             sheetNo = 4;
                             break;
                     }
                     wrongAns = totalAns - correctAns;
-                    //questionAnsweredTxt.setText("Questions Answered: " + totalAns);
-                    //correctAnswersTxt.setText("Correct Answers: " + correctAns);
-                    //wrongAnswersTxt.setText("Wrong Answers: " + wrongAns);
-                    defineProgress();
+                    questionAnsweredTxt.setText("Questions Answered: " + totalAns);
+                    correctAnswersTxt.setText("Correct Answers: " + correctAns);
+                    wrongAnswersTxt.setText("Wrong Answers: " + wrongAns);
 
                 }
             });
         }
     }
 
-    public void textAnimation(String operation){
-        String textToShow = "Ready to " + operation + " ?";
-        readyTxt.setText(textToShow);
-        readyTxt.animate().setDuration(1000).rotationX(30);
+    public void getData() {
+    /*
+        TODO
+        If ans is right, update the correctAnswers node for the user in firebased directly.
+        Access the drive sheet, get the number of questions answered so far, no. correct and no. wrong.
+
+     */
     }
 
     public void launchTest(View view) {

@@ -12,6 +12,8 @@
     android:layout_width="match_parent"
     android:background="#DCDCDC"
     android:padding="10dp"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -69,12 +71,13 @@
         android:layout_height="30dp"/>
 
     <EditText
+        android:id="@+id/userAnswer_edittxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter numeric answer"
-        android:inputType="numberSigned"
         android:layout_gravity="center"
-        android:importantForAutofill="no" />
+        android:hint="Enter numeric answer"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned" />
 
     <Space
         android:layout_width="match_parent"
@@ -84,16 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_gravity="center"
-            android:onClick="previousQuestion"
-            android:text="Previous" />
+        android:orientation="vertical">
 
         <Button
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -102,7 +96,16 @@
             android:textColor="@color/colorPrimaryDark"
             android:layout_gravity="center"
             android:onClick="nextQuestion"
-            android:text="Next" />
+            android:text="Submit and Next" />
+
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:onClick="finishTest"
+            android:text="Finish test" />
     </LinearLayout>
 
 
