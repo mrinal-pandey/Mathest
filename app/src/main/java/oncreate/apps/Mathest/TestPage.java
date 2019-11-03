@@ -65,7 +65,7 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.i("Classifier: " , s);
+            Log.i("Classifier: ", s);
         }
     }
 
@@ -116,7 +116,20 @@ public class TestPage extends AppCompatActivity {
                     number2 = details.getString("number2");
                 }
                 questionNumber.setText("Question " + (nextQuestion + 1));
-                questionBody.setText("Add " + number1 + " and " + number2);
+                switch (sheetNo){
+                    case 1:
+                        questionBody.setText("Add " + number1 + " and " + number2);
+                        break;
+                    case 2:
+                        questionBody.setText("Subtract " + number2 + " from " + number1);
+                        break;
+                    case 3:
+                        questionBody.setText("Mutliply " + number1 + " with " + number2);
+                        break;
+                    case 4:
+                        questionBody.setText("Divide " + number1 + " by " + number2);
+                        break;
+                }
             }
             catch (Exception e)
             {
@@ -183,29 +196,48 @@ public class TestPage extends AppCompatActivity {
     public void nextQuestion(View view) {
         //check if correct, ask new question and update total questions in firestore.
         String message = "";
-        if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
-            message = "Correct!";
-            ++correctAnswersCounter;
-        }else {
-            message = "Wrong!";
-        }
         Classifier classifier = new Classifier();
         switch (sheetNo){
             case 1:
+                if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
+                    message = "Correct!";
+                    ++correctAnswersCounter;
+                }else {
+                    message = "Wrong!";
+                }
                 classifier.execute("http://mathest.herokuapp.com/addition?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
             case 2:
+                if (Integer.valueOf(number1) - Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
+                    message = "Correct!";
+                    ++correctAnswersCounter;
+                }else {
+                    message = "Wrong!";
+                }
                 classifier.execute("http://mathest.herokuapp.com/subtraction?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
             case 3:
+                if (Integer.valueOf(number1) * Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
+                    message = "Correct!";
+                    ++correctAnswersCounter;
+                }else {
+                    message = "Wrong!";
+                }
                 classifier.execute("http://mathest.herokuapp.com/multiplication?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
             case 4:
+                if (Integer.valueOf(number1) / Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
+                    message = "Correct!";
+                    ++correctAnswersCounter;
+                }else {
+                    message = "Wrong!";
+                }
                 classifier.execute("http://mathest.herokuapp.com/division?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
+
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         getQuestionDetails(++nextQuestion);
