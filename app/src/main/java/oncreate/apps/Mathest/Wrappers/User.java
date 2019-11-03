@@ -5,24 +5,32 @@ public class User {
     String name;
     String school;
     int grade;
-    String sheetLink;
-    int additionCorrectAnswers = 0;
-    int additionQuestionsAnswered = 0;
-    int subtractionCorrectAnswers = 0;
-    int subtractionQuestionsAnswered = 0;
-    int multiplicationCorrectAnswers = 0;
-    int multiplicationQuestionsAnswered = 0;
-    int divisionCorrectAnswers = 0;
-    int divisionQuestionsAnswered = 0;
+    String sheetID;
+    int additionCorrectAnswers;
+    int additionQuestionsAnswered;
+    int subtractionCorrectAnswers;
+    int subtractionQuestionsAnswered;
+    int multiplicationCorrectAnswers;
+    int multiplicationQuestionsAnswered;
+    int divisionCorrectAnswers;
+    int divisionQuestionsAnswered;
 
     public User() {
     }
 
-    public User(String name, String sheetLink, String school, int grade) {
+    public User(String name, String sheetID, String school, int grade) {
         this.name = name;
-        this.sheetLink = sheetLink;
+        this.sheetID = sheetID;
         this.school = school;
         this.grade = grade;
+        additionCorrectAnswers = 0;
+        additionQuestionsAnswered = 0;
+        subtractionCorrectAnswers = 0;
+        subtractionQuestionsAnswered = 0;
+        multiplicationCorrectAnswers = 0;
+        multiplicationQuestionsAnswered = 0;
+        divisionCorrectAnswers = 0;
+        divisionQuestionsAnswered = 0;
     }
 
     public String getName() {
@@ -39,8 +47,8 @@ public class User {
 
     public int getDivisionCorrectAnswers() {return divisionCorrectAnswers; }
 
-    public String getSheetLink() {
-        return sheetLink;
+    public String getSheetID() {
+        return sheetID;
     }
 
     public int getAdditionQuestionsAnswered() {
