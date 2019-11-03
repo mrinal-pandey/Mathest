@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,7 @@ public class TestPage extends AppCompatActivity {
     TextView questionNumber;
     TextView questionBody;
     int nextQuestion;
+    int sheetNo;
 
 
     @Override
@@ -20,9 +22,10 @@ public class TestPage extends AppCompatActivity {
         setContentView(R.layout.test_page);
         Intent intent = getIntent();
         nextQuestion = intent.getIntExtra("nextQuestion", 0);
+        sheetNo = intent.getIntExtra("sheetNo", 2);
         questionBody = findViewById(R.id.questionBody_txt);
         questionNumber = findViewById(R.id.questionNumber_txt);
-
+        Toast.makeText(this, "Sheet No :" + sheetNo, Toast.LENGTH_SHORT).show();
 
     }
 

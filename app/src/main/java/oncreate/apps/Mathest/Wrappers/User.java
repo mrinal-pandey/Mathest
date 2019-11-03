@@ -6,8 +6,14 @@ public class User {
     String school;
     int grade;
     String sheetLink;
-    int correctAnswers = 0;
-    int questionsAnswered = 0;
+    int additionCorrectAnswers = 0;
+    int additionQuestionsAnswered = 0;
+    int subtractionCorrectAnswers = 0;
+    int subtractionQuestionsAnswered = 0;
+    int multiplicationCorrectAnswers = 0;
+    int multiplicationQuestionsAnswered = 0;
+    int divisionCorrectAnswers = 0;
+    int divisionQuestionsAnswered = 0;
 
     public User() {
     }
@@ -23,17 +29,29 @@ public class User {
         return name;
     }
 
-    public int getCorrectAnswers() {
-        return correctAnswers;
+    public int getAdditionCorrectAnswers() {
+        return additionCorrectAnswers;
     }
+
+    public int getSubtractionCorrectAnswers() {return subtractionCorrectAnswers; }
+
+    public int getMultiplicationCorrectAnswers() {return multiplicationCorrectAnswers; }
+
+    public int getDivisionCorrectAnswers() {return divisionCorrectAnswers; }
 
     public String getSheetLink() {
         return sheetLink;
     }
 
-    public int getQuestionsAnswered() {
-        return questionsAnswered;
+    public int getAdditionQuestionsAnswered() {
+        return additionQuestionsAnswered;
     }
+
+    public int getSubtractionQuestionsAnswered() {return subtractionQuestionsAnswered; }
+
+    public int getMultiplicationQuestionsAnswered() {return multiplicationQuestionsAnswered; }
+
+    public int getDivisionQuestionsAnswered() {return divisionQuestionsAnswered; }
 
     public String getSchool() {
         return school;

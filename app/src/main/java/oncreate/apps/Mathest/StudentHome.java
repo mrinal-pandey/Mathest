@@ -33,6 +33,7 @@ public class StudentHome extends AppCompatActivity {
     int totalAns;
     int correctAns;
     int wrongAns;
+    int sheetNo;
 
     TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt;
     private Toolbar toolBar;
@@ -43,7 +44,6 @@ public class StudentHome extends AppCompatActivity {
         setContentView(R.layout.student_home);
         toolBar = findViewById(R.id.student_home_toolbar);
         setSupportActionBar(toolBar);
-        toolBar.setTitle("Addition");
 
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
@@ -68,23 +68,15 @@ public class StudentHome extends AppCompatActivity {
                     name = m_user.getName();
                     grade = m_user.getGrade();
                     school = m_user.getSchool();
-                    totalAns = m_user.getQuestionsAnswered();
-                    correctAns = m_user.getCorrectAnswers();
-                    wrongAns = totalAns - correctAns;
 
                     nameTxt.setText(name);
                     classNameTxt.setText("Class: " + grade);
                     schoolTxt.setText("School: " + school);
-                    questionAnsweredTxt.setText("Questions Answered: " + totalAns);
-                    correctAnswersTxt.setText("Correct Answers: " + correctAns);
-                    wrongAnswersTxt.setText("Wrong Answers: " + wrongAns);
-
 
                 }
             });
         }
-
-
+        setAttributes(R.id.addition_icon);
     }
 
     @Override
@@ -103,23 +95,56 @@ public class StudentHome extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId()){
-                case R.id.addition_icon:
-                    toolBar.setTitle("Addition");
-                    break;
-                case R.id.subtraction_icon:
-                    toolBar.setTitle("Subtraction");
-                    break;
-                case R.id.multiplication_icon:
-                    toolBar.setTitle("Multiplication");
-                    break;
-                case R.id.division_icon:
-                    toolBar.setTitle("Division");
-                    break;
-            }
+            setAttributes(menuItem.getItemId());
             return false;
         }
     };
+
+    //the function is used to set the attributes based on the category (Addition, Subtraction, Division, Multiplication) selected by the user
+    public void setAttributes(int receivedIconID){
+        String UID = getIntent().getStringExtra("uid");
+        final int iconID = receivedIconID;
+        if (!UID.isEmpty()) {
+            firebaseFirestore.collection("users").document(UID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    Log.d(TAG, "Doc snapshot: " + documentSnapshot.toString());
+                    User m_user = documentSnapshot.toObject(User.class);
+                    switch (iconID) {
+                        case R.id.addition_icon:
+                            toolBar.setTitle("Addition");
+                            totalAns = m_user.getAdditionQuestionsAnswered();
+                            correctAns = m_user.getAdditionCorrectAnswers();
+                            sheetNo = 1;
+                            break;
+                        case R.id.subtraction_icon:
+                            toolBar.setTitle("Subtraction");
+                            totalAns = m_user.getSubtractionQuestionsAnswered();
+                            correctAns = m_user.getSubtractionCorrectAnswers();
+                            sheetNo = 2;
+                            break;
+                        case R.id.multiplication_icon:
+                            toolBar.setTitle("Multiplication");
+                            totalAns = m_user.getMultiplicationQuestionsAnswered();
+                            correctAns = m_user.getMultiplicationCorrectAnswers();
+                            sheetNo = 3;
+                            break;
+                        case R.id.division_icon:
+                            toolBar.setTitle("Division");
+                            totalAns = m_user.getDivisionQuestionsAnswered();
+                            correctAns = m_user.getDivisionCorrectAnswers();
+                            sheetNo = 4;
+                            break;
+                    }
+                    wrongAns = totalAns - correctAns;
+                    questionAnsweredTxt.setText("Questions Answered: " + totalAns);
+                    correctAnswersTxt.setText("Correct Answers: " + correctAns);
+                    wrongAnswersTxt.setText("Wrong Answers: " + wrongAns);
+
+                }
+            });
+        }
+    }
 
     public void getData() {
     /*
@@ -132,7 +157,8 @@ public class StudentHome extends AppCompatActivity {
 
     public void launchTest(View view) {
         Intent intent = new Intent(this, TestPage.class);
-        intent.putExtra("nextQuestion", totalAns + 1);
+        intent.putExtra("nextQuestion", totalAns + 2);
+        intent.putExtra("sheetNo", sheetNo);
         startActivity(intent);
     }
 }
