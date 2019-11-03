@@ -34,6 +34,7 @@ public class StudentHome extends AppCompatActivity {
     int correctAns;
     int wrongAns;
     int sheetNo;
+    String UID;
 
     TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt;
     private Toolbar toolBar;
@@ -56,7 +57,7 @@ public class StudentHome extends AppCompatActivity {
         wrongAnswersTxt = findViewById(R.id.wrongAnswers_txt);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        String UID = getIntent().getStringExtra("uid");
+        UID = getIntent().getStringExtra("uid");
         if (!UID.isEmpty()) {
             firebaseFirestore.collection("users").document(UID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
@@ -87,8 +88,11 @@ public class StudentHome extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(R.id.profile_icon == item.getItemId())
+        if(R.id.profile_icon == item.getItemId()){
             Toast.makeText(this, "Display here", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, StudentProfile.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -146,19 +150,12 @@ public class StudentHome extends AppCompatActivity {
         }
     }
 
-    public void getData() {
-    /*
-        TODO
-        If ans is right, update the correctAnswers node for the user in firebased directly.
-        Access the drive sheet, get the number of questions answered so far, no. correct and no. wrong.
-
-     */
-    }
-
     public void launchTest(View view) {
         Intent intent = new Intent(this, TestPage.class);
-        intent.putExtra("nextQuestion", totalAns + 2);
+        intent.putExtra("nextQuestion", totalAns);
         intent.putExtra("sheetNo", sheetNo);
+        intent.putExtra("UID", UID);
+        intent.putExtra("correctAnswers", correctAns);
         startActivity(intent);
     }
 }

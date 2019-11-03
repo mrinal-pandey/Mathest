@@ -12,8 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Login"
+        <activity android:name=".LaunchScreen"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StudentHome" />
-        <activity android:name=".TestPage" />
-        <activity
-            android:name=".Signup"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".StudentHome"/>
+        <activity android:name=".TestPage"/>
+        <activity android:name=".Login"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".Signup"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".StudentProfile" />
     </application>
 
 </manifest>
