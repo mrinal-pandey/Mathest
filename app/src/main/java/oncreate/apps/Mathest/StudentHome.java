@@ -27,15 +27,13 @@ import oncreate.apps.Mathest.Wrappers.User;
 public class StudentHome extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     private final String TAG = "StudentHome";
-    String name,UID;
-    int grade;
-    String school;
+    String UID;
     int totalAns;
     int correctAns;
     int wrongAns;
     int sheetNo;
 
-    TextView nameTxt, classNameTxt, schoolTxt, questionAnsweredTxt, correctAnswersTxt, wrongAnswersTxt, readyTxt, accuracyTxt, progressTxt;
+    TextView readyTxt, accuracyTxt, progressTxt;
     private Toolbar toolBar;
     private ProgressBar accuracyBar, progressBar;
     private ObjectAnimator objectAnimator;
@@ -50,37 +48,9 @@ public class StudentHome extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
-       /* nameTxt = findViewById(R.id.name_txt);
-        classNameTxt = findViewById(R.id.class_txt);
-        schoolTxt = findViewById(R.id.school_txt);
-        questionAnsweredTxt = findViewById(R.id.questionsAnswered_txt);
-        correctAnswersTxt = findVaccuracyBar.setMax(100);
-        progressBar.setMax(10+(wrongAns*3));
-        animateProgressBar(accuracyBar,accuracyPercent);
-        animateProgressBar(progwById(R.id.correctAnswers_txt);
-        wrongAnswersTxt = findViewById(R.id.wronieyId(R.id.progress_bar);*/
         readyTxt = findViewById(R.id.ready_txt);
         firebaseFirestore = FirebaseFirestore.getInstance();
-        UID = getIntent().getStringExtra("uid");
-        if (!UID.isEmpty()) {
-            firebaseFirestore.collection("users").document(UID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    Log.d(TAG, "Doc snapshot: " + documentSnapshot.toString());
-                    User m_user = documentSnapshot.toObject(User.class);
-                    Log.d(TAG, "Class name: " + m_user.getGrade());
 
-                    name = m_user.getName();
-                    grade = m_user.getGrade();
-                    school = m_user.getSchool();
-
-                    //nameTxt.setText(name);
-                    //classNameTxt.setText("Class: " + grade);
-                    //schoolTxt.setText("School: " + school);
-
-                }
-            });
-        }
         setAttributes(R.id.addition_icon);
     }
 
@@ -120,6 +90,7 @@ public class StudentHome extends AppCompatActivity {
         if(R.id.profile_icon == item.getItemId()) {
             Toast.makeText(this, "Display here", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, StudentProfile.class);
+            intent.putExtra("UID", UID);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
