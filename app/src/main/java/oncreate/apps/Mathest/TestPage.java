@@ -240,6 +240,8 @@ public class TestPage extends AppCompatActivity {
 
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        userAnswer.getText().clear();
+        userAnswer.setHint("Enter numeric answer");
         getQuestionDetails(++nextQuestion);
     }
 
