@@ -22,11 +22,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import oncreate.apps.Mathest.UI.DialogHandler;
 import oncreate.apps.Mathest.Wrappers.User;
 
 public class StudentHome extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
     private final String TAG = "StudentHome";
+    DialogHandler dialogHandler;
     String UID;
     int totalAns;
     int correctAns;
@@ -42,6 +44,9 @@ public class StudentHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
+
+        UID = getIntent().getStringExtra("uid");
+
         toolBar = findViewById(R.id.student_home_toolbar);
         setSupportActionBar(toolBar);
 
@@ -107,9 +112,10 @@ public class StudentHome extends AppCompatActivity {
 
     //the function is used to set the attributes based on the category (Addition, Subtraction, Division, Multiplication) selected by the user
     public void setAttributes(int receivedIconID){
-        UID = getIntent().getStringExtra("uid");
         final int iconID = receivedIconID;
         if (!UID.isEmpty()) {
+            dialogHandler = new DialogHandler(this);
+            dialogHandler.showDialog();
             firebaseFirestore.collection("users").document(UID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -146,9 +152,7 @@ public class StudentHome extends AppCompatActivity {
                             break;
                     }
                     wrongAns = totalAns - correctAns;
-                    //questionAnsweredTxt.setText("Questions Answered: " + totalAns);
-                    //correctAnswersTxt.setText("Correct Answers: " + correctAns);
-                    //wrongAnswersTxt.setText("Wrong Answers: " + wrongAns);
+                    dialogHandler.hideDialog();
                     defineProgress();
 
                 }

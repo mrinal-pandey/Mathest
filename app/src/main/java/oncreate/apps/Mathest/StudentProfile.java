@@ -13,11 +13,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import oncreate.apps.Mathest.UI.DialogHandler;
 import oncreate.apps.Mathest.Wrappers.User;
 
 public class StudentProfile extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
+    DialogHandler dialogHandler;
     private Toolbar toolbar;
     String UID;
     String nameOfUser;
@@ -45,6 +47,10 @@ public class StudentProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_profile);
+
+        dialogHandler = new DialogHandler(this);
+
+        dialogHandler.showDialog();
 
         toolbar = findViewById(R.id.student_profile_toolbar);
         setSupportActionBar(toolbar);
@@ -99,6 +105,8 @@ public class StudentProfile extends AppCompatActivity {
                     divisionQuestionsAnswered = m_user.getDivisionQuestionsAnswered();
                     divisionCorrectAnswers = m_user.getDivisionCorrectAnswers();
                     divisionWrongAnswers = divisionQuestionsAnswered - divisionCorrectAnswers;
+
+                    dialogHandler.hideDialog();
 
                     nameOfUserTextView.setText("Name: " + nameOfUser);
                     gradeOfUserTextView.setText("Grade: " + gradeOfUser);

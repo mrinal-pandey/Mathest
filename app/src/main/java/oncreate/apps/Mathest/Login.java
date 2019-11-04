@@ -58,16 +58,11 @@ public class Login extends AppCompatActivity {
                                         Log.d(TAG, "UID entered: " + UID + " UID from database: " + document.getId());
                                         if (document.getId().equals(UID)) {
                                             uidNotFound = false;
-                                            try {
-                                                sheetLink = document.getData().get("Sheet link").toString();
-                                            } catch (NullPointerException e) {
-                                                sheetLink = "";
-                                            }
-                                            Log.d(TAG, "Sheet link: " + sheetLink);
+
                                             dialogHandler.hideDialog();
 
                                             Intent in = new Intent(getApplicationContext(), StudentHome.class);
-                                            in.putExtra("link", sheetLink);
+
                                             in.putExtra("uid", UID);
                                             startActivity(in);
                                             //TODO implement finish after implementing a cached sign-in system.

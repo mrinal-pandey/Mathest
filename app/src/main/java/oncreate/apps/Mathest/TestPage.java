@@ -26,10 +26,18 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import oncreate.apps.Mathest.UI.DialogHandler;
+
 
 public class TestPage extends AppCompatActivity {
 
     public class Classifier extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialogHandler.showDialog();
+        }
 
         @Override
         protected String doInBackground(String... strings) {
@@ -65,11 +73,19 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            dialogHandler.hideDialog();
             Log.i("Classifier: ", s);
+            getQuestionDetails(++nextQuestion);
         }
     }
 
     public class Downloader extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialogHandler.showDialog();
+        }
 
         @Override
         protected String doInBackground(String... strings) {
@@ -115,6 +131,7 @@ public class TestPage extends AppCompatActivity {
                     number1 = details.getString("number1");
                     number2 = details.getString("number2");
                 }
+                dialogHandler.hideDialog();
                 questionNumber.setText("Question " + (nextQuestion + 1));
                 switch (sheetNo){
                     case 1:
@@ -140,6 +157,7 @@ public class TestPage extends AppCompatActivity {
     }
 
     FirebaseFirestore firebaseFirestore;
+    DialogHandler dialogHandler;
     TextView questionNumber;
     TextView questionBody;
     EditText userAnswer;
@@ -175,6 +193,8 @@ public class TestPage extends AppCompatActivity {
         correctAnswersCounter = intent.getIntExtra("correctAnswers", 0);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
+        dialogHandler = new DialogHandler(this);
 
         //Toast.makeText(this, "Sheet No :" + sheetNo + "nq: " + nextQuestion + "uid: " + UID, Toast.LENGTH_LONG).show();
 
@@ -240,13 +260,13 @@ public class TestPage extends AppCompatActivity {
 
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        getQuestionDetails(++nextQuestion);
     }
 
     public void finishTest(View view){
 
         switch (sheetNo){
             case 1:
+                dialogHandler.showDialog();
                 firebaseFirestore.collection("users").document(UID)
                         .update("additionQuestionsAnswered", nextQuestion)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -261,11 +281,13 @@ public class TestPage extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
                         });
                 break;
             case 2:
+                dialogHandler.showDialog();
                 firebaseFirestore.collection("users").document(UID)
                         .update("subtractionQuestionsAnswered", nextQuestion)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -280,11 +302,13 @@ public class TestPage extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
                         });
                 break;
             case 3:
+                dialogHandler.showDialog();
                 firebaseFirestore.collection("users").document(UID)
                         .update("multiplicationQuestionsAnswered", nextQuestion)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -299,11 +323,13 @@ public class TestPage extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
                         });
                 break;
             case 4:
+                dialogHandler.showDialog();
                 firebaseFirestore.collection("users").document(UID)
                         .update("divisionQuestionsAnswered", nextQuestion)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -318,6 +344,7 @@ public class TestPage extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
                         });
