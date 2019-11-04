@@ -75,6 +75,7 @@ public class TestPage extends AppCompatActivity {
             super.onPostExecute(s);
             dialogHandler.hideDialog();
             Log.i("Classifier: ", s);
+            userAnswer.getText().clear();
             getQuestionDetails(++nextQuestion);
         }
     }
