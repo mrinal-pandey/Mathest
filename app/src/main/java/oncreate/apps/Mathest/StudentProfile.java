@@ -67,8 +67,8 @@ public class StudentProfile extends AppCompatActivity {
         multiplicationCorrectAnswersTextView = findViewById(R.id.multiplicationCorrectAnswers);
         multiplicationWrongAnswersTextView = findViewById(R.id.multiplicationWrongAnswers);
 
-        divisionQuestionsAnsweredTextView = findViewById(R.id.multiplicationQuestionsAnswered);
-        divisionCorrectAnswersTextView = findViewById(R.id.multiplicationCorrectAnswers);
+        divisionQuestionsAnsweredTextView = findViewById(R.id.divisionQuestionsAnswered);
+        divisionCorrectAnswersTextView = findViewById(R.id.divisionCorrectAnswers);
         divisionWrongAnswersTextView = findViewById(R.id.divisionWrongAnswers);
 
         UID = getIntent().getStringExtra("UID");
