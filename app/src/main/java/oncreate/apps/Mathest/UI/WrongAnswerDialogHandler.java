@@ -9,13 +9,13 @@ import com.bumptech.glide.Glide;
 
 import oncreate.apps.Mathest.R;
 
-public class DialogHandler {
+public class WrongAnswerDialogHandler {
 
     Activity activity;
     Dialog dialog;
 
     //..we need the context else we can not create the dialog so get context in constructor
-    public DialogHandler(Activity activity) {
+    public WrongAnswerDialogHandler(Activity activity) {
         this.activity = activity;
     }
 
@@ -34,8 +34,8 @@ public class DialogHandler {
         //...now load that gif which we put inside the drawable folder here with the help of Glide
 
         Glide.with(activity)
-                .load(R.drawable.loading)
-                .placeholder(R.drawable.loading)
+                .load(R.drawable.wrong_answer)
+                .placeholder(R.drawable.wrong_answer)
                 .centerCrop()
                 .into(gifImageView);
 
@@ -47,4 +47,5 @@ public class DialogHandler {
     public void hideDialog() {
         dialog.dismiss();
     }
+
 }

@@ -26,7 +26,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import oncreate.apps.Mathest.UI.CorrectAnswerDialogHandler;
 import oncreate.apps.Mathest.UI.DialogHandler;
+import oncreate.apps.Mathest.UI.WrongAnswerDialogHandler;
 
 
 public class TestPage extends AppCompatActivity {
@@ -36,7 +38,11 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialogHandler.showDialog();
+            if(message.equals("Correct!")){
+                correctAnswerDialogHandler.showDialog();
+            }else if(message.equals("Wrong!")){
+                wrongAnswerDialogHandler.showDialog();
+            }
         }
 
         @Override
@@ -73,7 +79,11 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            dialogHandler.hideDialog();
+            if(message.equals("Correct!")) {
+                correctAnswerDialogHandler.hideDialog();
+            }else if(message.equals("Wrong!")){
+                wrongAnswerDialogHandler.hideDialog();
+            }
             Log.i("Classifier: ", s);
             userAnswer.getText().clear();
             getQuestionDetails(++nextQuestion);
@@ -159,12 +169,15 @@ public class TestPage extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
     DialogHandler dialogHandler;
+    CorrectAnswerDialogHandler correctAnswerDialogHandler;
+    WrongAnswerDialogHandler wrongAnswerDialogHandler;
     TextView questionNumber;
     TextView questionBody;
     EditText userAnswer;
     int nextQuestion;
     int sheetNo;
     String UID;
+    String message = "";
     String number1 = "", number2 = "";
     int correctAnswersCounter = 0;
 
@@ -196,6 +209,8 @@ public class TestPage extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         dialogHandler = new DialogHandler(this);
+        correctAnswerDialogHandler = new CorrectAnswerDialogHandler(this);
+        wrongAnswerDialogHandler = new WrongAnswerDialogHandler(this);
 
         //Toast.makeText(this, "Sheet No :" + sheetNo + "nq: " + nextQuestion + "uid: " + UID, Toast.LENGTH_LONG).show();
 
@@ -216,7 +231,6 @@ public class TestPage extends AppCompatActivity {
 
     public void nextQuestion(View view) {
         //check if correct, ask new question and update total questions in firestore.
-        String message = "";
         Classifier classifier = new Classifier();
         switch (sheetNo){
             case 1:
@@ -357,6 +371,7 @@ public class TestPage extends AppCompatActivity {
         Intent intent = new Intent(this, StudentHome.class);
         intent.putExtra("uid", UID);
         startActivity(intent);
+        finish();
     }
 
 }

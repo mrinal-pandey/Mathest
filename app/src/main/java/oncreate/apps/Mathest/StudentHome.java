@@ -173,5 +173,6 @@ public class StudentHome extends AppCompatActivity {
         intent.putExtra("nextQuestion", totalAns);
         intent.putExtra("sheetNo", sheetNo);
         startActivity(intent);
+        finish();
     }
 }
