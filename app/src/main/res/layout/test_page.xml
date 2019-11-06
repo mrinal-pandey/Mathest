@@ -12,13 +12,19 @@
     android:layout_width="match_parent"
     android:background="#DCDCDC"
     android:padding="10dp"
+    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context=".MainActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         android:padding="10dp"
@@ -30,12 +36,15 @@
 
         <TextView
             android:padding="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="40sp"
+            android:background="@color/colorTextPrimary"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="20sp"
             android:id="@+id/questionNumber_txt"
-            android:text="Question 1" />
+            android:text="Question ??" />
     </androidx.cardview.widget.CardView>
 
     <Space
@@ -44,10 +53,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="20dp"
         android:padding="10dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:background="@color/cardview_dark_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -56,25 +66,47 @@
 
         <TextView
             android:id="@+id/questionBody_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="Add 5 and 5"
-            android:textSize="30sp" />
+            android:padding="10dp"
+            android:textColor="@color/colorTextPrimary"
+            android:background="@color/colorPrimary"
+            android:text="Fetching..."
+            android:elevation="4dp"
+            android:textSize="35sp" />
     </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="30dp"/>
+        android:layout_height="20dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardMaxElevation="20dp"
+        android:padding="10dp"
+        android:background="@color/cardview_shadow_end_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
 
     <EditText
-        android:layout_width="wrap_content"
+        android:id="@+id/userAnswer_edittxt"
+        android:padding="10dp"
+        android:elevation="2dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:hint="Enter numeric answer"
-        android:inputType="numberSigned"
         android:layout_gravity="center"
-        android:importantForAutofill="no" />
+        android:textColor="@color/colorAccent"
+        android:hint="Enter numeric answer"
+        android:textStyle="bold"
+        android:importantForAutofill="no"
+        android:inputType="numberSigned" />
+    </androidx.cardview.widget.CardView>
 
     <Space
         android:layout_width="match_parent"
@@ -85,24 +117,56 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+        <androidx.cardview.widget.CardView
             android:layout_gravity="center"
-            android:onClick="previousQuestion"
-            android:text="Previous" />
-
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"
+            app:cardCornerRadius="5dp"
+            app:cardMaxElevation="20dp"
+            android:padding="10dp"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        <Button
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:fadingEdgeLength="5dp"
+            android:layout_width="150dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_height="70dp"
+            android:textColor="@color/colorTextPrimary"
+            android:background="@color/colorPrimary"
             android:layout_gravity="center"
             android:onClick="nextQuestion"
-            android:text="Next" />
+            android:text="Submit and Next" />
+        </androidx.cardview.widget.CardView>
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardMaxElevation="20dp"
+            android:padding="10dp"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        <Button
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="150dp"
+            android:fadingEdgeLength="5dp"
+            android:layout_height="70dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_gravity="center"
+            android:onClick="finishTest"
+            android:text="Finish test" />
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 

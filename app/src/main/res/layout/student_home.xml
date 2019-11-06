@@ -16,16 +16,30 @@
         android:background="@color/colorPrimary"
         android:elevation="4dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#ffffff"
-        android:padding="5dp" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="#ffffff"
+                android:padding="5dp" />
+
+            <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -37,75 +51,66 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/name_txt"
+                    android:id="@+id/accuracy_percent_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your accuracy = 0%"
+                    android:padding="5sp"
+                    android:textSize="20sp" />
+                <ProgressBar
+                    android:id="@+id/accuracy_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="30sp"
+                    android:padding="5sp"
+                    android:progress="20"
+                    android:progressTint="@color/colorPrimary"
+                    android:scaleY="2"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.201" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/progress_txt"
+                    android:text="Your Progress = 0/10"
+                    android:padding="5sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/class_txt"
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/school_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/rounded_color_border"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Previous Test Stats"
-                    android:textSize="18sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@color/colorAccent"
-                    android:padding="5dp" />
-
-                <TextView
-                    android:id="@+id/questionsAnswered_txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Questions Answered: 10" />
-
-                <TextView
-                    android:id="@+id/correctAnswers_txt"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@android:drawable/presence_online"
-                    android:text="Correct answers: 6"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/wrongAnswers_txt"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:drawableLeft="@android:drawable/presence_busy"
-                    android:text="Wrong answers: 4"
-                    android:textSize="15sp" />
+                    android:layout_height="30sp"
+                    android:padding="5sp"
+                    android:progress="20"
+                    android:progressTint="@color/colorPrimary"
+                    android:scaleY="2"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.201" />
 
             </LinearLayout>
 
@@ -115,8 +120,14 @@
 
     </androidx.cardview.widget.CardView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10sp"
+        android:background="#ffffff"
+        android:padding="5dp" />
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical"
@@ -126,16 +137,38 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <pl.droidsonroids.gif.GifImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/home_screen"
+            android:layout_width="250sp"
+            android:layout_height="250sp"
             android:layout_gravity="center"
+            android:src="@drawable/home_screen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.612" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="5sp"
+            android:background="#ffffff"
+            android:padding="5sp" />
+
+        <TextView
+            android:id="@+id/ready_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:gravity="center"
+            android:text="Ready to Add ?"
+            android:textStyle="bold"
+            android:textColor="@color/colorTextPrimary"
+            android:textSize="30sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10sp"
+            android:background="#ffffff"
+            android:padding="5sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -144,15 +177,16 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/button2"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="launchTest"
-                android:text="Take test"
+                android:text="Let's Go!"
                 android:textColor="@color/colorTextPrimary"
                 android:background="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.784"
@@ -162,6 +196,8 @@
 
         </LinearLayout>
     </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -169,14 +205,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Main content -->
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
+            app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@android:color/black"
             app:itemTextColor="@android:color/black"
             app:menu="@menu/student_home_menu" />
