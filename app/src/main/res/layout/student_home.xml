@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#ffff"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center">
@@ -51,12 +51,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/rounded_color_border"
                 android:orientation="vertical">
 
                 <TextView
@@ -87,6 +89,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:padding="5dp"
+                android:background="@drawable/rounded_color_border"
                 android:orientation="vertical">
 
                 <TextView
@@ -210,7 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:itemBackground="@color/colorPrimary"
+            app:itemBackground="@color/colorPrimaryLight"
             app:itemIconTint="@android:color/black"
             app:itemTextColor="@android:color/black"
             app:menu="@menu/student_home_menu" />
