@@ -7,13 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -93,7 +90,7 @@ public class StudentHome extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(R.id.profile_icon == item.getItemId()) {
-            Toast.makeText(this, "Display here", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Display here", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, StudentProfile.class);
             intent.putExtra("UID", UID);
             startActivity(intent);

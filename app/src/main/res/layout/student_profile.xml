@@ -156,7 +156,7 @@
 
             <TextView
                 android:id="@+id/additionCorrectAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
                 android:text="Correct answers: 0"
@@ -164,7 +164,7 @@
 
             <TextView
                 android:id="@+id/additionWrongAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
                 android:text="Wrong answers: 0"
@@ -219,7 +219,7 @@
 
             <TextView
                 android:id="@+id/subtractionCorrectAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
                 android:text="Correct answers: 0"
@@ -227,7 +227,7 @@
 
             <TextView
                 android:id="@+id/subtractionWrongAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
                 android:text="Wrong answers: 0"
@@ -282,7 +282,7 @@
 
             <TextView
                 android:id="@+id/multiplicationCorrectAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
                 android:text="Correct answers: 0"
@@ -290,7 +290,7 @@
 
             <TextView
                 android:id="@+id/multiplicationWrongAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
                 android:text="Wrong answers: 0"
@@ -345,7 +345,7 @@
 
             <TextView
                 android:id="@+id/divisionCorrectAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
                 android:text="Correct answers: 0"
@@ -353,7 +353,7 @@
 
             <TextView
                 android:id="@+id/divisionWrongAnswers"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
                 android:text="Wrong answers: 0"

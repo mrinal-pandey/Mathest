@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -89,7 +88,7 @@ public class Signup extends AppCompatActivity {
             school = schoolEdit.getText().toString();
             grade = Integer.parseInt(gradeEdit.getText().toString());
 
-            User m_user = new User(name, sheetID, school, grade);
+            User m_user = new User(name, sheetID, school, grade, UID);
 
             firestoreDatabase.collection("users").document(UID).set(m_user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
