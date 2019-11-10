@@ -2,6 +2,7 @@ package oncreate.apps.Mathest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,15 +29,29 @@ public class Login extends AppCompatActivity {
     String UID;
     DialogHandler dialogHandler;
     String sheetLink;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+        sharedPreferences = this.getSharedPreferences("usercontent", Context.MODE_PRIVATE);
+
         firestoreDatabase = FirebaseFirestore.getInstance();
         UIDInput = findViewById(R.id.UID_input);
 
         dialogHandler = new DialogHandler(this);
+
+        String UID = sharedPreferences.getString("UID", "NA");
+        dialogHandler.showDialog();
+        if (UID.contentEquals("NA")) {
+            dialogHandler.hideDialog();
+        } else {
+            dialogHandler.hideDialog();
+            Intent in = new Intent(getApplicationContext(), StudentHome.class);
+            in.putExtra("uid", UID);
+            startActivity(in);
+        }
 
     }
 
@@ -58,6 +73,9 @@ public class Login extends AppCompatActivity {
                                         Log.d(TAG, "UID entered: " + UID + " UID from database: " + document.getId());
                                         if (document.getId().equals(UID)) {
                                             uidNotFound = false;
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putString("UID", UID);
+                                            editor.apply();
 
                                             dialogHandler.hideDialog();
 

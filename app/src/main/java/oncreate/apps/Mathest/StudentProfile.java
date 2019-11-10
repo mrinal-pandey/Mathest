@@ -1,13 +1,17 @@
 package oncreate.apps.Mathest;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.graphics.drawable.ColorDrawable;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -43,6 +47,8 @@ public class StudentProfile extends AppCompatActivity {
     TextView multiplicationWrongAnswersTextView;
     TextView divisionWrongAnswersTextView;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +57,11 @@ public class StudentProfile extends AppCompatActivity {
         dialogHandler = new DialogHandler(this);
 
         dialogHandler.showDialog();
+        sharedPreferences = this.getSharedPreferences("usercontent", Context.MODE_PRIVATE);
 
         toolbar = findViewById(R.id.student_profile_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -131,6 +139,30 @@ public class StudentProfile extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.student_profile_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.signout:
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
+                editor.commit();
+                startActivity(new Intent(this, Login.class));
+                finish();
+
+
+        }
+        return true;
     }
 
 }
