@@ -81,26 +81,26 @@ public class TestPage extends AppCompatActivity {
             super.onPostExecute(s);
             if(message.equals("Correct!")) {
                 correctAnswerDialogHandler.hideDialog();
-            }else if(message.equals("Wrong!")){
+            }else if(message.equals("Wrong!")) {
                 wrongAnswerDialogHandler.hideDialog();
-            }
-            try{
-                JSONArray jsonArray = new JSONArray(s);
-                for(int i = 0; i < jsonArray.length(); ++i) {
-                    JSONObject details = jsonArray.getJSONObject(i);
-                    feedbackMessage = details.getString("comment");
-                    new AlertDialog.Builder(TestPage.this)
-                            .setMessage(feedbackMessage)
-                            .setTitle("Please read this!")
-                            .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    for (int i = 0; i < jsonArray.length(); ++i) {
+                        JSONObject details = jsonArray.getJSONObject(i);
+                        feedbackMessage = details.getString("comment");
+                        new AlertDialog.Builder(TestPage.this)
+                                .setMessage(feedbackMessage)
+                                .setTitle("Please read this!")
+                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                                }
-                            }).show();
+                                    }
+                                }).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }catch (Exception e){
-                e.printStackTrace();
             }
             Log.i("Content: ", s);
             userAnswer.getText().clear();
