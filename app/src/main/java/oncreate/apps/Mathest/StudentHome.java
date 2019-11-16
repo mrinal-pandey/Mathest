@@ -61,7 +61,7 @@ public class StudentHome extends AppCompatActivity {
         progressTxt = findViewById(R.id.progress_txt);
         int accuracyPercent;
         if(totalAns == 0) {
-            accuracyPercent = 0;
+            accuracyPercent = 100;
         }
         else {
             accuracyPercent = (int) (((float)correctAns / totalAns) * 100);

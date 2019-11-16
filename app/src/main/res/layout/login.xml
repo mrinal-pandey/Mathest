@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/login_bg_image"
+    android:background="@drawable/mathest_login_signup_bg"
     android:orientation="vertical">
 
     <EditText
@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/uid"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorTextPrimary"
         android:textStyle="bold"
         android:textSize="20sp"
         android:importantForAutofill="no"
         android:inputType="number"
         android:textAlignment="center"
-        android:textColorHint="@color/colorPrimary"
+        android:textColorHint="@color/cardview_shadow_start_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_button"
         android:onClick="signupUser"
-        android:text="sign up"
+        android:text="@string/signup"
         android:textColor="@color/colorTextPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
