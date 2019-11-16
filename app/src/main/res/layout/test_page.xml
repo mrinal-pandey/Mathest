@@ -121,6 +121,33 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:cardMaxElevation="20dp"
+            android:padding="10dp"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:fadingEdgeLength="5dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="finishTest"
+                android:text="Finish test"
+                android:textColor="@color/colorTextPrimary" />
+        </androidx.cardview.widget.CardView>
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"/>
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="5dp"
             app:cardMaxElevation="20dp"
             android:padding="10dp"
@@ -141,32 +168,7 @@
             android:onClick="nextQuestion"
             android:text="Submit and Next" />
         </androidx.cardview.widget.CardView>
-        <Space
-            android:layout_width="25dp"
-            android:layout_height="wrap_content"/>
-        <androidx.cardview.widget.CardView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardMaxElevation="20dp"
-            android:padding="10dp"
-            android:background="@color/cardview_dark_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        <Button
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="150dp"
-            android:fadingEdgeLength="5dp"
-            android:layout_height="70dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorTextPrimary"
-            android:layout_gravity="center"
-            android:onClick="finishTest"
-            android:text="Finish test" />
-        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
 
