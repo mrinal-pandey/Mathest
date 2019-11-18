@@ -46,6 +46,7 @@ public class StudentProfile extends AppCompatActivity {
     TextView subtractionWrongAnswersTextView;
     TextView multiplicationWrongAnswersTextView;
     TextView divisionWrongAnswersTextView;
+    TextView userUIDTextView;
 
     SharedPreferences sharedPreferences;
 
@@ -85,6 +86,8 @@ public class StudentProfile extends AppCompatActivity {
         divisionCorrectAnswersTextView = findViewById(R.id.divisionCorrectAnswers);
         divisionWrongAnswersTextView = findViewById(R.id.divisionWrongAnswers);
 
+        userUIDTextView = findViewById(R.id.user_uid);
+
         UID = getIntent().getStringExtra("UID");
         Log.i("UID: ", UID);
         if (!UID.isEmpty()) {
@@ -116,6 +119,7 @@ public class StudentProfile extends AppCompatActivity {
 
                     dialogHandler.hideDialog();
 
+                    userUIDTextView.setText("Your UID is: " + UID);
                     nameOfUserTextView.setText("Name: " + nameOfUser);
                     gradeOfUserTextView.setText("Grade: " + gradeOfUser);
                     schoolOfUserTextView.setText("School: " + schoolOfUser);
@@ -157,10 +161,11 @@ public class StudentProfile extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
-                startActivity(new Intent(this, Login.class));
+                Intent in = new Intent(this, Login.class);
+                in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(in);
                 finish();
-
-
+                break;
         }
         return true;
     }

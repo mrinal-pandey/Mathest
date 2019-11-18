@@ -3,4 +3,21 @@
     <string name="login">Login</string>
     <string name="uid">UID</string>
     <string name="node_users">users</string>
+    <string name="submit_details">Submit</string>
+    <string name="hint_school">School</string>
+    <string name="hint_grade">Grade</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="uid_display_signup">Your UID is: </string>
+    <string name="signup">sign up</string>
+    <string name="accuracy_default">Your accuracy: 100%</string>
+    <string name="progress_default">Your progress: 0/10</string>
+    <string name="ready_display">Ready to add?</string>
+    <string name="lets_go_text">Let\'s Go!</string>
+    <string name="addition_statistics">Addition Test Statistics</string>
+    <string name="questions_answered">Questions Answered: 0</string>
+    <string name="correct_answers">Correct answers: 0</string>
+    <string name="wrong_answers">Wrong answers: 0</string>
+    <string name="subtraction_statistics">Subtraction Test Statistics</string>
+    <string name="multiplication_statistics">Multiplication Test Statistics</string>
+    <string name="division_statistics">Division Test Statistics</string>
 </resources>
