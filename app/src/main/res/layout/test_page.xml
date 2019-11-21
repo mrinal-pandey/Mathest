@@ -138,7 +138,7 @@
                 android:fadingEdgeLength="5dp"
                 android:foreground="?attr/selectableItemBackground"
                 android:onClick="finishTest"
-                android:text="Finish test"
+                android:text="Save Progress"
                 android:textColor="@color/colorTextPrimary" />
         </androidx.cardview.widget.CardView>
         <Space
