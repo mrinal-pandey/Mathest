@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -157,24 +158,42 @@ public class TestPage extends AppCompatActivity {
                 for(int i = 0; i < jsonArray.length(); ++i) {
 
                     JSONObject details = jsonArray.getJSONObject(i);
-                    number1 = details.getString("number1");
-                    number2 = details.getString("number2");
+                    if(details.has("error")){
+                        questionsExhausted = true;
+                        new AlertDialog.Builder(TestPage.this)
+                                .setMessage("Questions Exhausted!")
+                                .setTitle("Please press Save progress to exit")
+                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                }).show();
+                    }else {
+                        number1 = details.getString("number1");
+                        number2 = details.getString("number2");
+                    }
                 }
                 dialogHandler.hideDialog();
-                questionNumber.setText("Question " + (nextQuestion + 1));
-                switch (sheetNo){
-                    case 1:
-                        questionBody.setText("Add " + number1 + " and " + number2);
-                        break;
-                    case 2:
-                        questionBody.setText("Subtract " + number2 + " from " + number1);
-                        break;
-                    case 3:
-                        questionBody.setText("Mutliply " + number1 + " with " + number2);
-                        break;
-                    case 4:
-                        questionBody.setText("Divide " + number1 + " by " + number2);
-                        break;
+                if(!questionsExhausted) {
+                    questionNumber.setText("Question " + (nextQuestion + 1));
+                    switch (sheetNo) {
+                        case 1:
+                            questionBody.setText("Add " + number1 + " and " + number2);
+                            break;
+                        case 2:
+                            questionBody.setText("Subtract " + number2 + " from " + number1);
+                            break;
+                        case 3:
+                            questionBody.setText("Mutliply " + number1 + " with " + number2);
+                            break;
+                        case 4:
+                            questionBody.setText("Divide " + number1 + " by " + number2);
+                            break;
+                    }
+                }else{
+                    submitButton.setEnabled(false);
+                    submitButton.setBackgroundColor(R.color.colorTextPrimary);
                 }
             }
             catch (Exception e)
@@ -192,6 +211,7 @@ public class TestPage extends AppCompatActivity {
     TextView questionNumber;
     TextView questionBody;
     EditText userAnswer;
+    Button submitButton;
     int nextQuestion;
     int sheetNo;
     String UID;
@@ -199,12 +219,13 @@ public class TestPage extends AppCompatActivity {
     String feedbackMessage = "";
     String number1 = "", number2 = "";
     int correctAnswersCounter = 0;
+    boolean questionsExhausted = false;
 
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(TestPage.this)
                 .setMessage("You can't go back from here")
-                .setTitle("Please press Finish test to exit")
+                .setTitle("Please press Save progress to exit")
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -236,6 +257,7 @@ public class TestPage extends AppCompatActivity {
         questionBody = findViewById(R.id.questionBody_txt);
         questionNumber = findViewById(R.id.questionNumber_txt);
         userAnswer = findViewById(R.id.userAnswer_edittxt);
+        submitButton = findViewById(R.id.submitButtonTestPage);
 
         getQuestionDetails(nextQuestion);
 
@@ -306,7 +328,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
                             }
                         });
                 firebaseFirestore.collection("users").document(UID).
@@ -314,7 +336,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
                                 dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
@@ -327,7 +349,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
                             }
                         });
                 firebaseFirestore.collection("users").document(UID).
@@ -335,7 +357,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
                                 dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
@@ -348,7 +370,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
                             }
                         });
                 firebaseFirestore.collection("users").document(UID).
@@ -356,7 +378,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
                                 dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }
@@ -369,7 +391,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
                             }
                         });
                 firebaseFirestore.collection("users").document(UID).
@@ -377,7 +399,7 @@ public class TestPage extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
                                 dialogHandler.hideDialog();
                                 goToPreviousActivity();
                             }

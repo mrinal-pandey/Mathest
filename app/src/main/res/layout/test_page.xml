@@ -156,17 +156,19 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        <Button
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:fadingEdgeLength="5dp"
-            android:layout_width="150dp"
-            android:foreground="?attr/selectableItemBackground"
-            android:layout_height="70dp"
-            android:textColor="@color/colorTextPrimary"
-            android:background="@color/colorPrimary"
-            android:layout_gravity="center"
-            android:onClick="nextQuestion"
-            android:text="Submit and Next" />
+
+            <Button
+                android:id="@+id/submitButtonTestPage"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="150dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:fadingEdgeLength="5dp"
+                android:foreground="?attr/selectableItemBackground"
+                android:onClick="nextQuestion"
+                android:text="Submit and Next"
+                android:textColor="@color/colorTextPrimary" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
