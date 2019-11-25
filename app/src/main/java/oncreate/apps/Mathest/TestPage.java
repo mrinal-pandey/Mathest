@@ -161,8 +161,8 @@ public class TestPage extends AppCompatActivity {
                     if(details.has("error")){
                         questionsExhausted = true;
                         new AlertDialog.Builder(TestPage.this)
-                                .setMessage("Questions Exhausted!")
-                                .setTitle("Please press Save progress to exit")
+                                .setMessage("Congratulations! You have answered all questions of this category. Please press 'Okay' and then 'Save progress' to exit.")
+                                .setTitle("Questions exhausted!")
                                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -192,8 +192,12 @@ public class TestPage extends AppCompatActivity {
                             break;
                     }
                 }else{
+                    questionNumber.setText("Congratulations!");
+                    questionBody.setText("You have mastered this category!");
+                    userAnswer.setEnabled(false);
+                    userAnswer.setBackgroundColor(getResources().getColor(R.color.disableColor));
                     submitButton.setEnabled(false);
-                    submitButton.setBackgroundColor(R.color.colorTextPrimary);
+                    submitButton.setBackgroundColor(getResources().getColor(R.color.disableColor));
                 }
             }
             catch (Exception e)

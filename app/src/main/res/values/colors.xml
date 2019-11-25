@@ -5,4 +5,5 @@
     <color name="colorPrimaryLight">#ffff5a</color>
     <color name="colorTextPrimary">#000000</color>>
     <color name="colorAccent">#D50000</color>
+    <color name="disableColor">#f0f0f0</color>
 </resources>
