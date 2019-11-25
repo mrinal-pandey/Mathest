@@ -153,7 +153,7 @@ public class TestPage extends AppCompatActivity {
             super.onPostExecute(s);
 
             try {
-                Log.i("JSON content", s);
+                //Log.i("JSON content", s);
                 JSONArray jsonArray = new JSONArray(s);
                 for(int i = 0; i < jsonArray.length(); ++i) {
 
@@ -319,7 +319,7 @@ public class TestPage extends AppCompatActivity {
                 break;
 
         }
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
     public void finishTest(View view){
