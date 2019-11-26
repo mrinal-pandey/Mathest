@@ -261,7 +261,7 @@ public class TestPage extends AppCompatActivity {
 
         //Toast.makeText(this, "Sheet No :" + sheetNo + "nq: " + nextQuestion + "uid: " + UID, Toast.LENGTH_LONG).show();
 
-        questionBody = findViewById(R.id.questionBody_txt);
+        questionBody = findViewById(R.id.questionBodyWorkspace);
         questionNumber = findViewById(R.id.questionNumber_txt);
         userAnswer = findViewById(R.id.userAnswer_edittxt);
         submitButton = findViewById(R.id.submitButtonTestPage);
@@ -416,8 +416,15 @@ public class TestPage extends AppCompatActivity {
     }
 
     public void additionWorkspace(View view){
-        Intent intent = new Intent(this, AdditionWorkspace.class);
-        startActivity(intent);
+        if(sheetNo == 1) {
+            Intent intent = new Intent(this, AdditionWorkspace.class);
+            intent.putExtra("number1", number1);
+            intent.putExtra("number2", number2);
+            intent.putExtra("UID", UID);
+            startActivity(intent);
+        }else{
+            Toast.makeText(this, "Functionality not available!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void goToPreviousActivity(){

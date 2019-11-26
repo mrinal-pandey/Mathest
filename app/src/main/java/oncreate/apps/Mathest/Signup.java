@@ -1,5 +1,3 @@
-
-
 package oncreate.apps.Mathest;
 
 import android.content.Context;
