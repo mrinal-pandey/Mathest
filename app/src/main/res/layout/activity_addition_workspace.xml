@@ -71,13 +71,13 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="30dp"
+                    android:id="@+id/carry_digit_1"
                     android:background="@drawable/additional_digit_disable"
                     android:gravity="center"
                     android:textColor="@color/colorTextPrimary"
                     android:layout_gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:onClick="questionEnable"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.531"
@@ -91,13 +91,13 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="30dp"
+                    android:id="@+id/carry_digit_2"
                     android:background="@drawable/additional_digit_disable"
                     android:gravity="center"
                     android:textColor="@color/colorTextPrimary"
                     android:layout_gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
-                    android:onClick="questionEnable"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.531"
@@ -113,13 +113,13 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="30dp"
+                    android:id="@+id/carry_digit_3"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="@color/colorTextPrimary"
                     android:inputType="number"
                     android:maxLength="1"
                     android:background="@drawable/additional_digit_disable"
-                    android:onClick="questionEnable"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.25"
@@ -134,13 +134,13 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="30dp"
+                    android:id="@+id/carry_digit_4"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="@color/colorTextPrimary"
                     android:inputType="number"
                     android:maxLength="1"
                     android:background="@drawable/additional_digit_disable"
-                    android:onClick="questionEnable"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.797"
@@ -171,6 +171,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/number1_digit1"
                     android:background="@drawable/digit_disable"
                     android:gravity="center"
                     android:textColor="@color/colorPrimary"
@@ -194,6 +195,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/number1_digit2"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="@color/colorPrimary"
@@ -217,6 +219,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/number1_digit3"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:textColor="@color/colorPrimary"
@@ -258,6 +261,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/number2_digit1"
                     android:background="@drawable/digit_disable"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -280,6 +284,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/number2_digit2"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:inputType="number"
@@ -303,6 +308,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/number2_digit3"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:inputType="number"
@@ -346,6 +352,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/answer_digit1"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:inputType="number"
@@ -368,6 +375,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/answer_digit2"
                     android:background="@drawable/digit_disable"
                     android:gravity="center"
                     android:layout_gravity="center"
@@ -391,6 +399,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/answer_digit3"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:inputType="number"
@@ -414,6 +423,7 @@
                 <EditText
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:id="@+id/answer_digit4"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:inputType="number"
@@ -431,8 +441,72 @@
                     app:layout_constraintVertical_bias="0.353" />
 
             </LinearLayout>
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardMaxElevation="20dp"
+                android:padding="10dp"
+                android:background="@color/cardview_dark_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
+                <Button
+                    style="@style/Widget.AppCompat.Button"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:fadingEdgeLength="5dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="checkBlocks"
+                    android:text="Evaluate"
+                    android:textColor="@color/colorTextPrimary" />
+            </androidx.cardview.widget.CardView>
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"/>
+            <androidx.cardview.widget.CardView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                app:cardMaxElevation="20dp"
+                android:padding="10dp"
+                android:background="@color/cardview_dark_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/submitButtonTestPage"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="150dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary"
+                    android:fadingEdgeLength="5dp"
+                    android:visibility="gone"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:onClick="saveAnswer"
+                    android:text="Save my answer!"
+                    android:textColor="@color/colorTextPrimary" />
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
+
+
+    </LinearLayout>
 
     </ScrollView>
 
