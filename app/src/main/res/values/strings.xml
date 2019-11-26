@@ -20,4 +20,5 @@
     <string name="subtraction_statistics">Subtraction Test Statistics</string>
     <string name="multiplication_statistics">Multiplication Test Statistics</string>
     <string name="division_statistics">Division Test Statistics</string>
+    <string name="editor_button">Try in editor</string>
 </resources>

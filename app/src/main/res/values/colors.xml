@@ -6,4 +6,5 @@
     <color name="colorTextPrimary">#000000</color>>
     <color name="colorAccent">#D50000</color>
     <color name="disableColor">#f0f0f0</color>
+    <color name="answerDigitColor">#00e676</color>
 </resources>

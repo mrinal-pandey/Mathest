@@ -415,6 +415,11 @@ public class TestPage extends AppCompatActivity {
         }
     }
 
+    public void additionWorkspace(View view){
+        Intent intent = new Intent(this, AdditionWorkspace.class);
+        startActivity(intent);
+    }
+
     public void goToPreviousActivity(){
         Intent intent = new Intent(this, StudentHome.class);
         intent.putExtra("uid", UID);
