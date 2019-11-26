@@ -56,6 +56,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            //Log.i("JSON", s);
             try{
 
                 JSONArray jsonArray = new JSONArray(s);
@@ -76,6 +77,23 @@ public class AdditionWorkspace extends AppCompatActivity {
                     resultArray[i] = Integer.valueOf(resultDetails.getString("digit" + (i + 1)));
                 }
 
+                /*for(int i = 0; i < 4; ++i){
+                    System.out.print(carryArray[i] + " ");
+                }
+                System.out.println();
+                for(int i = 0; i < 3; ++i){
+                    System.out.print(number1Array[i] + " ");
+                }
+                System.out.println();
+                for(int i = 0; i < 3; ++i){
+                    System.out.print(number2Array[i] + " ");
+                }
+                System.out.println();
+                for(int i = 0; i < 4; ++i){
+                    System.out.print(resultArray[i] + " ");
+                }
+                System.out.println();*/
+
             }catch (Exception e){
 
             }
@@ -90,8 +108,14 @@ public class AdditionWorkspace extends AppCompatActivity {
     int[] number1Array = {0, 0, 0};
     int[] number2Array = {0, 0, 0};
     int[] resultArray = {0, 0, 0, 0};
-    EditText carry1, carry2, carry3, carry4, number11, number12, number13,
-            number21, number22, number23, answer1, answer2, answer3, answer4;
+    EditText carry1, carry2, carry3, carry4;
+    EditText number11, number12, number13;
+    EditText number21, number22, number23;
+    EditText answer1, answer2, answer3, answer4;
+    int[] carryUserArray = {0, 0, 0, 0};
+    int[] number1UserArray = {0, 0, 0};
+    int[] number2UserArray = {0, 0, 0};
+    int[] resultUserArray = {0, 0, 0, 0};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +133,7 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         Downloader downloader = new Downloader();
         downloader.execute("https://mathest.herokuapp.com/addition-working?uid="+UID+"&number1="+number1+"&number2="+number2);
+
         carry1 = findViewById(R.id.carry_digit_1);
         carry2 = findViewById(R.id.carry_digit_2);
         carry3 = findViewById(R.id.carry_digit_3);
@@ -126,27 +151,249 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public void questionEnable(View view){
-        view.setBackground(getDrawable(R.drawable.question_digit_enable));
+        view.setBackground(getResources().getDrawable(R.drawable.question_digit_enable));
         view.setFocusableInTouchMode(true);
         view.requestFocus();
     }
     public void answerEnable(View view){
-        view.setBackground(getDrawable(R.drawable.answer_digit_enable));
+        view.setBackground(getResources().getDrawable(R.drawable.answer_digit_enable));
         view.setFocusableInTouchMode(true);
         view.requestFocus();
     }
 
     public void checkBlocks(View view){
-        if(answerNotEntered()){
-            Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
-            return;
+
+        if(carry1.getText().toString().equals("")){
+            carryUserArray[0] = 0;
+        }else {
+            carryUserArray[0] = Integer.valueOf(carry1.getText().toString());
         }
-    }
-    public boolean answerNotEntered(){
-        if(answer1.getText().toString() == "" && answer2.getText().toString() == "" &&
-                answer3.getText().toString() == "" && answer4.getText().toString() == ""){
-            return true;
+
+        if(carry2.getText().toString().equals("")){
+            carryUserArray[1] = 0;
+        }else {
+            carryUserArray[1] = Integer.valueOf(carry2.getText().toString());
         }
-        return false;
+
+        if(carry3.getText().toString().equals("")){
+            carryUserArray[2] = 0;
+        }else {
+            carryUserArray[2] = Integer.valueOf(carry3.getText().toString());
+        }
+
+        if(carry4.getText().toString().equals("")){
+            carryUserArray[3] = 0;
+        }else {
+            carryUserArray[3] = Integer.valueOf(carry4.getText().toString());
+        }
+
+        if(number11.getText().toString().equals("")){
+            number1UserArray[0] = 0;
+        }else{
+            number1UserArray[0] = Integer.valueOf(number11.getText().toString());
+        }
+
+        if(number12.getText().toString().equals("")){
+            number1UserArray[1] = 0;
+        }else{
+            number1UserArray[1] = Integer.valueOf(number12.getText().toString());
+        }
+
+        if(number13.getText().toString().equals("")){
+            number1UserArray[2] = 0;
+        }else{
+            number1UserArray[2] = Integer.valueOf(number13.getText().toString());
+        }
+
+        if(number21.getText().toString().equals("")){
+            number2UserArray[0] = 0;
+        }else{
+            number2UserArray[0] = Integer.valueOf(number21.getText().toString());
+        }
+
+        if(number22.getText().toString().equals("")){
+            number2UserArray[1] = 0;
+        }else{
+            number2UserArray[1] = Integer.valueOf(number22.getText().toString());
+        }
+
+        if(number23.getText().toString().equals("")){
+            number2UserArray[2] = 0;
+        }else{
+            number2UserArray[2] = Integer.valueOf(number23.getText().toString());
+        }
+
+        if(answer1.getText().toString().equals("")){
+            resultUserArray[0] = 0;
+        }else{
+            resultUserArray[0] = Integer.valueOf(answer1.getText().toString());
+        }
+
+        if(answer2.getText().toString().equals("")){
+            resultUserArray[1] = 0;
+        }else{
+            resultUserArray[1] = Integer.valueOf(answer2.getText().toString());
+        }
+
+        if(answer3.getText().toString().equals("")){
+            resultUserArray[2] = 0;
+        }else{
+            resultUserArray[2] = Integer.valueOf(answer3.getText().toString());
+        }
+
+        if(answer4.getText().toString().equals("")){
+            resultUserArray[3] = 0;
+        }else{
+            resultUserArray[3] = Integer.valueOf(answer4.getText().toString());
+        }
+
+        for(int i = 0; i < 4; ++i){
+            if(carryUserArray[i] != carryArray[i]){
+                switch(i)
+                {
+                    case 0:
+                        carry1.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 1:
+                        carry2.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 2:
+                        carry3.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 3:
+                        carry4.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                }
+            }/*else{
+                switch(i)
+                {
+                    case 0:
+                        carry1.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        break;
+                    case 1:
+                        carry2.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        break;
+                    case 2:
+                        carry3.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        break;
+                    case 3:
+                        carry4.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        break;
+                }
+            }*/
+        }
+
+        for(int i = 0; i < 3; ++i){
+            if(number1UserArray[i] != number1Array[i]){
+                switch(i)
+                {
+                    case 0:
+                        number11.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 1:
+                        number12.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 2:
+                        number13.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                }
+            }/*else{
+                switch(i)
+                {
+                    case 0:
+                        number11.setBackgroundColor(R.drawable.question_digit_enable);
+                        break;
+                    case 1:
+                        number12.setBackgroundColor(R.drawable.question_digit_enable);
+                        break;
+                    case 2:
+                        number13.setBackgroundColor(R.drawable.question_digit_enable);
+                        break;
+                }
+            }*/
+        }
+
+        for(int i = 0; i < 3; ++i){
+            if(number2UserArray[i] != number2Array[i]){
+                switch(i)
+                {
+                    case 0:
+                        number21.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 1:
+                        number22.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 2:
+                        number23.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                }
+            }/*else{
+                switch(i)
+                {
+                    case 0:
+                        number21.setBackgroundColor(R.drawable.question_digit_enable);
+                        break;
+                    case 1:
+                        number22.setBackgroundColor(R.drawable.question_digit_enable);
+                        break;
+                    case 2:
+                        number23.setBackgroundColor(R.drawable.question_digit_enable);
+                        break;
+                }
+            }*/
+        }
+
+        for(int i = 0; i < 4; ++i){
+            if(resultUserArray[i] != resultArray[i]){
+                switch(i)
+                {
+                    case 0:
+                        answer1.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 1:
+                        answer2.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 2:
+                        answer3.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                    case 3:
+                        answer4.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        break;
+                }
+            }/*else{
+                switch(i)
+                {
+                    case 0:
+                        answer1.setBackgroundColor(R.drawable.answer_digit_enable);
+                        break;
+                    case 1:
+                        answer2.setBackgroundColor(R.drawable.answer_digit_enable);
+                        break;
+                    case 2:
+                        answer3.setBackgroundColor(R.drawable.answer_digit_enable);
+                        break;
+                    case 3:
+                        answer4.setBackgroundColor(R.drawable.answer_digit_enable);
+                        break;
+                }
+            }*/
+        }
+
+        /*for(int i = 0; i < 4; ++i){
+            System.out.print(carryUserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 3; ++i){
+            System.out.print(number1UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 3; ++i){
+            System.out.print(number2UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 4; ++i){
+            System.out.print(resultUserArray[i] + " ");
+        }
+        System.out.println();*/
     }
 }
