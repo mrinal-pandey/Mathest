@@ -3,6 +3,7 @@ package oncreate.apps.Mathest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +36,9 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         sharedPreferences = this.getSharedPreferences("usercontent", Context.MODE_PRIVATE);
 
         firestoreDatabase = FirebaseFirestore.getInstance();

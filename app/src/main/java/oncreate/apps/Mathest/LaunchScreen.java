@@ -3,6 +3,7 @@ package oncreate.apps.Mathest;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -16,6 +17,8 @@ public class LaunchScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launch_screen);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         imageView = findViewById(R.id.logoImageView);
         imageView.animate().rotationY(360).setDuration(1000);

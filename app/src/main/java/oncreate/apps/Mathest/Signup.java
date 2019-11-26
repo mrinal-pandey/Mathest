@@ -1,6 +1,7 @@
 package oncreate.apps.Mathest;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -146,6 +147,9 @@ public class Signup extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         firestoreDatabase = FirebaseFirestore.getInstance();
 
         UID_disp = findViewById(R.id.UID_disp);

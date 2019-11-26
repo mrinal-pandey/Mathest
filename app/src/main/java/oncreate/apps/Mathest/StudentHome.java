@@ -2,6 +2,7 @@ package oncreate.apps.Mathest;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -41,6 +42,8 @@ public class StudentHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         UID = getIntent().getStringExtra("uid");
 
