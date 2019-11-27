@@ -118,6 +118,7 @@ public class AdditionWorkspace extends AppCompatActivity {
     int[] number2UserArray = {-1, -1, -1};
     int[] resultUserArray = {-1, -1, -1, -1};
     int userAnswer = 0;
+    int wrongCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,7 +329,8 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         boolean firstWorking = firstWorkingMethod();
         boolean secondWorking = true;
-        if(!firstWorking){
+        //Log.i("Count", String.valueOf(wrongCount));
+        if(!firstWorking && wrongCount > 3){
             secondWorking = secondWorkingMethod();
         }
 
@@ -385,6 +387,7 @@ public class AdditionWorkspace extends AppCompatActivity {
 
     public boolean firstWorkingMethod(){
         boolean workingCorrectFlag = true;
+        wrongCount = 0;
         for(int i = 0; i < 3; ++i){
             if(number1UserArray[i] != number1Array[i]){
                 workingCorrectFlag = false;
@@ -392,12 +395,15 @@ public class AdditionWorkspace extends AppCompatActivity {
                 {
                     case 0:
                         number11.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount;
                         break;
                     case 1:
                         number12.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount;
                         break;
                     case 2:
                         number13.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount;
                         break;
                 }
             }else{
@@ -423,12 +429,15 @@ public class AdditionWorkspace extends AppCompatActivity {
                 {
                     case 0:
                         number21.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount;
                         break;
                     case 1:
                         number22.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount;
                         break;
                     case 2:
                         number23.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount;
                         break;
                 }
             }else{
