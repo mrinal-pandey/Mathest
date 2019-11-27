@@ -178,85 +178,85 @@ public class AdditionWorkspace extends AppCompatActivity {
             return;
         }
         if(carry1.getText().toString().equals("")){
-            carryUserArray[0] = 0;
+            carryUserArray[0] = -1;
         }else {
             carryUserArray[0] = Integer.valueOf(carry1.getText().toString());
         }
 
         if(carry2.getText().toString().equals("")){
-            carryUserArray[1] = 0;
+            carryUserArray[1] = -1;
         }else {
             carryUserArray[1] = Integer.valueOf(carry2.getText().toString());
         }
 
         if(carry3.getText().toString().equals("")){
-            carryUserArray[2] = 0;
+            carryUserArray[2] = -1;
         }else {
             carryUserArray[2] = Integer.valueOf(carry3.getText().toString());
         }
 
         if(carry4.getText().toString().equals("")){
-            carryUserArray[3] = 0;
+            carryUserArray[3] = -1;
         }else {
             carryUserArray[3] = Integer.valueOf(carry4.getText().toString());
         }
 
         if(number11.getText().toString().equals("")){
-            number1UserArray[0] = 0;
+            number1UserArray[0] = -1;
         }else{
             number1UserArray[0] = Integer.valueOf(number11.getText().toString());
         }
 
         if(number12.getText().toString().equals("")){
-            number1UserArray[1] = 0;
+            number1UserArray[1] = -1;
         }else{
             number1UserArray[1] = Integer.valueOf(number12.getText().toString());
         }
 
         if(number13.getText().toString().equals("")){
-            number1UserArray[2] = 0;
+            number1UserArray[2] = -1;
         }else{
             number1UserArray[2] = Integer.valueOf(number13.getText().toString());
         }
 
         if(number21.getText().toString().equals("")){
-            number2UserArray[0] = 0;
+            number2UserArray[0] = -1;
         }else{
             number2UserArray[0] = Integer.valueOf(number21.getText().toString());
         }
 
         if(number22.getText().toString().equals("")){
-            number2UserArray[1] = 0;
+            number2UserArray[1] = -1;
         }else{
             number2UserArray[1] = Integer.valueOf(number22.getText().toString());
         }
 
         if(number23.getText().toString().equals("")){
-            number2UserArray[2] = 0;
+            number2UserArray[2] = -1;
         }else{
             number2UserArray[2] = Integer.valueOf(number23.getText().toString());
         }
 
         if(answer1.getText().toString().equals("")){
-            resultUserArray[0] = 0;
+            resultUserArray[0] = -1;
         }else{
             resultUserArray[0] = Integer.valueOf(answer1.getText().toString());
         }
 
         if(answer2.getText().toString().equals("")){
-            resultUserArray[1] = 0;
+            resultUserArray[1] = -1;
         }else{
             resultUserArray[1] = Integer.valueOf(answer2.getText().toString());
         }
 
         if(answer3.getText().toString().equals("")){
-            resultUserArray[2] = 0;
+            resultUserArray[2] = -1;
         }else{
             resultUserArray[2] = Integer.valueOf(answer3.getText().toString());
         }
 
         if(answer4.getText().toString().equals("")){
-            resultUserArray[3] = 0;
+            resultUserArray[3] = -1;
         }else{
             resultUserArray[3] = Integer.valueOf(answer4.getText().toString());
         }
@@ -420,5 +420,13 @@ public class AdditionWorkspace extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public void saveAnswer(){
+        int i = 0;
+        while(resultUserArray[i] == -1){
+            i++;
+        }
+        
     }
 }
