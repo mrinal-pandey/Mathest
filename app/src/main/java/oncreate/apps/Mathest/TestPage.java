@@ -215,7 +215,7 @@ public class TestPage extends AppCompatActivity {
     WrongAnswerDialogHandler wrongAnswerDialogHandler;
     TextView questionNumber;
     TextView questionBody;
-    EditText userAnswer;
+    static EditText userAnswer;
     Button submitButton;
     int nextQuestion;
     int sheetNo;

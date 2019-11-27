@@ -464,7 +464,7 @@
                 <Button
                     android:id="@+id/evaluateAdditionWorkspace"
                     style="@style/Widget.AppCompat.Button"
-                    android:layout_width="150dp"
+                    android:layout_width="100dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
@@ -493,7 +493,7 @@
                 <Button
                     android:id="@+id/saveAnswerAddition"
                     style="@style/Widget.AppCompat.Button.Borderless"
-                    android:layout_width="150dp"
+                    android:layout_width="100dp"
                     android:layout_height="70dp"
                     android:layout_gravity="center"
                     android:background="@color/colorPrimary"
@@ -501,7 +501,7 @@
                     android:visibility="gone"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="saveAnswer"
-                    android:text="Save my answer!"
+                    android:text="Save answer"
                     android:textColor="@color/colorTextPrimary" />
             </androidx.cardview.widget.CardView>
                 <Space
@@ -510,6 +510,7 @@
 
                 <Button
                     style="@style/Widget.AppCompat.Button"
+                    android:id="@+id/refreshAdditionWorkspace"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"

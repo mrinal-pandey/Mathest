@@ -106,17 +106,18 @@ public class AdditionWorkspace extends AppCompatActivity {
     String UID;
     TextView questionBodyTextView;
     int[] carryArray = {0, 0, 0, 0};
-    int[] number1Array = {0, 0, 0};
-    int[] number2Array = {0, 0, 0};
-    int[] resultArray = {0, 0, 0, 0};
+    int[] number1Array = {-1, -1, -1};
+    int[] number2Array = {-1, -1, -1};
+    int[] resultArray = {-1, -1, -1, -1};
     EditText carry1, carry2, carry3, carry4;
     EditText number11, number12, number13;
     EditText number21, number22, number23;
     EditText answer1, answer2, answer3, answer4;
     int[] carryUserArray = {0, 0, 0, 0};
-    int[] number1UserArray = {0, 0, 0};
-    int[] number2UserArray = {0, 0, 0};
-    int[] resultUserArray = {0, 0, 0, 0};
+    int[] number1UserArray = {-1, -1, -1};
+    int[] number2UserArray = {-1, -1, -1};
+    int[] resultUserArray = {-1, -1, -1, -1};
+    int userAnswer = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +152,14 @@ public class AdditionWorkspace extends AppCompatActivity {
         answer4 = findViewById(R.id.answer_digit4);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(userAnswer!=0){
+            TestPage.userAnswer.setText(String.valueOf(userAnswer));
+        }
+    }
+
     public void questionEnable(View view){
         view.setBackground(getResources().getDrawable(R.drawable.question_digit_enable));
         view.setFocusableInTouchMode(true);
@@ -172,31 +181,32 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public void checkBlocks(View view){
+        boolean flag = true;
 
         if(noAnswerEntered()){
             Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
             return;
         }
         if(carry1.getText().toString().equals("")){
-            carryUserArray[0] = -1;
+            carryUserArray[0] = 0;
         }else {
             carryUserArray[0] = Integer.valueOf(carry1.getText().toString());
         }
 
         if(carry2.getText().toString().equals("")){
-            carryUserArray[1] = -1;
+            carryUserArray[1] = 0;
         }else {
             carryUserArray[1] = Integer.valueOf(carry2.getText().toString());
         }
 
         if(carry3.getText().toString().equals("")){
-            carryUserArray[2] = -1;
+            carryUserArray[2] = 0;
         }else {
             carryUserArray[2] = Integer.valueOf(carry3.getText().toString());
         }
 
         if(carry4.getText().toString().equals("")){
-            carryUserArray[3] = -1;
+            carryUserArray[3] = 0;
         }else {
             carryUserArray[3] = Integer.valueOf(carry4.getText().toString());
         }
@@ -262,7 +272,8 @@ public class AdditionWorkspace extends AppCompatActivity {
         }
 
         for(int i = 0; i < 4; ++i){
-            if(carryUserArray[i] != carryArray[i]){
+            if(carryUserArray[i] != 0 && carryUserArray[i] != carryArray[i]){
+                flag = false;
                 switch(i)
                 {
                     case 0:
@@ -278,27 +289,28 @@ public class AdditionWorkspace extends AppCompatActivity {
                         carry4.setBackground(getDrawable(R.drawable.additional_digit_wrong));
                         break;
                 }
-            }/*else{
+            }else{
                 switch(i)
                 {
                     case 0:
-                        carry1.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        carry1.setBackground(getDrawable(R.drawable.additional_digit_disable));
                         break;
                     case 1:
-                        carry2.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        carry2.setBackground(getDrawable(R.drawable.additional_digit_disable));
                         break;
                     case 2:
-                        carry3.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        carry3.setBackground(getDrawable(R.drawable.additional_digit_disable));
                         break;
                     case 3:
-                        carry4.setBackgroundColor(getResources().getColor(R.color.whiteColor));
+                        carry4.setBackground(getDrawable(R.drawable.additional_digit_disable));
                         break;
                 }
-            }*/
+            }
         }
 
         for(int i = 0; i < 3; ++i){
             if(number1UserArray[i] != number1Array[i]){
+                flag = false;
                 switch(i)
                 {
                     case 0:
@@ -311,24 +323,25 @@ public class AdditionWorkspace extends AppCompatActivity {
                         number13.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
-            }/*else{
+            }else{
                 switch(i)
                 {
                     case 0:
-                        number11.setBackgroundColor(R.drawable.question_digit_enable);
+                        number11.setBackground(getDrawable(R.drawable.question_digit_enable));
                         break;
                     case 1:
-                        number12.setBackgroundColor(R.drawable.question_digit_enable);
+                        number12.setBackground(getDrawable(R.drawable.question_digit_enable));
                         break;
                     case 2:
-                        number13.setBackgroundColor(R.drawable.question_digit_enable);
+                        number13.setBackground(getDrawable(R.drawable.question_digit_enable));
                         break;
                 }
-            }*/
+            }
         }
 
         for(int i = 0; i < 3; ++i){
             if(number2UserArray[i] != number2Array[i]){
+                flag = false;
                 switch(i)
                 {
                     case 0:
@@ -341,24 +354,25 @@ public class AdditionWorkspace extends AppCompatActivity {
                         number23.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
-            }/*else{
+            }else{
                 switch(i)
                 {
                     case 0:
-                        number21.setBackgroundColor(R.drawable.question_digit_enable);
+                        number21.setBackground(getDrawable(R.drawable.question_digit_enable));
                         break;
                     case 1:
-                        number22.setBackgroundColor(R.drawable.question_digit_enable);
+                        number22.setBackground(getDrawable(R.drawable.question_digit_enable));
                         break;
                     case 2:
-                        number23.setBackgroundColor(R.drawable.question_digit_enable);
+                        number23.setBackground(getDrawable(R.drawable.question_digit_enable));
                         break;
                 }
-            }*/
+            }
         }
 
         for(int i = 0; i < 4; ++i){
             if(resultUserArray[i] != resultArray[i]){
+                flag = false;
                 switch(i)
                 {
                     case 0:
@@ -374,43 +388,29 @@ public class AdditionWorkspace extends AppCompatActivity {
                         answer4.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
-            }/*else{
+            }else{
                 switch(i)
                 {
                     case 0:
-                        answer1.setBackgroundColor(R.drawable.answer_digit_enable);
+                        answer1.setBackground(getDrawable(R.drawable.answer_digit_enable));
                         break;
                     case 1:
-                        answer2.setBackgroundColor(R.drawable.answer_digit_enable);
+                        answer2.setBackground(getDrawable(R.drawable.answer_digit_enable));
                         break;
                     case 2:
-                        answer3.setBackgroundColor(R.drawable.answer_digit_enable);
+                        answer3.setBackground(getDrawable(R.drawable.answer_digit_enable));
                         break;
                     case 3:
-                        answer4.setBackgroundColor(R.drawable.answer_digit_enable);
+                        answer4.setBackground(getDrawable(R.drawable.answer_digit_enable));
                         break;
                 }
-            }*/
+            }
         }
-
-        /*for(int i = 0; i < 4; ++i){
-            System.out.print(carryUserArray[i] + " ");
+        if(flag == true){
+            Toast.makeText(this, "Congratulations! You did it right!", Toast.LENGTH_SHORT).show();
         }
-        System.out.println();
-        for(int i = 0; i < 3; ++i){
-            System.out.print(number1UserArray[i] + " ");
-        }
-        System.out.println();
-        for(int i = 0; i < 3; ++i){
-            System.out.print(number2UserArray[i] + " ");
-        }
-        System.out.println();
-        for(int i = 0; i < 4; ++i){
-            System.out.print(resultUserArray[i] + " ");
-        }
-        System.out.println();*/
-        Button evaluateButton = findViewById(R.id.evaluateAdditionWorkspace);
-        evaluateButton.setVisibility(View.GONE);
+       /* Button evaluateButton = findViewById(R.id.evaluateAdditionWorkspace);
+        evaluateButton.setVisibility(View.GONE);*/
         Button saveAnswer = findViewById(R.id.saveAnswerAddition);
         saveAnswer.setVisibility(View.VISIBLE);
     }
@@ -422,11 +422,34 @@ public class AdditionWorkspace extends AppCompatActivity {
         return false;
     }
 
-    public void saveAnswer(){
+    public void saveAnswer(View view){
         int i = 0;
+        userAnswer = 0;
         while(resultUserArray[i] == -1){
             i++;
         }
-        
+        while(i < 4){
+            if(resultUserArray[i] == -1){
+                Toast.makeText(this, "This is not a valid answer! Try again.",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+            switch(i){
+                case 0:
+                    userAnswer += resultUserArray[i] * 1000;
+                    break;
+                case 1:
+                    userAnswer += resultUserArray[i] * 100;
+                    break;
+                case 2:
+                    userAnswer += resultUserArray[i] * 10;
+                    break;
+                case 3:
+                    userAnswer += resultUserArray[i];
+            }
+            i++;
+        }
+
+        Toast.makeText(this, "Answer saved is "+userAnswer+" Press back to continue!", Toast.LENGTH_SHORT).show();
     }
 }
