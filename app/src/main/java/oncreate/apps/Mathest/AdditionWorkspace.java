@@ -155,7 +155,7 @@ public class AdditionWorkspace extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        if(userAnswer!=0){
+        if(userAnswer != 0){
             TestPage.userAnswer.setText(String.valueOf(userAnswer));
         }
     }
@@ -181,7 +181,8 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public void checkBlocks(View view){
-        boolean flag = true;
+
+        boolean workingCorrectFlag = true, answerCorrectFlag = true;
 
         if(noAnswerEntered()){
             Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
@@ -271,9 +272,26 @@ public class AdditionWorkspace extends AppCompatActivity {
             resultUserArray[3] = Integer.valueOf(answer4.getText().toString());
         }
 
+        /*for(int i = 0; i < 4; ++i){
+            System.out.print(carryUserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 3; ++i){
+            System.out.print(number1UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 3; ++i){
+            System.out.print(number2UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 4; ++i){
+            System.out.print(resultUserArray[i] + " ");
+        }
+        System.out.println();*/
+
         for(int i = 0; i < 4; ++i){
             if(carryUserArray[i] != carryArray[i]){
-                flag = false;
+                workingCorrectFlag = false;
                 switch(i)
                 {
                     case 0:
@@ -308,71 +326,17 @@ public class AdditionWorkspace extends AppCompatActivity {
             }
         }
 
-        for(int i = 0; i < 3; ++i){
-            if(number1UserArray[i] != number1Array[i]){
-                flag = false;
-                switch(i)
-                {
-                    case 0:
-                        number11.setBackground(getDrawable(R.drawable.digit_wrong));
-                        break;
-                    case 1:
-                        number12.setBackground(getDrawable(R.drawable.digit_wrong));
-                        break;
-                    case 2:
-                        number13.setBackground(getDrawable(R.drawable.digit_wrong));
-                        break;
-                }
-            }else{
-                switch(i)
-                {
-                    case 0:
-                        number11.setBackground(getDrawable(R.drawable.question_digit_enable));
-                        break;
-                    case 1:
-                        number12.setBackground(getDrawable(R.drawable.question_digit_enable));
-                        break;
-                    case 2:
-                        number13.setBackground(getDrawable(R.drawable.question_digit_enable));
-                        break;
-                }
-            }
+        boolean firstWorking = firstWorkingMethod();
+        boolean secondWorking = true;
+        if(!firstWorking){
+            secondWorking = secondWorkingMethod();
         }
 
-        for(int i = 0; i < 3; ++i){
-            if(number2UserArray[i] != number2Array[i]){
-                flag = false;
-                switch(i)
-                {
-                    case 0:
-                        number21.setBackground(getDrawable(R.drawable.digit_wrong));
-                        break;
-                    case 1:
-                        number22.setBackground(getDrawable(R.drawable.digit_wrong));
-                        break;
-                    case 2:
-                        number23.setBackground(getDrawable(R.drawable.digit_wrong));
-                        break;
-                }
-            }else{
-                switch(i)
-                {
-                    case 0:
-                        number21.setBackground(getDrawable(R.drawable.question_digit_enable));
-                        break;
-                    case 1:
-                        number22.setBackground(getDrawable(R.drawable.question_digit_enable));
-                        break;
-                    case 2:
-                        number23.setBackground(getDrawable(R.drawable.question_digit_enable));
-                        break;
-                }
-            }
-        }
+        workingCorrectFlag = workingCorrectFlag && (firstWorking || secondWorking);
 
         for(int i = 0; i < 4; ++i){
             if(resultUserArray[i] != resultArray[i]){
-                flag = false;
+                answerCorrectFlag = false;
                 switch(i)
                 {
                     case 0:
@@ -406,14 +370,151 @@ public class AdditionWorkspace extends AppCompatActivity {
                 }
             }
         }
-        if(flag == true){
-            Toast.makeText(this, "Congratulations! You did it right!", Toast.LENGTH_SHORT).show();
+        if(answerCorrectFlag){
+            String message = "Congratulations! Your answer is correct!";
+            if(workingCorrectFlag) {
+                message = "Congratulations! You did it absolutely right!";
+            }
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
        /* Button evaluateButton = findViewById(R.id.evaluateAdditionWorkspace);
         evaluateButton.setVisibility(View.GONE);*/
         Button saveAnswer = findViewById(R.id.saveAnswerAddition);
         saveAnswer.setVisibility(View.VISIBLE);
     }
+
+    public boolean firstWorkingMethod(){
+        boolean workingCorrectFlag = true;
+        for(int i = 0; i < 3; ++i){
+            if(number1UserArray[i] != number1Array[i]){
+                workingCorrectFlag = false;
+                switch(i)
+                {
+                    case 0:
+                        number11.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 1:
+                        number12.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 2:
+                        number13.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                }
+            }else{
+                switch(i)
+                {
+                    case 0:
+                        number11.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 1:
+                        number12.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 2:
+                        number13.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                }
+            }
+        }
+
+        for(int i = 0; i < 3; ++i){
+            if(number2UserArray[i] != number2Array[i]){
+                workingCorrectFlag = false;
+                switch(i)
+                {
+                    case 0:
+                        number21.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 1:
+                        number22.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 2:
+                        number23.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                }
+            }else{
+                switch(i)
+                {
+                    case 0:
+                        number21.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 1:
+                        number22.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 2:
+                        number23.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                }
+            }
+        }
+        return workingCorrectFlag;
+    }
+
+    public boolean secondWorkingMethod(){
+        boolean workingCorrectFlag = true;
+        for(int i = 0; i < 3; ++i){
+            if(number1UserArray[i] != number2Array[i]){
+                workingCorrectFlag = false;
+                switch(i)
+                {
+                    case 0:
+                        number11.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 1:
+                        number12.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 2:
+                        number13.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                }
+            }else{
+                switch(i)
+                {
+                    case 0:
+                        number11.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 1:
+                        number12.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 2:
+                        number13.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                }
+            }
+        }
+
+        for(int i = 0; i < 3; ++i){
+            if(number2UserArray[i] != number1Array[i]){
+                workingCorrectFlag = false;
+                switch(i)
+                {
+                    case 0:
+                        number21.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 1:
+                        number22.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                    case 2:
+                        number23.setBackground(getDrawable(R.drawable.digit_wrong));
+                        break;
+                }
+            }else{
+                switch(i)
+                {
+                    case 0:
+                        number21.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 1:
+                        number22.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                    case 2:
+                        number23.setBackground(getDrawable(R.drawable.question_digit_enable));
+                        break;
+                }
+            }
+        }
+        return workingCorrectFlag;
+    }
+
     public boolean noAnswerEntered(){
         if(answer1.getText().toString().equals("") && answer2.getText().toString().equals("") &&
                 answer3.getText().toString().equals("") && answer4.getText().toString().equals("")){
