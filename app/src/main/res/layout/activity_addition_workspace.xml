@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AdditionWorkspace">
@@ -27,6 +28,55 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.209"
             tools:context=".MainActivity">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Please press 'Evaluate' before saving answer"
+                android:gravity="center"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:textStyle="bold">
+            </TextView>
+
+            </androidx.cardview.widget.CardView>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Click on 'Reload' symbol to reset the canvas"
+                android:gravity="center"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:textStyle="bold">
+            </TextView>
+
+            </androidx.cardview.widget.CardView>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"/>
+
             <androidx.cardview.widget.CardView
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
