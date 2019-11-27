@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/mathest_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdditionWorkspace"></activity>
+        <activity android:name=".AdditionWorkspace"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".LaunchScreen"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -23,12 +24,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".StudentHome" />
-        <activity android:name=".TestPage" />
+        <activity android:name=".TestPage"
+            android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".Login"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Signup"
+            android:windowSoftInputMode="stateHidden"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".StudentProfile" />
     </application>
