@@ -272,7 +272,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         }
 
         for(int i = 0; i < 4; ++i){
-            if(carryUserArray[i] != 0 && carryUserArray[i] != carryArray[i]){
+            if(carryUserArray[i] != carryArray[i]){
                 flag = false;
                 switch(i)
                 {
@@ -432,6 +432,7 @@ public class AdditionWorkspace extends AppCompatActivity {
             if(resultUserArray[i] == -1){
                 Toast.makeText(this, "This is not a valid answer! Try again.",
                         Toast.LENGTH_SHORT).show();
+                userAnswer = 0;
                 return;
             }
             switch(i){
