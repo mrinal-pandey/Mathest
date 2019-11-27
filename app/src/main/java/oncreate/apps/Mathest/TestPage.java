@@ -199,6 +199,8 @@ public class TestPage extends AppCompatActivity {
                     userAnswer.setBackgroundColor(getResources().getColor(R.color.disableColor));
                     submitButton.setEnabled(false);
                     submitButton.setBackgroundColor(getResources().getColor(R.color.disableColor));
+                    workspaceButton.setEnabled(false);
+                    workspaceButton.setBackgroundColor(getResources().getColor(R.id.disableHome));
                 }
             }
             catch (Exception e)
@@ -216,7 +218,7 @@ public class TestPage extends AppCompatActivity {
     TextView questionNumber;
     TextView questionBody;
     static EditText userAnswer;
-    Button submitButton;
+    Button submitButton, workspaceButton;
     int nextQuestion;
     int sheetNo;
     String UID;
@@ -265,6 +267,7 @@ public class TestPage extends AppCompatActivity {
         questionNumber = findViewById(R.id.questionNumber_txt);
         userAnswer = findViewById(R.id.userAnswer_edittxt);
         submitButton = findViewById(R.id.submitButtonTestPage);
+        workspaceButton = findViewById(R.id.buttonAdditionWorkspace);
 
         getQuestionDetails(nextQuestion);
 
