@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -161,8 +162,21 @@ public class AdditionWorkspace extends AppCompatActivity {
         view.requestFocus();
     }
 
+    public void repaint(View view){
+        Intent intent = new Intent(this, AdditionWorkspace.class);
+        intent.putExtra("number1", number1);
+        intent.putExtra("number2", number2);
+        intent.putExtra("UID", UID);
+        finish();
+        startActivity(intent);
+    }
+
     public void checkBlocks(View view){
 
+        if(noAnswerEntered()){
+            Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if(carry1.getText().toString().equals("")){
             carryUserArray[0] = 0;
         }else {
@@ -252,16 +266,16 @@ public class AdditionWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        carry1.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        carry1.setBackground(getDrawable(R.drawable.additional_digit_wrong));
                         break;
                     case 1:
-                        carry2.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        carry2.setBackground(getDrawable(R.drawable.additional_digit_wrong));
                         break;
                     case 2:
-                        carry3.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        carry3.setBackground(getDrawable(R.drawable.additional_digit_wrong));
                         break;
                     case 3:
-                        carry4.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        carry4.setBackground(getDrawable(R.drawable.additional_digit_wrong));
                         break;
                 }
             }/*else{
@@ -288,13 +302,13 @@ public class AdditionWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        number11.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        number11.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 1:
-                        number12.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        number12.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 2:
-                        number13.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        number13.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
             }/*else{
@@ -318,13 +332,13 @@ public class AdditionWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        number21.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        number21.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 1:
-                        number22.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        number22.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 2:
-                        number23.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        number23.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
             }/*else{
@@ -348,16 +362,16 @@ public class AdditionWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        answer1.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        answer1.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 1:
-                        answer2.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        answer2.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 2:
-                        answer3.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        answer3.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 3:
-                        answer4.setBackgroundColor(getResources().getColor(R.color.wrongAnswerColor));
+                        answer4.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
             }/*else{
@@ -395,5 +409,16 @@ public class AdditionWorkspace extends AppCompatActivity {
             System.out.print(resultUserArray[i] + " ");
         }
         System.out.println();*/
+        Button evaluateButton = findViewById(R.id.evaluateAdditionWorkspace);
+        evaluateButton.setVisibility(View.GONE);
+        Button saveAnswer = findViewById(R.id.saveAnswerAddition);
+        saveAnswer.setVisibility(View.VISIBLE);
+    }
+    public boolean noAnswerEntered(){
+        if(answer1.getText().toString().equals("") && answer2.getText().toString().equals("") &&
+                answer3.getText().toString().equals("") && answer4.getText().toString().equals("")){
+            return true;
+        }
+        return false;
     }
 }
