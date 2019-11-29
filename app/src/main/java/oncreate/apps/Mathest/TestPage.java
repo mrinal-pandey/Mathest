@@ -202,7 +202,7 @@ public class TestPage extends AppCompatActivity {
                     submitButton.setEnabled(false);
                     submitButton.setBackgroundColor(getResources().getColor(R.color.disableColor));
                     workspaceButton.setEnabled(false);
-                    workspaceButton.setBackgroundColor(getResources().getColor(R.id.disableHome));
+                    workspaceButton.setBackgroundColor(getResources().getColor(R.color.disableColor));
                 }
             }
             catch (Exception e)
