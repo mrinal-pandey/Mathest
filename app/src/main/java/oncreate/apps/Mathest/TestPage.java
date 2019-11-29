@@ -1,15 +1,12 @@
 package oncreate.apps.Mathest;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -19,7 +16,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONArray;
@@ -37,11 +33,14 @@ import oncreate.apps.Mathest.UI.WrongAnswerDialogHandler;
 
 public class TestPage extends AppCompatActivity {
 
+    private final String TAG = "TestPage.class";
+
     public class Classifier extends AsyncTask<String, Void, String>{
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            Log.d(TAG, "Starting classifier");
             if(message.equals("Correct!")){
                 correctAnswerDialogHandler.showDialog();
             }else if(message.equals("Wrong!")){
@@ -63,6 +62,7 @@ public class TestPage extends AppCompatActivity {
                 InputStream in = urlConnection.getInputStream();
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
+                Log.d(TAG, "Fetching classifier URL " + url);
 
                 while(data!=-1)
                 {
@@ -74,6 +74,7 @@ public class TestPage extends AppCompatActivity {
             }
             catch(Exception e)
             {
+                Log.d(TAG, "Error fetching classifier URL, check logs");
                 e.printStackTrace();
             }
 
@@ -117,6 +118,7 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            Log.d(TAG, "Launching Downloader");
             dialogHandler.showDialog();
         }
 
@@ -126,7 +128,7 @@ public class TestPage extends AppCompatActivity {
             String result = "";
             URL url;
             HttpURLConnection urlConnection = null;
-
+            Log.d(TAG, "Entered doInBackground for Dowlaoder");
             try
             {
                 url = new URL(strings[0]);
@@ -134,6 +136,7 @@ public class TestPage extends AppCompatActivity {
                 InputStream in = urlConnection.getInputStream();
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
+                Log.d(TAG, "Fetching Downloader URL:" + url);
 
                 while(data!=-1)
                 {
@@ -141,11 +144,13 @@ public class TestPage extends AppCompatActivity {
                     result = result + current;
                     data = reader.read();
                 }
+                Log.d(TAG, "result is " + result);
                 return result;
             }
             catch(Exception e)
             {
                 e.printStackTrace();
+                Log.d(TAG, "Error met");
             }
 
             return null;
@@ -154,7 +159,7 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
+            Log.d(TAG, "Execution successful");
             try {
                 //Log.i("JSON content", s);
                 JSONArray jsonArray = new JSONArray(s);
