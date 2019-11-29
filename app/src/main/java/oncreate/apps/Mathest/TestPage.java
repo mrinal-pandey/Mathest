@@ -283,7 +283,7 @@ public class TestPage extends AppCompatActivity {
     public void getQuestionDetails(int nextQuestion) {
 
         Downloader task = new Downloader();
-        task.execute("http://mathest.herokuapp.com/question?uid="+UID+"&row="+(nextQuestion+2)+"&sno="+sheetNo);
+        task.execute(this.getString(R.string.mathest_azure_endpoint)+"question?uid="+UID+"&row="+(nextQuestion+2)+"&sno="+sheetNo);
 
     }
 
@@ -298,7 +298,7 @@ public class TestPage extends AppCompatActivity {
                 }else {
                     message = "Wrong!";
                 }
-                classifier.execute("http://mathest.herokuapp.com/addition?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
+                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"addition?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
             case 2:
@@ -308,7 +308,7 @@ public class TestPage extends AppCompatActivity {
                 }else {
                     message = "Wrong!";
                 }
-                classifier.execute("http://mathest.herokuapp.com/subtraction?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
+                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"subtraction?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
             case 3:
@@ -318,7 +318,7 @@ public class TestPage extends AppCompatActivity {
                 }else {
                     message = "Wrong!";
                 }
-                classifier.execute("http://mathest.herokuapp.com/multiplication?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
+                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"multiplication?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
             case 4:
@@ -328,7 +328,7 @@ public class TestPage extends AppCompatActivity {
                 }else {
                     message = "Wrong!";
                 }
-                classifier.execute("http://mathest.herokuapp.com/division?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
+                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"division?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
                 break;
 
         }

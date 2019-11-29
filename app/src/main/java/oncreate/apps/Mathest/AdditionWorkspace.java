@@ -1,16 +1,15 @@
 package oncreate.apps.Mathest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -135,7 +134,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         questionBodyTextView.setText("Add " + number1 + " and " + number2);
 
         Downloader downloader = new Downloader();
-        downloader.execute("https://mathest.herokuapp.com/addition-working?uid="+UID+"&number1="+number1+"&number2="+number2);
+        downloader.execute(this.getString(R.string.mathest_azure_endpoint)+"addition-working?uid="+UID+"&number1="+number1+"&number2="+number2);
 
         carry1 = findViewById(R.id.carry_digit_1);
         carry2 = findViewById(R.id.carry_digit_2);
@@ -525,11 +524,8 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public boolean noAnswerEntered(){
-        if(answer1.getText().toString().equals("") && answer2.getText().toString().equals("") &&
-                answer3.getText().toString().equals("") && answer4.getText().toString().equals("")){
-            return true;
-        }
-        return false;
+        return answer1.getText().toString().equals("") && answer2.getText().toString().equals("") &&
+                answer3.getText().toString().equals("") && answer4.getText().toString().equals("");
     }
 
     public void saveAnswer(View view){

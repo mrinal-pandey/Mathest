@@ -30,7 +30,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import oncreate.apps.Mathest.UI.DialogHandler;
 import oncreate.apps.Mathest.Wrappers.User;
@@ -166,7 +165,7 @@ public class Signup extends AppCompatActivity {
             dialogHandler.showDialog();
 
             Downloader task=new Downloader();
-            task.execute("https://mathest.herokuapp.com/sheet?uid=" + UID);
+            task.execute(this.getString(R.string.mathest_azure_endpoint)+"sheet?uid=" + UID);
 
             if (userAdded) {
                 Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();
