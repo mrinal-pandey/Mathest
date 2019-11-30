@@ -109,6 +109,9 @@ public class TestPage extends AppCompatActivity {
             }
             Log.i("Content: ", s);
             userAnswer.getText().clear();
+            userAnswer.setHint("Enter Numeric answer");
+            userAnswer.setHintTextColor(getResources().getColor(R.color.disableColor));
+            answerEntered = false;
             getQuestionDetails(++nextQuestion);
         }
     }
@@ -276,6 +279,8 @@ public class TestPage extends AppCompatActivity {
         submitButton = findViewById(R.id.submitButtonTestPage);
         workspaceButton = findViewById(R.id.buttonAdditionWorkspace);
 
+        userAnswer.setHintTextColor(getResources().getColor(R.color.disableColor));
+
         getQuestionDetails(nextQuestion);
 
     }
@@ -287,52 +292,63 @@ public class TestPage extends AppCompatActivity {
 
     }
 
+    boolean answerEntered = false;
+
     public void nextQuestion(View view) {
         //check if correct, ask new question and update total questions in firestore.
-        Classifier classifier = new Classifier();
-        switch (sheetNo){
-            case 1:
-                if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
-                    message = "Correct!";
-                    ++correctAnswersCounter;
-                }else {
-                    message = "Wrong!";
-                }
-                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"addition?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
-                break;
-
-            case 2:
-                if (Integer.valueOf(number1) - Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
-                    message = "Correct!";
-                    ++correctAnswersCounter;
-                }else {
-                    message = "Wrong!";
-                }
-                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"subtraction?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
-                break;
-
-            case 3:
-                if (Integer.valueOf(number1) * Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
-                    message = "Correct!";
-                    ++correctAnswersCounter;
-                }else {
-                    message = "Wrong!";
-                }
-                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"multiplication?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
-                break;
-
-            case 4:
-                if (Integer.valueOf(number1) / Integer.valueOf(number2) == Integer.valueOf(userAnswer.getText().toString())){
-                    message = "Correct!";
-                    ++correctAnswersCounter;
-                }else {
-                    message = "Wrong!";
-                }
-                classifier.execute(this.getString(R.string.mathest_azure_endpoint)+"division?uid="+UID+"&row="+(nextQuestion+2)+"&answer="+userAnswer.getText().toString());
-                break;
-
+        String userAnswerText = userAnswer.getText().toString();
+        if(userAnswerText.equals("")){
+            userAnswer.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
+            userAnswer.setHint("Please provide an answer");
+        }else{
+            answerEntered = true;
         }
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        if(answerEntered) {
+            Classifier classifier = new Classifier();
+            switch (sheetNo) {
+                case 1:
+                    if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                        message = "Correct!";
+                        ++correctAnswersCounter;
+                    } else {
+                        message = "Wrong!";
+                    }
+                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "addition?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                    break;
+
+                case 2:
+                    if (Integer.valueOf(number1) - Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                        message = "Correct!";
+                        ++correctAnswersCounter;
+                    } else {
+                        message = "Wrong!";
+                    }
+                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "subtraction?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                    break;
+
+                case 3:
+                    if (Integer.valueOf(number1) * Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                        message = "Correct!";
+                        ++correctAnswersCounter;
+                    } else {
+                        message = "Wrong!";
+                    }
+                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "multiplication?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                    break;
+
+                case 4:
+                    if (Integer.valueOf(number1) / Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                        message = "Correct!";
+                        ++correctAnswersCounter;
+                    } else {
+                        message = "Wrong!";
+                    }
+                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "division?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                    break;
+
+            }
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+        }
     }
 
     public void finishTest(View view){

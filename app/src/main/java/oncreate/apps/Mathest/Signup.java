@@ -88,9 +88,6 @@ public class Signup extends AppCompatActivity {
             {
 
             }
-            name = nameEdit.getText().toString();
-            school = schoolEdit.getText().toString();
-            grade = Integer.parseInt(gradeEdit.getText().toString());
 
             User m_user = new User(name, sheetID, school, grade, UID);
 
@@ -160,15 +157,39 @@ public class Signup extends AppCompatActivity {
         UIDGenerator();
     }
 
+    boolean nameEntered = false;
+
     public void submitDetails(View view) {
         if(isNetworkConnected()) {
-            dialogHandler.showDialog();
 
-            Downloader task=new Downloader();
-            task.execute(this.getString(R.string.mathest_azure_endpoint)+"sheet?uid=" + UID);
+            if(nameEdit.getText().toString().equals("")) {
+                nameEdit.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
+                nameEdit.setHint("Please provide Full Name");
+            }else{
+                nameEntered = true;
+                name = nameEdit.getText().toString();
+            }
+            if(schoolEdit.getText().toString().equals("")){
+                school = "NA";
+            }else {
+                school = schoolEdit.getText().toString();
+            }
+            if(gradeEdit.getText().toString().equals("")){
+                grade = -1;
+            }else {
+                grade = Integer.parseInt(gradeEdit.getText().toString());
+            }
 
-            if (userAdded) {
-                Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();
+            if(nameEntered) {
+
+                dialogHandler.showDialog();
+
+                Downloader task = new Downloader();
+                task.execute(this.getString(R.string.mathest_azure_endpoint) + "sheet?uid=" + UID);
+
+                if (userAdded) {
+                    Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();
+                }
             }
 
         }else{
