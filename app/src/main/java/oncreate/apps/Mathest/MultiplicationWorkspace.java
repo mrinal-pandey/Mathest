@@ -152,6 +152,14 @@ public class MultiplicationWorkspace extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(userAnswer != 0){
+            TestPage.userAnswer.setText(String.valueOf(userAnswer));
+        }
+    }
+
     public void checkBlocks(View view){
 
         boolean workingCorrectFlag = true, answerCorrectFlag = true;
@@ -377,6 +385,35 @@ public class MultiplicationWorkspace extends AppCompatActivity {
             resultUserArray[5] = Integer.valueOf(result6.getText().toString());
         }
 
+        /*for(int i = 0; i < 3; ++i){
+            System.out.print(number1UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 3; ++i){
+            System.out.print(number2UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 6; ++i){
+            System.out.print(carryUserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 6; ++i){
+            System.out.print(subnum1UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 6; ++i){
+            System.out.print(subnum2UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 6; ++i){
+            System.out.print(subnum3UserArray[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < 6; ++i){
+            System.out.print(resultUserArray[i] + " ");
+        }
+        System.out.println();*/
+
         for(int i = 0; i < 3; ++i){
             if(number1UserArray[i] != number1Array[i]){
                 workingCorrectFlag = false;
@@ -493,22 +530,22 @@ public class MultiplicationWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        subnum11.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum11.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 1:
-                        subnum12.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum12.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 2:
-                        subnum13.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum13.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 3:
-                        subnum14.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum14.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 4:
-                        subnum15.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum15.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 5:
-                        subnum16.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum16.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
             }else{
@@ -542,22 +579,22 @@ public class MultiplicationWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        subnum21.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum21.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 1:
-                        subnum22.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum22.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 2:
-                        subnum23.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum23.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 3:
-                        subnum24.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum24.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 4:
-                        subnum25.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum25.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 5:
-                        subnum26.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum26.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
             }else{
@@ -591,22 +628,22 @@ public class MultiplicationWorkspace extends AppCompatActivity {
                 switch(i)
                 {
                     case 0:
-                        subnum31.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum31.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 1:
-                        subnum32.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum32.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 2:
-                        subnum33.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum33.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 3:
-                        subnum34.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum34.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 4:
-                        subnum35.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum35.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                     case 5:
-                        subnum36.setBackground(getDrawable(R.drawable.additional_digit_wrong));
+                        subnum36.setBackground(getDrawable(R.drawable.digit_wrong));
                         break;
                 }
             }else{
@@ -634,7 +671,7 @@ public class MultiplicationWorkspace extends AppCompatActivity {
             }
         }
 
-        for(int i = 0; i < 4; ++i){
+        for(int i = 0; i < 6; ++i){
             if(resultUserArray[i] != resultArray[i]){
                 answerCorrectFlag = false;
                 switch(i)
@@ -702,6 +739,7 @@ public class MultiplicationWorkspace extends AppCompatActivity {
     }
 
     public void saveAnswer(View view){
+        checkBlocks(findViewById(R.id.evaluateMultiplicationWorkspace));
         int i = 0;
         userAnswer = 0;
         while(resultUserArray[i] == -1){
@@ -736,8 +774,8 @@ public class MultiplicationWorkspace extends AppCompatActivity {
             }
             i++;
         }
-
-        Toast.makeText(this, "Answer saved is "+userAnswer+". Press back to continue!", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+        //Toast.makeText(this, "Answer saved is "+userAnswer+". Press back to continue!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

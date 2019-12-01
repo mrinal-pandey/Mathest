@@ -3,6 +3,7 @@ package oncreate.apps.Mathest;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -117,7 +118,7 @@ public class AdditionWorkspace extends AppCompatActivity {
     int[] number2UserArray = {-1, -1, -1};
     int[] resultUserArray = {-1, -1, -1, -1};
     int userAnswer = 0;
-    int wrongCount = 0;
+    int wrongCount1 = 0, wrongCount2 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -182,7 +183,7 @@ public class AdditionWorkspace extends AppCompatActivity {
 
     public void checkBlocks(View view){
 
-        boolean workingCorrectFlag = true, answerCorrectFlag = true;
+        boolean answerCorrectFlag = true, workingCorrectFlag = true;
 
         if(noAnswerEntered()){
             Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
@@ -327,10 +328,12 @@ public class AdditionWorkspace extends AppCompatActivity {
         }
 
         boolean firstWorking = firstWorkingMethod();
-        boolean secondWorking = true;
-        //Log.i("Count", String.valueOf(wrongCount));
-        if(!firstWorking && wrongCount > 3){
-            secondWorking = secondWorkingMethod();
+        boolean secondWorking = secondWorkingMethod();
+
+        if(wrongCount1 < wrongCount2){
+            firstWorkingMethod();
+        }else{
+            secondWorkingMethod();
         }
 
         workingCorrectFlag = workingCorrectFlag && (firstWorking || secondWorking);
@@ -385,24 +388,24 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public boolean firstWorkingMethod(){
-        boolean workingCorrectFlag = true;
-        wrongCount = 0;
+        boolean workingCorrectFlag1 = true;
+        wrongCount1 = 0;
         for(int i = 0; i < 3; ++i){
             if(number1UserArray[i] != number1Array[i]){
-                workingCorrectFlag = false;
+                workingCorrectFlag1 = false;
                 switch(i)
                 {
                     case 0:
                         number11.setBackground(getDrawable(R.drawable.digit_wrong));
-                        ++wrongCount;
+                        ++wrongCount1;
                         break;
                     case 1:
                         number12.setBackground(getDrawable(R.drawable.digit_wrong));
-                        ++wrongCount;
+                        ++wrongCount1;
                         break;
                     case 2:
                         number13.setBackground(getDrawable(R.drawable.digit_wrong));
-                        ++wrongCount;
+                        ++wrongCount1;
                         break;
                 }
             }else{
@@ -423,20 +426,20 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         for(int i = 0; i < 3; ++i){
             if(number2UserArray[i] != number2Array[i]){
-                workingCorrectFlag = false;
+                workingCorrectFlag1 = false;
                 switch(i)
                 {
                     case 0:
                         number21.setBackground(getDrawable(R.drawable.digit_wrong));
-                        ++wrongCount;
+                        ++wrongCount1;
                         break;
                     case 1:
                         number22.setBackground(getDrawable(R.drawable.digit_wrong));
-                        ++wrongCount;
+                        ++wrongCount1;
                         break;
                     case 2:
                         number23.setBackground(getDrawable(R.drawable.digit_wrong));
-                        ++wrongCount;
+                        ++wrongCount1;
                         break;
                 }
             }else{
@@ -454,24 +457,28 @@ public class AdditionWorkspace extends AppCompatActivity {
                 }
             }
         }
-        return workingCorrectFlag;
+        return workingCorrectFlag1;
     }
 
     public boolean secondWorkingMethod(){
-        boolean workingCorrectFlag = true;
+        boolean workingCorrectFlag2 = true;
+        wrongCount2 = 0;
         for(int i = 0; i < 3; ++i){
             if(number1UserArray[i] != number2Array[i]){
-                workingCorrectFlag = false;
+                workingCorrectFlag2 = false;
                 switch(i)
                 {
                     case 0:
                         number11.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount2;
                         break;
                     case 1:
                         number12.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount2;
                         break;
                     case 2:
                         number13.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount2;
                         break;
                 }
             }else{
@@ -492,17 +499,20 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         for(int i = 0; i < 3; ++i){
             if(number2UserArray[i] != number1Array[i]){
-                workingCorrectFlag = false;
+                workingCorrectFlag2 = false;
                 switch(i)
                 {
                     case 0:
                         number21.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount2;
                         break;
                     case 1:
                         number22.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount2;
                         break;
                     case 2:
                         number23.setBackground(getDrawable(R.drawable.digit_wrong));
+                        ++wrongCount2;
                         break;
                 }
             }else{
@@ -520,7 +530,7 @@ public class AdditionWorkspace extends AppCompatActivity {
                 }
             }
         }
-        return workingCorrectFlag;
+        return workingCorrectFlag2;
     }
 
     public boolean noAnswerEntered(){
@@ -529,6 +539,7 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public void saveAnswer(View view){
+        checkBlocks(findViewById(R.id.evaluateAdditionWorkspace));
         int i = 0;
         userAnswer = 0;
         while(resultUserArray[i] == -1){
@@ -556,7 +567,7 @@ public class AdditionWorkspace extends AppCompatActivity {
             }
             i++;
         }
-
-        Toast.makeText(this, "Answer saved is "+userAnswer+". Press back to continue!", Toast.LENGTH_SHORT).show();
+        onBackPressed();
+        //Toast.makeText(this, "Answer saved is "+userAnswer+". Press back to continue!", Toast.LENGTH_SHORT).show();
     }
 }
