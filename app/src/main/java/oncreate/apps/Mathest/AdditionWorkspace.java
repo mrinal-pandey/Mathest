@@ -1,6 +1,8 @@
 package oncreate.apps.Mathest;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -134,8 +136,12 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         questionBodyTextView.setText("Add " + number1 + " and " + number2);
 
-        Downloader downloader = new Downloader();
-        downloader.execute(this.getString(R.string.mathest_azure_endpoint)+"addition-working?uid="+UID+"&number1="+number1+"&number2="+number2);
+        if(isNetworkConnected()) {
+            Downloader downloader = new Downloader();
+            downloader.execute(this.getString(R.string.mathest_azure_endpoint) + "addition-working?uid=" + UID + "&number1=" + number1 + "&number2=" + number2);
+        }else{
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+        }
 
         carry1 = findViewById(R.id.carry_digit_1);
         carry2 = findViewById(R.id.carry_digit_2);
@@ -182,6 +188,11 @@ public class AdditionWorkspace extends AppCompatActivity {
     }
 
     public void checkBlocks(View view){
+
+        if(!isNetworkConnected()){
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         boolean answerCorrectFlag = true, workingCorrectFlag = true;
 
@@ -533,12 +544,25 @@ public class AdditionWorkspace extends AppCompatActivity {
         return workingCorrectFlag2;
     }
 
+    private boolean isNetworkConnected() {
+
+        //Checks for network connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
     public boolean noAnswerEntered(){
         return answer1.getText().toString().equals("") && answer2.getText().toString().equals("") &&
                 answer3.getText().toString().equals("") && answer4.getText().toString().equals("");
     }
 
     public void saveAnswer(View view){
+
+        if(!isNetworkConnected()){
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         checkBlocks(findViewById(R.id.evaluateAdditionWorkspace));
         int i = 0;
         userAnswer = 0;

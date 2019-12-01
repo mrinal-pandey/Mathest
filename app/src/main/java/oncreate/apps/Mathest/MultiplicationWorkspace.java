@@ -2,7 +2,9 @@ package oncreate.apps.Mathest;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -161,6 +163,11 @@ public class MultiplicationWorkspace extends AppCompatActivity {
     }
 
     public void checkBlocks(View view){
+
+        if(!isNetworkConnected()){
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            return;
+        }
 
         boolean workingCorrectFlag = true, answerCorrectFlag = true;
 
@@ -732,6 +739,13 @@ public class MultiplicationWorkspace extends AppCompatActivity {
         saveAnswer.setVisibility(View.VISIBLE);
     }
 
+    private boolean isNetworkConnected() {
+
+        //Checks for network connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
     public boolean noAnswerEntered(){
         return result1.getText().toString().equals("") && result2.getText().toString().equals("") &&
                 result3.getText().toString().equals("") && result4.getText().toString().equals("") &&
@@ -739,6 +753,12 @@ public class MultiplicationWorkspace extends AppCompatActivity {
     }
 
     public void saveAnswer(View view){
+
+        if(!isNetworkConnected()){
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         checkBlocks(findViewById(R.id.evaluateMultiplicationWorkspace));
         int i = 0;
         userAnswer = 0;
@@ -792,8 +812,12 @@ public class MultiplicationWorkspace extends AppCompatActivity {
 
         questionBodyTextView.setText("Multiply " + number1 + " and " + number2);
 
-        Downloader downloader = new Downloader();
-        downloader.execute(this.getString(R.string.mathest_azure_endpoint)+"multiplication-working?uid="+UID+"&number1="+number1+"&number2="+number2);
+        if(isNetworkConnected()) {
+            Downloader downloader = new Downloader();
+            downloader.execute(this.getString(R.string.mathest_azure_endpoint) + "multiplication-working?uid=" + UID + "&number1=" + number1 + "&number2=" + number2);
+        }else{
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+        }
 
         number11 = findViewById(R.id.number1_digit1);
         number12 = findViewById(R.id.number1_digit2);

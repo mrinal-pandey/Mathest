@@ -1,8 +1,10 @@
 package oncreate.apps.Mathest;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -281,8 +283,19 @@ public class TestPage extends AppCompatActivity {
 
         userAnswer.setHintTextColor(getResources().getColor(R.color.disableColor));
 
-        getQuestionDetails(nextQuestion);
+        if(isNetworkConnected()) {
+            getQuestionDetails(nextQuestion);
+        }else{
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+        }
 
+    }
+
+    private boolean isNetworkConnected() {
+
+        //Checks for network connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
     }
 
     public void getQuestionDetails(int nextQuestion) {
@@ -295,167 +308,178 @@ public class TestPage extends AppCompatActivity {
     boolean answerEntered = false;
 
     public void nextQuestion(View view) {
-        //check if correct, ask new question and update total questions in firestore.
-        String userAnswerText = userAnswer.getText().toString();
-        if(userAnswerText.equals("")){
-            userAnswer.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
-            userAnswer.setHint("Please provide an answer");
-        }else{
-            answerEntered = true;
-        }
-        if(answerEntered) {
-            Classifier classifier = new Classifier();
-            switch (sheetNo) {
-                case 1:
-                    if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                        message = "Correct!";
-                        ++correctAnswersCounter;
-                    } else {
-                        message = "Wrong!";
-                    }
-                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "addition?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
-                    break;
-
-                case 2:
-                    if (Integer.valueOf(number1) - Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                        message = "Correct!";
-                        ++correctAnswersCounter;
-                    } else {
-                        message = "Wrong!";
-                    }
-                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "subtraction?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
-                    break;
-
-                case 3:
-                    if (Integer.valueOf(number1) * Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                        message = "Correct!";
-                        ++correctAnswersCounter;
-                    } else {
-                        message = "Wrong!";
-                    }
-                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "multiplication?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
-                    break;
-
-                case 4:
-                    if (Integer.valueOf(number1) / Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                        message = "Correct!";
-                        ++correctAnswersCounter;
-                    } else {
-                        message = "Wrong!";
-                    }
-                    classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "division?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
-                    break;
-
+        if(isNetworkConnected()) {
+            //check if correct, ask new question and update total questions in firestore.
+            String userAnswerText = userAnswer.getText().toString();
+            if (userAnswerText.equals("")) {
+                userAnswer.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
+                userAnswer.setHint("Please provide an answer");
+            } else {
+                answerEntered = true;
             }
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            if (answerEntered) {
+                Classifier classifier = new Classifier();
+                switch (sheetNo) {
+                    case 1:
+                        if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                            message = "Correct!";
+                            ++correctAnswersCounter;
+                        } else {
+                            message = "Wrong!";
+                        }
+                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "addition?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        break;
+
+                    case 2:
+                        if (Integer.valueOf(number1) - Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                            message = "Correct!";
+                            ++correctAnswersCounter;
+                        } else {
+                            message = "Wrong!";
+                        }
+                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "subtraction?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        break;
+
+                    case 3:
+                        if (Integer.valueOf(number1) * Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                            message = "Correct!";
+                            ++correctAnswersCounter;
+                        } else {
+                            message = "Wrong!";
+                        }
+                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "multiplication?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        break;
+
+                    case 4:
+                        if (Integer.valueOf(number1) / Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
+                            message = "Correct!";
+                            ++correctAnswersCounter;
+                        } else {
+                            message = "Wrong!";
+                        }
+                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "division?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        break;
+
+                }
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
         }
     }
 
     public void finishTest(View view){
-
-        switch (sheetNo){
-            case 1:
-                dialogHandler.showDialog();
-                firebaseFirestore.collection("users").document(UID)
-                        .update("additionQuestionsAnswered", nextQuestion)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                firebaseFirestore.collection("users").document(UID).
-                        update("additionCorrectAnswers", correctAnswersCounter)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
-                                dialogHandler.hideDialog();
-                                goToPreviousActivity();
-                            }
-                        });
-                break;
-            case 2:
-                dialogHandler.showDialog();
-                firebaseFirestore.collection("users").document(UID)
-                        .update("subtractionQuestionsAnswered", nextQuestion)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                firebaseFirestore.collection("users").document(UID).
-                        update("subtractionCorrectAnswers", correctAnswersCounter)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
-                                dialogHandler.hideDialog();
-                                goToPreviousActivity();
-                            }
-                        });
-                break;
-            case 3:
-                dialogHandler.showDialog();
-                firebaseFirestore.collection("users").document(UID)
-                        .update("multiplicationQuestionsAnswered", nextQuestion)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                firebaseFirestore.collection("users").document(UID).
-                        update("multiplicationCorrectAnswers", correctAnswersCounter)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
-                                dialogHandler.hideDialog();
-                                goToPreviousActivity();
-                            }
-                        });
-                break;
-            case 4:
-                dialogHandler.showDialog();
-                firebaseFirestore.collection("users").document(UID)
-                        .update("divisionQuestionsAnswered", nextQuestion)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                firebaseFirestore.collection("users").document(UID).
-                        update("divisionCorrectAnswers", correctAnswersCounter)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
-                                dialogHandler.hideDialog();
-                                goToPreviousActivity();
-                            }
-                        });
-                break;
+        if(isNetworkConnected()) {
+            switch (sheetNo) {
+                case 1:
+                    dialogHandler.showDialog();
+                    firebaseFirestore.collection("users").document(UID)
+                            .update("additionQuestionsAnswered", nextQuestion)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    firebaseFirestore.collection("users").document(UID).
+                            update("additionCorrectAnswers", correctAnswersCounter)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                    dialogHandler.hideDialog();
+                                    goToPreviousActivity();
+                                }
+                            });
+                    break;
+                case 2:
+                    dialogHandler.showDialog();
+                    firebaseFirestore.collection("users").document(UID)
+                            .update("subtractionQuestionsAnswered", nextQuestion)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    firebaseFirestore.collection("users").document(UID).
+                            update("subtractionCorrectAnswers", correctAnswersCounter)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                    dialogHandler.hideDialog();
+                                    goToPreviousActivity();
+                                }
+                            });
+                    break;
+                case 3:
+                    dialogHandler.showDialog();
+                    firebaseFirestore.collection("users").document(UID)
+                            .update("multiplicationQuestionsAnswered", nextQuestion)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    firebaseFirestore.collection("users").document(UID).
+                            update("multiplicationCorrectAnswers", correctAnswersCounter)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                    dialogHandler.hideDialog();
+                                    goToPreviousActivity();
+                                }
+                            });
+                    break;
+                case 4:
+                    dialogHandler.showDialog();
+                    firebaseFirestore.collection("users").document(UID)
+                            .update("divisionQuestionsAnswered", nextQuestion)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-1", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    firebaseFirestore.collection("users").document(UID).
+                            update("divisionCorrectAnswers", correctAnswersCounter)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    //Toast.makeText(TestPage.this, "Firebase updated-2", Toast.LENGTH_SHORT).show();
+                                    dialogHandler.hideDialog();
+                                    goToPreviousActivity();
+                                }
+                            });
+                    break;
+            }
+        }else{
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
         }
     }
 
     public void additionWorkspace(View view){
-        if(sheetNo == 1) {
-            Intent intent = new Intent(this, AdditionWorkspace.class);
-            intent.putExtra("number1", number1);
-            intent.putExtra("number2", number2);
-            intent.putExtra("UID", UID);
-            startActivity(intent);
-        }else if(sheetNo == 3){
-            Intent intent = new Intent(this, MultiplicationWorkspace.class);
-            intent.putExtra("number1", number1);
-            intent.putExtra("number2", number2);
-            intent.putExtra("UID", UID);
-            startActivity(intent);
+        if(isNetworkConnected()) {
+            if (sheetNo == 1) {
+                Intent intent = new Intent(this, AdditionWorkspace.class);
+                intent.putExtra("number1", number1);
+                intent.putExtra("number2", number2);
+                intent.putExtra("UID", UID);
+                startActivity(intent);
+            } else if (sheetNo == 3) {
+                Intent intent = new Intent(this, MultiplicationWorkspace.class);
+                intent.putExtra("number1", number1);
+                intent.putExtra("number2", number2);
+                intent.putExtra("UID", UID);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Functionality not available!", Toast.LENGTH_SHORT).show();
+            }
         }else{
-            Toast.makeText(this, "Functionality not available!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
         }
     }
 
