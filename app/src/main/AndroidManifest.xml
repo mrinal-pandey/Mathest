@@ -5,9 +5,6 @@
 
     <dist:module dist:instant="true" />
 
-    <uses-sdk android:minSdkVersion="21"
-        android:targetSdkVersion="Q"/>
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/mathest_logo"
@@ -16,7 +13,8 @@
         android:roundIcon="@mipmap/mathest_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MultiplicationWorkspace"></activity>
+        <activity android:name=".MultiplicationWorkspace"
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".AdditionWorkspace"
             android:windowSoftInputMode="stateHidden" />

@@ -124,7 +124,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addition_workspace);
 
-        questionBodyTextView = findViewById(R.id.questionBodyWorkspace);
+        questionBodyTextView = findViewById(R.id.questionBodyMultiplicationWorkspace);
 
         Intent intent = getIntent();
         number1 = intent.getStringExtra("number1");
@@ -557,6 +557,6 @@ public class AdditionWorkspace extends AppCompatActivity {
             i++;
         }
 
-        Toast.makeText(this, "Answer saved is "+userAnswer+" Press back to continue!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Answer saved is "+userAnswer+". Press back to continue!", Toast.LENGTH_SHORT).show();
     }
 }

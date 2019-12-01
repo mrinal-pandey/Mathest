@@ -273,7 +273,7 @@ public class TestPage extends AppCompatActivity {
 
         //Toast.makeText(this, "Sheet No :" + sheetNo + "nq: " + nextQuestion + "uid: " + UID, Toast.LENGTH_LONG).show();
 
-        questionBody = findViewById(R.id.questionBodyWorkspace);
+        questionBody = findViewById(R.id.questionBodyMultiplicationWorkspace);
         questionNumber = findViewById(R.id.questionNumber_txt);
         userAnswer = findViewById(R.id.userAnswer_edittxt);
         submitButton = findViewById(R.id.submitButtonTestPage);
@@ -444,6 +444,12 @@ public class TestPage extends AppCompatActivity {
     public void additionWorkspace(View view){
         if(sheetNo == 1) {
             Intent intent = new Intent(this, AdditionWorkspace.class);
+            intent.putExtra("number1", number1);
+            intent.putExtra("number2", number2);
+            intent.putExtra("UID", UID);
+            startActivity(intent);
+        }else if(sheetNo == 3){
+            Intent intent = new Intent(this, MultiplicationWorkspace.class);
             intent.putExtra("number1", number1);
             intent.putExtra("number2", number2);
             intent.putExtra("UID", UID);
