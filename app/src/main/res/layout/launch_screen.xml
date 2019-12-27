@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:background="@drawable/launch_screen_bg_image"
+    android:background="@drawable/mathest_login_signup_bg"
     android:gravity="center"
     tools:context=".LaunchScreen">
 

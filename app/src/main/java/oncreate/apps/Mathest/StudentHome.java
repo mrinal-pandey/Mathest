@@ -1,7 +1,10 @@
 package oncreate.apps.Mathest;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,10 +41,19 @@ public class StudentHome extends AppCompatActivity {
     private ProgressBar accuracyBar, progressBar;
     private ObjectAnimator objectAnimator;
 
+    private boolean isNetworkConnected() {
+
+        //Checks for network connection
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         UID = getIntent().getStringExtra("uid");
 
@@ -91,9 +104,13 @@ public class StudentHome extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(R.id.profile_icon == item.getItemId()) {
             //Toast.makeText(this, "Display here", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, StudentProfile.class);
-            intent.putExtra("UID", UID);
-            startActivity(intent);
+            if(isNetworkConnected()) {
+                Intent intent = new Intent(this, StudentProfile.class);
+                intent.putExtra("UID", UID);
+                startActivity(intent);
+            }else{
+                Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -164,12 +181,16 @@ public class StudentHome extends AppCompatActivity {
     }
 
     public void launchTest(View view) {
-        Intent intent = new Intent(this, TestPage.class);
-        intent.putExtra("UID", UID);
-        intent.putExtra("correctAnswers",correctAns);
-        intent.putExtra("nextQuestion", totalAns);
-        intent.putExtra("sheetNo", sheetNo);
-        startActivity(intent);
-        finish();
+        if(isNetworkConnected()) {
+            Intent intent = new Intent(this, TestPage.class);
+            intent.putExtra("UID", UID);
+            intent.putExtra("correctAnswers", correctAns);
+            intent.putExtra("nextQuestion", totalAns);
+            intent.putExtra("sheetNo", sheetNo);
+            startActivity(intent);
+            finish();
+        }else{
+            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+        }
     }
 }

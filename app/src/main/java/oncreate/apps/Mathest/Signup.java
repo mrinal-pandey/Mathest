@@ -1,6 +1,7 @@
 package oncreate.apps.Mathest;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,7 +28,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.List;
 
 import oncreate.apps.Mathest.UI.DialogHandler;
 import oncreate.apps.Mathest.Wrappers.User;
@@ -84,9 +88,6 @@ public class Signup extends AppCompatActivity {
             {
 
             }
-            name = nameEdit.getText().toString();
-            school = schoolEdit.getText().toString();
-            grade = Integer.parseInt(gradeEdit.getText().toString());
 
             User m_user = new User(name, sheetID, school, grade, UID);
 
@@ -111,14 +112,41 @@ public class Signup extends AppCompatActivity {
     int grade;
     boolean userAdded = false;
     DialogHandler dialogHandler;
+    List<String> listOfUIDs;
+
+    public void UIDValidator(final String UIDGenerated){
+        listOfUIDs = new ArrayList<>();
+        firestoreDatabase.collection("users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        listOfUIDs.add(document.getId());
+                    }
+                    for(String uid : listOfUIDs){
+                        if(uid.equals(UIDGenerated)){
+                            UIDGenerator();
+                        }
+                    }
+                    UID_disp.setText("Your UID is: " + UID);
+                }
+            }
+        });
+    }
+
+    public void UIDGenerator(){
+        UID = String.valueOf((int)((Math.random() * 999) + 1));
+        UIDValidator(UID);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         firestoreDatabase = FirebaseFirestore.getInstance();
-        Random r = new Random();
-        UID = String.valueOf(r.nextInt(999));
 
         UID_disp = findViewById(R.id.UID_disp);
         nameEdit = findViewById(R.id.name_edit);
@@ -126,19 +154,42 @@ public class Signup extends AppCompatActivity {
         gradeEdit = findViewById(R.id.grade_edit);
         dialogHandler = new DialogHandler(this);
 
-        UID_disp.setText("Your UID is: " + UID);
-
+        UIDGenerator();
     }
+
+    boolean nameEntered = false;
 
     public void submitDetails(View view) {
         if(isNetworkConnected()) {
-            dialogHandler.showDialog();
 
-            Downloader task=new Downloader();
-            task.execute("https://mathest.herokuapp.com/sheet?uid=" + UID);
+            if(nameEdit.getText().toString().equals("")) {
+                nameEdit.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
+                nameEdit.setHint("Please provide Full Name");
+            }else{
+                nameEntered = true;
+                name = nameEdit.getText().toString();
+            }
+            if(schoolEdit.getText().toString().equals("")){
+                school = "NA";
+            }else {
+                school = schoolEdit.getText().toString();
+            }
+            if(gradeEdit.getText().toString().equals("")){
+                grade = -1;
+            }else {
+                grade = Integer.parseInt(gradeEdit.getText().toString());
+            }
 
-            if (userAdded) {
-                Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();
+            if(nameEntered) {
+
+                dialogHandler.showDialog();
+
+                Downloader task = new Downloader();
+                task.execute(this.getString(R.string.mathest_azure_endpoint) + "sheet?uid=" + UID);
+
+                if (userAdded) {
+                    Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();
+                }
             }
 
         }else{

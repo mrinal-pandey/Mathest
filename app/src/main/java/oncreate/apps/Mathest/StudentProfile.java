@@ -3,11 +3,13 @@ package oncreate.apps.Mathest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +56,8 @@ public class StudentProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_profile);
+
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         dialogHandler = new DialogHandler(this);
 
@@ -121,8 +125,16 @@ public class StudentProfile extends AppCompatActivity {
 
                     userUIDTextView.setText("Your UID is: " + UID);
                     nameOfUserTextView.setText("Name: " + nameOfUser);
-                    gradeOfUserTextView.setText("Grade: " + gradeOfUser);
-                    schoolOfUserTextView.setText("School: " + schoolOfUser);
+                    if(gradeOfUser != -1) {
+                        gradeOfUserTextView.setText("Grade: " + gradeOfUser);
+                    }else{
+                        gradeOfUserTextView.setVisibility(View.GONE);
+                    }
+                    if(!schoolOfUser.equals("NA")) {
+                        schoolOfUserTextView.setText("School: " + schoolOfUser);
+                    }else{
+                        schoolOfUserTextView.setVisibility(View.GONE);
+                    }
 
                     additionQuestionsAnsweredTextView.setText("Questions Answered: " + additionQuestionsAnswered);
                     additionCorrectAnswersTextView.setText("Correct Answers: " + additionCorrectAnswers);
