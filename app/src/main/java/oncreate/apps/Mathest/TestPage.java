@@ -76,6 +76,7 @@ public class TestPage extends AppCompatActivity {
             }
             catch(Exception e)
             {
+                Toast.makeText(TestPage.this,"Error trying to access classifier API, check logs",Toast.LENGTH_LONG).show();
                 Log.d(TAG, "Error fetching classifier URL, check logs");
                 e.printStackTrace();
             }
@@ -106,6 +107,7 @@ public class TestPage extends AppCompatActivity {
                                 }).show();
                     }
                 } catch (Exception e) {
+                    Toast.makeText(TestPage.this,"Error trying to access API, check logs",Toast.LENGTH_LONG).show();
                     e.printStackTrace();
                 }
             }
@@ -154,8 +156,10 @@ public class TestPage extends AppCompatActivity {
             }
             catch(Exception e)
             {
+                //dialogHandler.hideDialog();
+
                 e.printStackTrace();
-                Log.d(TAG, "Error met");
+                Log.d(TAG, "Error met"+e);
             }
 
             return null;
@@ -164,6 +168,7 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            dialogHandler.hideDialog();
             Log.d(TAG, "Execution successful");
             try {
                 //Log.i("JSON content", s);
@@ -217,6 +222,7 @@ public class TestPage extends AppCompatActivity {
             }
             catch (Exception e)
             {
+                Toast.makeText(TestPage.this,"Error trying to access API, check logs",Toast.LENGTH_LONG).show();
 
             }
 
@@ -301,7 +307,7 @@ public class TestPage extends AppCompatActivity {
     public void getQuestionDetails(int nextQuestion) {
 
         Downloader task = new Downloader();
-        task.execute(this.getString(R.string.mathest_azure_endpoint)+"question?uid="+UID+"&row="+(nextQuestion+2)+"&sno="+sheetNo);
+        task.execute(this.getString(R.string.mathest_heroku_endpoint)+"question?uid="+UID+"&row="+(nextQuestion+2)+"&sno="+sheetNo);
 
     }
 
