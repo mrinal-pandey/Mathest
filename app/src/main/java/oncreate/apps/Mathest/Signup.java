@@ -36,6 +36,7 @@ import oncreate.apps.Mathest.Wrappers.User;
 
 public class Signup extends AppCompatActivity {
 
+    private final String TAG = "Signup_Mathest";
     public class Downloader extends AsyncTask<String, Void, String>{
 
         @Override
@@ -43,7 +44,7 @@ public class Signup extends AppCompatActivity {
 
             String result = "";
             URL url;
-            HttpURLConnection urlConnection = null;
+            HttpURLConnection urlConnection;
 
             try
             {
@@ -63,6 +64,7 @@ public class Signup extends AppCompatActivity {
             }
             catch(Exception e)
             {
+                Log.d(TAG,"Error accessing API , check logs");
                 e.printStackTrace();
             }
 
@@ -86,7 +88,7 @@ public class Signup extends AppCompatActivity {
             }
             catch (Exception e)
             {
-
+                Toast.makeText(Signup.this,"Error trying to retrieve JSON object, check logs",Toast.LENGTH_LONG).show();
             }
 
             User m_user = new User(name, sheetID, school, grade, UID);
