@@ -333,7 +333,7 @@ public class TestPage extends AppCompatActivity {
                         } else {
                             message = "Wrong!";
                         }
-                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "addition?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "addition?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                     case 2:
@@ -343,7 +343,7 @@ public class TestPage extends AppCompatActivity {
                         } else {
                             message = "Wrong!";
                         }
-                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "subtraction?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "subtraction?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                     case 3:
@@ -353,7 +353,7 @@ public class TestPage extends AppCompatActivity {
                         } else {
                             message = "Wrong!";
                         }
-                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "multiplication?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "multiplication?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                     case 4:
@@ -363,7 +363,7 @@ public class TestPage extends AppCompatActivity {
                         } else {
                             message = "Wrong!";
                         }
-                        classifier.execute(this.getString(R.string.mathest_azure_endpoint) + "division?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
+                        classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "division?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                 }

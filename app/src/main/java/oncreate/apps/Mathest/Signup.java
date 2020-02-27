@@ -187,7 +187,7 @@ public class Signup extends AppCompatActivity {
                 dialogHandler.showDialog();
 
                 Downloader task = new Downloader();
-                task.execute(this.getString(R.string.mathest_azure_endpoint) + "sheet?uid=" + UID);
+                task.execute(this.getString(R.string.mathest_heroku_endpoint) + "sheet?uid=" + UID);
 
                 if (userAdded) {
                     Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();

@@ -814,7 +814,7 @@ public class MultiplicationWorkspace extends AppCompatActivity {
 
         if(isNetworkConnected()) {
             Downloader downloader = new Downloader();
-            downloader.execute(this.getString(R.string.mathest_azure_endpoint) + "multiplication-working?uid=" + UID + "&number1=" + number1 + "&number2=" + number2);
+            downloader.execute(this.getString(R.string.mathest_heroku_endpoint) + "multiplication-working?uid=" + UID + "&number1=" + number1 + "&number2=" + number2);
         }else{
             Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
         }
