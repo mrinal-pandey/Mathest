@@ -190,14 +190,14 @@ public class AdditionWorkspace extends AppCompatActivity {
     public void checkBlocks(View view){
 
         if(!isNetworkConnected()){
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
             return;
         }
 
         boolean answerCorrectFlag = true, workingCorrectFlag = true;
 
         if(noAnswerEntered()){
-            Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.provide_answer_hint), Toast.LENGTH_SHORT).show();
             return;
         }
         if(carry1.getText().toString().equals("")){
@@ -386,9 +386,9 @@ public class AdditionWorkspace extends AppCompatActivity {
             }
         }
         if(answerCorrectFlag){
-            String message = "Congratulations! Your answer is correct!";
+            String message = getString(R.string.correct_answer_message);
             if(workingCorrectFlag) {
-                message = "Congratulations! You did it absolutely right!";
+                message = getString(R.string.working_correct_message);
             }
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
