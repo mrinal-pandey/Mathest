@@ -37,11 +37,9 @@
     <string name="multiplication_category">गुणा</string>
     <string name="multiplication_statistics">गुणन सांख्यिकी</string>
     <string name="multiply_instruction">गुणा करें</string>
-    <string name="na">NA</string>
     <string name="name_display">नाम</string>
     <string name="name_invalid_message">कृपया कर के नाम बताएं</string>
     <string name="no_internet_message">इंटरनेट नहीं मिला</string>
-    <string name="node_users">users</string>
     <string name="okay_dialog_button">ठीक है</string>
     <string name="progress_default">आपकी प्रगति : 0/10</string>
     <string name="progress_display">आपकी प्रगति :</string>

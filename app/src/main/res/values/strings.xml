@@ -2,7 +2,7 @@
     <string name="app_name">Mathest</string>
     <string name="login">Login</string>
     <string name="uid">UID</string>
-    <string name="node_users">users</string>
+    <string name="node_users" translatable="false">users</string>
     <string name="submit_details">Submit</string>
     <string name="hint_school">School</string>
     <string name="hint_grade">Grade</string>
@@ -61,7 +61,7 @@
     <string name="invalid_uid_message">Please enter a valid UID</string>
     <string name="signup_successful_message">User successfully added</string>
     <string name="name_invalid_message">Please provide Full Name</string>
-    <string name="na">NA</string>
+    <string name="na" translatable="false">NA</string>
     <string name="signup_unsuccessful_message">Unable to add user, please try again...</string>
     <string name="accuracy_display">Your accuracy: </string>
     <string name="progress_display">Your progress: </string>
