@@ -33,7 +33,7 @@
     <string name="grade_display">Grade: </string>
     <string name="school_display">School: </string>
     <string name="correct_prompt">Correct!</string>
-    <string name="wrong_prompt">"Wrong!"</string>
+    <string name="wrong_prompt">Wrong!</string>
     <string name="read_instruction">Please read this!</string>
     <string name="okay_dialog_button">Okay</string>
     <string name="hint_answer_edit_box">Enter Numeric answer</string>
@@ -62,7 +62,7 @@
     <string name="signup_successful_message">User successfully added</string>
     <string name="name_invalid_message">Please provide Full Name</string>
     <string name="na">NA</string>
-    <string name="signup_unsuccessful_message">Unable to add user, please try again..</string>
+    <string name="signup_unsuccessful_message">Unable to add user, please try again...</string>
     <string name="accuracy_display">Your accuracy: </string>
     <string name="progress_display">Your progress: </string>
     <string name="addition_category">Addition</string>

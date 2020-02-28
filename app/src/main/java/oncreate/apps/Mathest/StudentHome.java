@@ -79,8 +79,8 @@ public class StudentHome extends AppCompatActivity {
         else {
             accuracyPercent = (int) (((float)correctAns / totalAns) * 100);
         }
-        accuracyTxt.setText(getString(R.string.accuracy_display) + accuracyPercent + "%");
-        progressTxt.setText(getString(R.string.progress_display) + totalAns+"/"+(10+wrongAns*3));
+        accuracyTxt.setText(getString(R.string.accuracy_display) + " " + accuracyPercent + "%");
+        progressTxt.setText(getString(R.string.progress_display) + " " + totalAns+"/"+(10+wrongAns*3));
         accuracyBar = findViewById(R.id.accuracy_bar);
         progressBar = findViewById(R.id.progress_bar);
         accuracyBar.setMax(100);
@@ -158,7 +158,7 @@ public class StudentHome extends AppCompatActivity {
                             sheetNo = 3;
                             break;
                         case R.id.division_icon:
-                            toolBar.setTitle(getString(R.string.division_statistics));
+                            toolBar.setTitle(getString(R.string.division_category));
                             textAnimation(getString(R.string.divide_instruction));
                             totalAns = m_user.getDivisionQuestionsAnswered();
                             correctAns = m_user.getDivisionCorrectAnswers();
@@ -175,7 +175,7 @@ public class StudentHome extends AppCompatActivity {
     }
 
     public void textAnimation(String operation){
-        String textToShow = getString(R.string.ready_display) + operation + " ?";
+        String textToShow = getString(R.string.ready_display) + " " + operation + " ?";
         readyTxt.setText(textToShow);
         readyTxt.animate().setDuration(1000).rotationX(30);
     }

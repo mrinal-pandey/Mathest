@@ -130,7 +130,7 @@ public class Signup extends AppCompatActivity {
                             UIDGenerator();
                         }
                     }
-                    UID_disp.setText(getString(R.string.uid_display) + UID);
+                    UID_disp.setText(getString(R.string.uid_display) + " " + UID);
                 }
             }
         });

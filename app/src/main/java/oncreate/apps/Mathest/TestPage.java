@@ -194,19 +194,19 @@ public class TestPage extends AppCompatActivity {
                 }
                 dialogHandler.hideDialog();
                 if(!questionsExhausted) {
-                    questionNumber.setText(getString(R.string.question_number_display) + (nextQuestion + 1));
+                    questionNumber.setText(getString(R.string.question_number_display) + " " + (nextQuestion + 1));
                     switch (sheetNo) {
                         case 1:
-                            questionBody.setText(getString(R.string.add_instruction) + number1 + getString(R.string.and) + number2);
+                            questionBody.setText(getString(R.string.add_instruction) + " " + number1 + " " + getString(R.string.and) + " " + number2);
                             break;
                         case 2:
-                            questionBody.setText(getString(R.string.subtract_instruction) + number2 + getString(R.string.from) + number1);
+                            questionBody.setText(getString(R.string.subtract_instruction) + " " + number2 + " " + getString(R.string.from) + " " + number1);
                             break;
                         case 3:
-                            questionBody.setText(getString(R.string.multiply_instruction) + number1 + getString(R.string.with) + number2);
+                            questionBody.setText(getString(R.string.multiply_instruction) + " " + number1 + " " + getString(R.string.with) + " " + number2);
                             break;
                         case 4:
-                            questionBody.setText(getString(R.string.divide_instruction) + number1 + getString(R.string.by) + number2);
+                            questionBody.setText(getString(R.string.divide_instruction) + " " + number1 + " " + getString(R.string.by) + " " + number2);
                             break;
                     }
                 }else{
