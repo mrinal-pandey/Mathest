@@ -96,4 +96,5 @@
     <string name="comment_d5">Hey folk! You almost got it correct but answered remainder instead of quotient. We\'ve added 3 more questions for you to try and rectify this error, all the best!</string>
     <string name="comment_d6">Hey folk! You have misunderstood division as subtraction. We\'ve added 3 more questions for you to try and rectify this error, all the best!</string>
     <string name="comment_d7">Hey folk! You have misunderstood division as addition. We\'ve added 3 more questions for you to try and rectify this error, all the best!</string>
+    <string name="comment_random">We couldn\'t classify the mistake you have made. We are adding 3 more random questions keeping in mind that you went wrong for this question.</string>
 </resources>

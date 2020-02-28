@@ -98,10 +98,9 @@ public class TestPage extends AppCompatActivity {
                         JSONObject details = jsonArray.getJSONObject(i);
                         Resources res = getResources();
                         String pkg = getPackageName();
-                        feedbackMessage =
-                                res.getString(res.getIdentifier(details.getString("comment"),
-                                        "string",
-                                        pkg));
+                        feedbackMessage = res.getString(res.getIdentifier(details.getString("comment"),
+                                "string",
+                                pkg));
                         new AlertDialog.Builder(TestPage.this)
                                 .setMessage(feedbackMessage)
                                 .setTitle(getString(R.string.read_instruction))
