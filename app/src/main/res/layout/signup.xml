@@ -42,7 +42,7 @@
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/colorPrimary"
             android:padding="5dp"
-            android:text="@string/uid_display_signup"
+            android:text="@string/uid_display"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="20sp"
