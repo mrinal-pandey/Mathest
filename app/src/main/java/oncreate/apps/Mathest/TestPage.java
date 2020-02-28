@@ -43,9 +43,9 @@ public class TestPage extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(TAG, "Starting classifier");
-            if(message.equals("Correct!")){
+            if(message.equals(getString(R.string.correct_prompt))){
                 correctAnswerDialogHandler.showDialog();
-            }else if(message.equals("Wrong!")){
+            }else if(message.equals(getString(R.string.wrong_prompt))){
                 wrongAnswerDialogHandler.showDialog();
             }
         }
