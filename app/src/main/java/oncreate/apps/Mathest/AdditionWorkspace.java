@@ -559,7 +559,7 @@ public class AdditionWorkspace extends AppCompatActivity {
     public void saveAnswer(View view){
 
         if(!isNetworkConnected()){
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -571,7 +571,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         }
         while(i < 4){
             if(resultUserArray[i] == -1){
-                Toast.makeText(this, "This is not a valid answer! Try again.",
+                Toast.makeText(this, getString(R.string.invalid_answer_message),
                         Toast.LENGTH_SHORT).show();
                 userAnswer = 0;
                 return;

@@ -11,7 +11,7 @@
     <string name="signup">sign up</string>
     <string name="accuracy_default">Your accuracy: 100%</string>
     <string name="progress_default">Your progress: 0/10</string>
-    <string name="ready_display">Ready to add?</string>
+    <string name="ready_display">Ready to </string>
     <string name="lets_go_text">Let\'s Go!</string>
     <string name="addition_statistics">Addition Test Statistics</string>
     <string name="questions_answered">Questions Answered: 0</string>
@@ -57,6 +57,18 @@
     <string name="functionality_unavailable">Functionality not available!</string>
     <string name="correct_answer_message">Congratulations! Your answer is correct!</string>
     <string name="working_correct_message">Congratulations! You did it absolutely right!</string>
+    <string name="invalid_answer_message">This is not a valid answer! Try again.</string>
+    <string name="invalid_uid_message">Please enter a valid UID</string>
+    <string name="signup_successful_message">User successfully added</string>
+    <string name="name_invalid_message">Please provide Full Name</string>
+    <string name="na">NA</string>
+    <string name="signup_unsuccessful_message">Unable to add user, please try again..</string>
+    <string name="accuracy_display">Your accuracy: </string>
+    <string name="progress_display">Your progress: </string>
+    <string name="addition_category">Addition</string>
+    <string name="subtraction_category">Subtraction</string>
+    <string name="multiplication_category">Multiplication</string>
+    <string name="division_category">Division</string>
     <string name="mathest_heroku_endpoint">http://mathest.herokuapp.com/</string>
     <string name="mathest_azure_endpoint">https://mathest-v1.azurewebsites.net/</string>
 </resources>

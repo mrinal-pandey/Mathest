@@ -165,14 +165,14 @@ public class MultiplicationWorkspace extends AppCompatActivity {
     public void checkBlocks(View view){
 
         if(!isNetworkConnected()){
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
             return;
         }
 
         boolean workingCorrectFlag = true, answerCorrectFlag = true;
 
         if(noAnswerEntered()){
-            Toast.makeText(this, "Please enter an answer!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.provide_answer_hint), Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -728,9 +728,9 @@ public class MultiplicationWorkspace extends AppCompatActivity {
         }
 
         if(answerCorrectFlag){
-            String message = "Congratulations! Your answer is correct!";
+            String message = getString(R.string.correct_answer_message);
             if(workingCorrectFlag) {
-                message = "Congratulations! You did it absolutely right!";
+                message = getString(R.string.working_correct_message);
             }
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
@@ -755,7 +755,7 @@ public class MultiplicationWorkspace extends AppCompatActivity {
     public void saveAnswer(View view){
 
         if(!isNetworkConnected()){
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -767,7 +767,7 @@ public class MultiplicationWorkspace extends AppCompatActivity {
         }
         while(i < 6){
             if(resultUserArray[i] == -1){
-                Toast.makeText(this, "This is not a valid answer! Try again.",
+                Toast.makeText(this, getString(R.string.invalid_answer_message),
                         Toast.LENGTH_SHORT).show();
                 userAnswer = 0;
                 return;
@@ -816,7 +816,7 @@ public class MultiplicationWorkspace extends AppCompatActivity {
             Downloader downloader = new Downloader();
             downloader.execute(this.getString(R.string.mathest_heroku_endpoint) + "multiplication-working?uid=" + UID + "&number1=" + number1 + "&number2=" + number2);
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
 
         number11 = findViewById(R.id.number1_digit1);
