@@ -123,34 +123,34 @@ public class StudentProfile extends AppCompatActivity {
 
                     dialogHandler.hideDialog();
 
-                    userUIDTextView.setText("Your UID is: " + UID);
-                    nameOfUserTextView.setText("Name: " + nameOfUser);
+                    userUIDTextView.setText(getString(R.string.uid_display) + UID);
+                    nameOfUserTextView.setText(getString(R.string.name_display) + nameOfUser);
                     if(gradeOfUser != -1) {
-                        gradeOfUserTextView.setText("Grade: " + gradeOfUser);
+                        gradeOfUserTextView.setText(getString(R.string.grade_display) + gradeOfUser);
                     }else{
                         gradeOfUserTextView.setVisibility(View.GONE);
                     }
-                    if(!schoolOfUser.equals("NA")) {
-                        schoolOfUserTextView.setText("School: " + schoolOfUser);
+                    if(!schoolOfUser.equals(getString(R.string.na))) {
+                        schoolOfUserTextView.setText(getString(R.string.school_display) + schoolOfUser);
                     }else{
                         schoolOfUserTextView.setVisibility(View.GONE);
                     }
 
-                    additionQuestionsAnsweredTextView.setText("Questions Answered: " + additionQuestionsAnswered);
-                    additionCorrectAnswersTextView.setText("Correct Answers: " + additionCorrectAnswers);
-                    additionWrongAnswersTextView.setText("Wrong Answers: " + additionWrongAnswers);
+                    additionQuestionsAnsweredTextView.setText(getString(R.string.questions_answered_display) + additionQuestionsAnswered);
+                    additionCorrectAnswersTextView.setText(getString(R.string.correct_answers_display) + additionCorrectAnswers);
+                    additionWrongAnswersTextView.setText(getString(R.string.wrong_answers_display) + additionWrongAnswers);
 
-                    subtractionQuestionsAnsweredTextView.setText("Questions Answered: " + subtractionQuestionsAnswered);
-                    subtractionCorrectAnswersTextView.setText("Correct Answers: " + subtractionCorrectAnswers);
-                    subtractionWrongAnswersTextView.setText("Wrong Answers: " + subtractionWrongAnswers);
+                    subtractionQuestionsAnsweredTextView.setText(getString(R.string.questions_answered_display) + subtractionQuestionsAnswered);
+                    subtractionCorrectAnswersTextView.setText(getString(R.string.correct_answers_display) + subtractionCorrectAnswers);
+                    subtractionWrongAnswersTextView.setText(getString(R.string.wrong_answers_display) + subtractionWrongAnswers);
 
-                    multiplicationQuestionsAnsweredTextView.setText("Questions Answered: " + multiplicationQuestionsAnswered);
-                    multiplicationCorrectAnswersTextView.setText("Correct Answers: " + multiplicationCorrectAnswers);
-                    multiplicationWrongAnswersTextView.setText("Wrong Answers: " + multiplicationWrongAnswers);
+                    multiplicationQuestionsAnsweredTextView.setText(getString(R.string.questions_answered_display) + multiplicationQuestionsAnswered);
+                    multiplicationCorrectAnswersTextView.setText(getString(R.string.correct_answers_display) + multiplicationCorrectAnswers);
+                    multiplicationWrongAnswersTextView.setText(getString(R.string.wrong_answers_display) + multiplicationWrongAnswers);
 
-                    divisionQuestionsAnsweredTextView.setText("Questions Answered: " + divisionQuestionsAnswered);
-                    divisionCorrectAnswersTextView.setText("Correct Answers: " + divisionCorrectAnswers);
-                    divisionWrongAnswersTextView.setText("Wrong Answers: " + divisionWrongAnswers);
+                    divisionQuestionsAnsweredTextView.setText(getString(R.string.questions_answered_display) + divisionQuestionsAnswered);
+                    divisionCorrectAnswersTextView.setText(getString(R.string.correct_answers_display) + divisionCorrectAnswers);
+                    divisionWrongAnswersTextView.setText(getString(R.string.wrong_answers_display) + divisionWrongAnswers);
 
                 }
             });

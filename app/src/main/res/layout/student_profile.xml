@@ -57,12 +57,12 @@
                     android:id="@+id/user_uid"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textStyle="bold"
-                    android:textSize="25dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:text="@string/uid_display"
                     android:textColor="@color/colorTextPrimary"
-                    android:text="@string/uid_display_signup"/>
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -163,14 +163,14 @@
                 android:id="@+id/additionQuestionsAnswered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/questions_answered" />
+                android:text="@string/questions_answered_default" />
 
             <TextView
                 android:id="@+id/additionCorrectAnswers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
-                android:text="@string/correct_answers"
+                android:text="@string/correct_answers_default"
                 android:textSize="15sp" />
 
             <TextView
@@ -178,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
-                android:text="@string/wrong_answers"
+                android:text="@string/wrong_answers_default"
                 android:textSize="15sp" />
 
             </LinearLayout>
@@ -226,14 +226,14 @@
                 android:id="@+id/subtractionQuestionsAnswered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/questions_answered" />
+                android:text="@string/questions_answered_default" />
 
             <TextView
                 android:id="@+id/subtractionCorrectAnswers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
-                android:text="@string/correct_answers"
+                android:text="@string/correct_answers_default"
                 android:textSize="15sp" />
 
             <TextView
@@ -241,7 +241,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
-                android:text="@string/wrong_answers"
+                android:text="@string/wrong_answers_default"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -289,14 +289,14 @@
                 android:id="@+id/multiplicationQuestionsAnswered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/questions_answered" />
+                android:text="@string/questions_answered_default" />
 
             <TextView
                 android:id="@+id/multiplicationCorrectAnswers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
-                android:text="@string/correct_answers"
+                android:text="@string/correct_answers_default"
                 android:textSize="15sp" />
 
             <TextView
@@ -304,7 +304,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
-                android:text="@string/wrong_answers"
+                android:text="@string/wrong_answers_default"
                 android:textSize="15sp" />
 
         </LinearLayout>
@@ -352,14 +352,14 @@
                 android:id="@+id/divisionQuestionsAnswered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/questions_answered" />
+                android:text="@string/questions_answered_default" />
 
             <TextView
                 android:id="@+id/divisionCorrectAnswers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_online"
-                android:text="@string/correct_answers"
+                android:text="@string/correct_answers_default"
                 android:textSize="15sp" />
 
             <TextView
@@ -367,7 +367,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@android:drawable/presence_busy"
-                android:text="@string/wrong_answers"
+                android:text="@string/wrong_answers_default"
                 android:textSize="15sp" />
 
         </LinearLayout>
