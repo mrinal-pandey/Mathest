@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -95,7 +96,12 @@ public class TestPage extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(s);
                     for (int i = 0; i < jsonArray.length(); ++i) {
                         JSONObject details = jsonArray.getJSONObject(i);
-                        feedbackMessage = details.getString("comment");
+                        Resources res = getResources();
+                        String pkg = getPackageName();
+                        feedbackMessage =
+                                res.getString(res.getIdentifier(details.getString("comment"),
+                                        "string",
+                                        pkg));
                         new AlertDialog.Builder(TestPage.this)
                                 .setMessage(feedbackMessage)
                                 .setTitle(getString(R.string.read_instruction))
