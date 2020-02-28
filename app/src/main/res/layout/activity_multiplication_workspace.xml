@@ -43,13 +43,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please press 'Evaluate' before saving answer"
+            android:layout_gravity="center"
             android:gravity="center"
+            android:text="@string/workspace_instruction_1"
             android:textColor="@color/colorTextPrimary"
             android:textSize="15sp"
-            android:layout_gravity="center"
-            android:textStyle="bold">
-        </TextView>
+            android:textStyle="bold"></TextView>
 
     </androidx.cardview.widget.CardView>
 
@@ -67,13 +66,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Click on 'Reload' symbol to reset the canvas"
+            android:layout_gravity="center"
             android:gravity="center"
+            android:text="@string/workspace_instruction_2"
             android:textColor="@color/colorTextPrimary"
             android:textSize="15sp"
-            android:layout_gravity="center"
-            android:textStyle="bold">
-        </TextView>
+            android:textStyle="bold"></TextView>
 
     </androidx.cardview.widget.CardView>
 
@@ -98,12 +96,12 @@
             android:id="@+id/questionBodyMultiplicationWorkspace"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="4dp"
             android:gravity="center"
             android:padding="10dp"
+            android:text="@string/question_fetching"
             android:textColor="@color/colorTextPrimary"
-            android:background="@color/colorPrimary"
-            android:text="Fetching..."
-            android:elevation="4dp"
             android:textSize="35sp" />
     </androidx.cardview.widget.CardView>
     <Space
@@ -1190,7 +1188,7 @@
                     android:fadingEdgeLength="5dp"
                     android:foreground="?attr/selectableItemBackground"
                     android:onClick="checkBlocks"
-                    android:text="Evaluate"
+                    android:text="@string/evaluate"
                     android:textColor="@color/colorTextPrimary" />
             </androidx.cardview.widget.CardView>
             <Space

@@ -21,6 +21,17 @@
     <string name="multiplication_statistics">Multiplication Test Statistics</string>
     <string name="division_statistics">Division Test Statistics</string>
     <string name="editor_button">Try in editor</string>
+    <string name="workspace_instruction_1">Please press \'Evaluate\' before saving answer</string>
+    <string name="workspace_instruction_2">Click on \'Reload\' symbol to reset the canvas</string>
+    <string name="question_fetching">Fetching...</string>
+    <string name="evaluate">Evaluate</string>
+    <string name="question_number_default">Question ??</string>
+    <string name="save_progress_button">Save Progress</string>
+    <string name="submit_next_button">Submit and Next</string>
+    <string name="user_profile">User profile</string>
+    <string name="name_display">Name: </string>
+    <string name="grade_display">Grade: </string>
+    <string name="school_display">School: </string>
     <string name="mathest_heroku_endpoint">http://mathest.herokuapp.com/</string>
     <string name="mathest_azure_endpoint">https://mathest-v1.azurewebsites.net/</string>
 </resources>
