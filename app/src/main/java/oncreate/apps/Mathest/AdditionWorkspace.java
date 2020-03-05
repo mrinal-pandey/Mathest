@@ -1,3 +1,5 @@
+/*Editor screen for addition
+* */
 package oncreate.apps.Mathest;
 
 import android.content.Context;
@@ -5,7 +7,6 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ import java.net.URL;
 
 public class AdditionWorkspace extends AppCompatActivity {
 
+    // Downloading the working of addition returned by the Mathest API
     public class Downloader extends AsyncTask<String, Void, String>{
 
         @Override
@@ -62,6 +64,7 @@ public class AdditionWorkspace extends AppCompatActivity {
             //Log.i("JSON", s);
             try{
 
+                // Setting all the parameters as returned by API
                 JSONArray jsonArray = new JSONArray(s);
                 JSONObject carryDetails = jsonArray.getJSONObject(1);
                 JSONObject number1Details = jsonArray.getJSONObject(2);
@@ -129,6 +132,7 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         questionBodyTextView = findViewById(R.id.questionBodyMultiplicationWorkspace);
 
+        // Getting the two numbers to work upon via Intent
         Intent intent = getIntent();
         number1 = intent.getStringExtra("number1");
         number2 = intent.getStringExtra("number2");
@@ -136,6 +140,7 @@ public class AdditionWorkspace extends AppCompatActivity {
 
         questionBodyTextView.setText("Add " + number1 + " and " + number2);
 
+        // If network is available download the working from API
         if(isNetworkConnected()) {
             Downloader downloader = new Downloader();
             downloader.execute(this.getString(R.string.mathest_heroku_endpoint) + "addition-working?uid=" + UID + "&number1=" + number1 + "&number2=" + number2);
@@ -159,6 +164,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         answer4 = findViewById(R.id.answer_digit4);
     }
 
+    // To set user answer on Test screen when back button is pressed
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -167,17 +173,20 @@ public class AdditionWorkspace extends AppCompatActivity {
         }
     }
 
+    // To enable the question digit by setting it to black
     public void questionEnable(View view){
         view.setBackground(getResources().getDrawable(R.drawable.question_digit_enable));
         view.setFocusableInTouchMode(true);
         view.requestFocus();
     }
+    // To enable the answer digit by setting it to green
     public void answerEnable(View view){
         view.setBackground(getResources().getDrawable(R.drawable.answer_digit_enable));
         view.setFocusableInTouchMode(true);
         view.requestFocus();
     }
 
+    // Repaint the whole screen
     public void repaint(View view){
         Intent intent = new Intent(this, AdditionWorkspace.class);
         intent.putExtra("number1", number1);
@@ -187,6 +196,7 @@ public class AdditionWorkspace extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Check the user working with the working of API whether it is correct or not
     public void checkBlocks(View view){
 
         if(!isNetworkConnected()){
@@ -200,6 +210,7 @@ public class AdditionWorkspace extends AppCompatActivity {
             Toast.makeText(this, getString(R.string.provide_answer_hint), Toast.LENGTH_SHORT).show();
             return;
         }
+        // Get the user working in respective variables
         if(carry1.getText().toString().equals("")){
             carryUserArray[0] = 0;
         }else {
@@ -284,23 +295,7 @@ public class AdditionWorkspace extends AppCompatActivity {
             resultUserArray[3] = Integer.valueOf(answer4.getText().toString());
         }
 
-        /*for(int i = 0; i < 4; ++i){
-            System.out.print(carryUserArray[i] + " ");
-        }
-        System.out.println();
-        for(int i = 0; i < 3; ++i){
-            System.out.print(number1UserArray[i] + " ");
-        }
-        System.out.println();
-        for(int i = 0; i < 3; ++i){
-            System.out.print(number2UserArray[i] + " ");
-        }
-        System.out.println();
-        for(int i = 0; i < 4; ++i){
-            System.out.print(resultUserArray[i] + " ");
-        }
-        System.out.println();*/
-
+        // If a digit is wrong set it to red
         for(int i = 0; i < 4; ++i){
             if(carryUserArray[i] != carryArray[i]){
                 workingCorrectFlag = false;
@@ -551,11 +546,13 @@ public class AdditionWorkspace extends AppCompatActivity {
         return cm.getActiveNetworkInfo() != null;
     }
 
+    // To check if an answer is entered by the user
     public boolean noAnswerEntered(){
         return answer1.getText().toString().equals("") && answer2.getText().toString().equals("") &&
                 answer3.getText().toString().equals("") && answer4.getText().toString().equals("");
     }
 
+    // Save the answer entered by the user
     public void saveAnswer(View view){
 
         if(!isNetworkConnected()){
