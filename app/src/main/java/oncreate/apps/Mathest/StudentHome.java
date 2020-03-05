@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,7 +48,6 @@ public class StudentHome extends AppCompatActivity {
 
     //Function to check network connectivity of the user
     private boolean isNetworkConnected() {
-
         //Checks for network connection
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
@@ -90,8 +90,8 @@ public class StudentHome extends AppCompatActivity {
         else {
             accuracyPercent = (int) (((float)correctAns / totalAns) * 100);
         }
-        accuracyTxt.setText(getString(R.string.accuracy_display) + accuracyPercent + "%");
-        progressTxt.setText(getString(R.string.progress_display) + totalAns+"/"+(10+wrongAns*3));
+        accuracyTxt.setText(getString(R.string.accuracy_display) + " " + accuracyPercent + "%");
+        progressTxt.setText(getString(R.string.progress_display) + " " + totalAns+"/"+(10+wrongAns*3));
         accuracyBar = findViewById(R.id.accuracy_bar);
         progressBar = findViewById(R.id.progress_bar);
         accuracyBar.setMax(100);
@@ -174,7 +174,7 @@ public class StudentHome extends AppCompatActivity {
                             sheetNo = 3;
                             break;
                         case R.id.division_icon:
-                            toolBar.setTitle(getString(R.string.division_statistics));
+                            toolBar.setTitle(getString(R.string.division_category));
                             textAnimation(getString(R.string.divide_instruction));
                             totalAns = m_user.getDivisionQuestionsAnswered();
                             correctAns = m_user.getDivisionCorrectAnswers();
@@ -192,7 +192,7 @@ public class StudentHome extends AppCompatActivity {
 
     //Rotating via x axis animation added to the text
     public void textAnimation(String operation){
-        String textToShow = getString(R.string.ready_display) + operation + " ?";
+        String textToShow = getString(R.string.ready_display) + " " + operation + " ?";
         readyTxt.setText(textToShow);
         readyTxt.animate().setDuration(1000).rotationX(30);
     }

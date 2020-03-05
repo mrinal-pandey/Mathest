@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -48,9 +49,9 @@ public class TestPage extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(TAG, "Starting classifier");
-            if(message.equals("Correct!")){
+            if(message.equals(getString(R.string.correct_prompt))){
                 correctAnswerDialogHandler.showDialog();
-            }else if(message.equals("Wrong!")){
+            }else if(message.equals(getString(R.string.wrong_prompt))){
                 wrongAnswerDialogHandler.showDialog();
             }
         }
@@ -101,7 +102,11 @@ public class TestPage extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(s);
                     for (int i = 0; i < jsonArray.length(); ++i) {
                         JSONObject details = jsonArray.getJSONObject(i);
-                        feedbackMessage = details.getString("comment");
+                        Resources res = getResources();
+                        String pkg = getPackageName();
+                        feedbackMessage = res.getString(res.getIdentifier(details.getString("comment"),
+                                "string",
+                                pkg));
                         new AlertDialog.Builder(TestPage.this)
                                 .setMessage(feedbackMessage)
                                 .setTitle(getString(R.string.read_instruction))
@@ -200,19 +205,19 @@ public class TestPage extends AppCompatActivity {
                 }
                 dialogHandler.hideDialog();
                 if(!questionsExhausted) {
-                    questionNumber.setText(getString(R.string.question_number_display) + (nextQuestion + 1));
+                    questionNumber.setText(getString(R.string.question_number_display) + " " + (nextQuestion + 1));
                     switch (sheetNo) {
                         case 1:
-                            questionBody.setText(getString(R.string.add_instruction) + number1 + getString(R.string.and) + number2);
+                            questionBody.setText(getString(R.string.add_instruction) + " " + number1 + " " + getString(R.string.and) + " " + number2);
                             break;
                         case 2:
-                            questionBody.setText(getString(R.string.subtract_instruction) + number2 + getString(R.string.from) + number1);
+                            questionBody.setText(getString(R.string.subtract_instruction) + " " + number2 + " " + getString(R.string.from) + " " + number1);
                             break;
                         case 3:
-                            questionBody.setText(getString(R.string.multiply_instruction) + number1 + getString(R.string.with) + number2);
+                            questionBody.setText(getString(R.string.multiply_instruction) + " " + number1 + " " + getString(R.string.with) + " " + number2);
                             break;
                         case 4:
-                            questionBody.setText(getString(R.string.divide_instruction) + number1 + getString(R.string.by) + number2);
+                            questionBody.setText(getString(R.string.divide_instruction) + " " + number1 + " " + getString(R.string.by) + " " + number2);
                             break;
                     }
                 }else{
