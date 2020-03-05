@@ -1,3 +1,7 @@
+/*Home Screen of the user which contains option to take a test in any of the
+four categories namely addition, subtraction, multiplication, division.
+This screen also displays the progress and the rate of accuracy of the user.
+ */
 package oncreate.apps.Mathest;
 
 import android.animation.ObjectAnimator;
@@ -41,6 +45,7 @@ public class StudentHome extends AppCompatActivity {
     private ProgressBar accuracyBar, progressBar;
     private ObjectAnimator objectAnimator;
 
+    //Function to check network connectivity of the user
     private boolean isNetworkConnected() {
 
         //Checks for network connection
@@ -53,28 +58,34 @@ public class StudentHome extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
 
+        //To avoid glitches in the interface, restricting the screen orientation to portrait
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         UID = getIntent().getStringExtra("uid");
 
+        //Adding custom toolbar
         toolBar = findViewById(R.id.student_home_toolbar);
         setSupportActionBar(toolBar);
 
+        //Adding bottom navigation fot the four categories "+ - * /"
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
         navigationView.setOnNavigationItemSelectedListener(navigationListener);
 
         readyTxt = findViewById(R.id.ready_txt);
+
+        //firebase cloud instance
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         setAttributes(R.id.addition_icon);
     }
 
+    //To calculate and display the accuracy and progress made by the user
     public void defineProgress(){
         accuracyTxt = findViewById(R.id.accuracy_percent_txt);
         progressTxt = findViewById(R.id.progress_txt);
         int accuracyPercent;
         if(totalAns == 0) {
-            accuracyPercent = 100;
+            accuracyPercent = 100; //Initially accuracy is considered 100%
         }
         else {
             accuracyPercent = (int) (((float)correctAns / totalAns) * 100);
@@ -89,17 +100,21 @@ public class StudentHome extends AppCompatActivity {
         animateProgressBar(progressBar,totalAns);
     }
 
+    //Adding the automatic sliding animation to the accuracy and progress bars
     public void animateProgressBar(ProgressBar progressBar, int value){
         objectAnimator = ObjectAnimator.ofInt(progressBar,"progress",0,value);
         objectAnimator.setDuration(3000);
         objectAnimator.start();
     }
+
+    //Providing a button in the toolbar to navigate to student profile
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.student_home_profile_menu, menu);
         return true;
     }
 
+    //Profile button functionality described here
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(R.id.profile_icon == item.getItemId()) {
@@ -115,6 +130,7 @@ public class StudentHome extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Providing functionality to the bottom navigation buttons
     private BottomNavigationView.OnNavigationItemSelectedListener navigationListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -174,12 +190,14 @@ public class StudentHome extends AppCompatActivity {
         }
     }
 
+    //Rotating via x axis animation added to the text
     public void textAnimation(String operation){
         String textToShow = getString(R.string.ready_display) + operation + " ?";
         readyTxt.setText(textToShow);
         readyTxt.animate().setDuration(1000).rotationX(30);
     }
 
+    //Providing intent to the test page with necessary details
     public void launchTest(View view) {
         if(isNetworkConnected()) {
             Intent intent = new Intent(this, TestPage.class);

@@ -1,3 +1,7 @@
+/*Test screen which displays question corresponding to the user,
+* accepts answer and validates it providing an appropriate
+* feedback incase the answer provided was wrong
+* Calls the RESTful API hosted on heroku for all the above functionality*/
 package oncreate.apps.Mathest;
 
 import android.content.Context;
@@ -35,10 +39,11 @@ import oncreate.apps.Mathest.UI.WrongAnswerDialogHandler;
 
 public class TestPage extends AppCompatActivity {
 
-    private final String TAG = "TestPage.class";
+    private final String TAG = "TestPage.class"; //For debugging purpose
 
     public class Classifier extends AsyncTask<String, Void, String>{
 
+        //To display the gif corresponding to the correct and wrong answer
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -84,6 +89,7 @@ public class TestPage extends AppCompatActivity {
             return null;
         }
 
+        //To hide the gif and provide the feedback to the user
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
