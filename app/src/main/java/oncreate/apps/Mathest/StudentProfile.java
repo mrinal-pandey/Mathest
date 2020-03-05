@@ -1,3 +1,6 @@
+/*
+* Profile of a student*/
+
 package oncreate.apps.Mathest;
 
 import android.content.Context;
@@ -21,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import oncreate.apps.Mathest.UI.DialogHandler;
 import oncreate.apps.Mathest.Wrappers.User;
+
+// Displaying all the statistics of the user
 
 public class StudentProfile extends AppCompatActivity {
 
@@ -57,6 +62,7 @@ public class StudentProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_profile);
 
+        // To avoid glitches in the interface, restricting the screen orientation to portrait
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         dialogHandler = new DialogHandler(this);
@@ -157,6 +163,7 @@ public class StudentProfile extends AppCompatActivity {
         }
     }
 
+    // Menu on app bar of student profile page
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.student_profile_menu, menu);
@@ -167,9 +174,11 @@ public class StudentProfile extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case android.R.id.home:
+                // Go back to home screen
                 finish();
                 break;
             case R.id.signout:
+                // Logout the user
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
