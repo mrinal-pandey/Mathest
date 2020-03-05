@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,7 +43,6 @@ public class StudentHome extends AppCompatActivity {
     private ObjectAnimator objectAnimator;
 
     private boolean isNetworkConnected() {
-
         //Checks for network connection
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
@@ -79,8 +79,8 @@ public class StudentHome extends AppCompatActivity {
         else {
             accuracyPercent = (int) (((float)correctAns / totalAns) * 100);
         }
-        accuracyTxt.setText("Your accuracy: " + accuracyPercent + "%");
-        progressTxt.setText("Your progress: " + totalAns+"/"+(10+wrongAns*3));
+        accuracyTxt.setText(getString(R.string.accuracy_display) + " " + accuracyPercent + "%");
+        progressTxt.setText(getString(R.string.progress_display) + " " + totalAns+"/"+(10+wrongAns*3));
         accuracyBar = findViewById(R.id.accuracy_bar);
         progressBar = findViewById(R.id.progress_bar);
         accuracyBar.setMax(100);
@@ -109,7 +109,7 @@ public class StudentHome extends AppCompatActivity {
                 intent.putExtra("UID", UID);
                 startActivity(intent);
             }else{
-                Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
             }
         }
         return super.onOptionsItemSelected(item);
@@ -137,29 +137,29 @@ public class StudentHome extends AppCompatActivity {
                     User m_user = documentSnapshot.toObject(User.class);
                     switch (iconID) {
                         case R.id.addition_icon:
-                            toolBar.setTitle("Addition");
-                            textAnimation("Add");
+                            toolBar.setTitle(getString(R.string.addition_category));
+                            textAnimation(getString(R.string.add_instruction));
                             totalAns = m_user.getAdditionQuestionsAnswered();
                             correctAns = m_user.getAdditionCorrectAnswers();
                             sheetNo = 1;
                             break;
                         case R.id.subtraction_icon:
-                            toolBar.setTitle("Subtraction");
-                            textAnimation("Subtract");
+                            toolBar.setTitle(getString(R.string.subtraction_category));
+                            textAnimation(getString(R.string.subtract_instruction));
                             totalAns = m_user.getSubtractionQuestionsAnswered();
                             correctAns = m_user.getSubtractionCorrectAnswers();
                             sheetNo = 2;
                             break;
                         case R.id.multiplication_icon:
-                            toolBar.setTitle("Multiplication");
-                            textAnimation("Multiply");
+                            toolBar.setTitle(getString(R.string.multiplication_category));
+                            textAnimation(getString(R.string.multiply_instruction));
                             totalAns = m_user.getMultiplicationQuestionsAnswered();
                             correctAns = m_user.getMultiplicationCorrectAnswers();
                             sheetNo = 3;
                             break;
                         case R.id.division_icon:
-                            toolBar.setTitle("Division");
-                            textAnimation("Divide");
+                            toolBar.setTitle(getString(R.string.division_category));
+                            textAnimation(getString(R.string.divide_instruction));
                             totalAns = m_user.getDivisionQuestionsAnswered();
                             correctAns = m_user.getDivisionCorrectAnswers();
                             sheetNo = 4;
@@ -175,7 +175,7 @@ public class StudentHome extends AppCompatActivity {
     }
 
     public void textAnimation(String operation){
-        String textToShow = "Ready to " + operation + " ?";
+        String textToShow = getString(R.string.ready_display) + " " + operation + " ?";
         readyTxt.setText(textToShow);
         readyTxt.animate().setDuration(1000).rotationX(30);
     }
@@ -190,7 +190,7 @@ public class StudentHome extends AppCompatActivity {
             startActivity(intent);
             finish();
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
     }
 }

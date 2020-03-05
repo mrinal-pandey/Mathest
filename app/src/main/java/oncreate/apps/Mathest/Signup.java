@@ -98,7 +98,7 @@ public class Signup extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Void> task) {
                     userAdded = true;
                     dialogHandler.hideDialog();
-                    Toast.makeText(getApplicationContext(), "User successfully added", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.signup_successful_message), Toast.LENGTH_LONG).show();
                     finish();
                 }
             });
@@ -130,7 +130,7 @@ public class Signup extends AppCompatActivity {
                             UIDGenerator();
                         }
                     }
-                    UID_disp.setText("Your UID is: " + UID);
+                    UID_disp.setText(getString(R.string.uid_display) + " " + UID);
                 }
             }
         });
@@ -166,13 +166,13 @@ public class Signup extends AppCompatActivity {
 
             if(nameEdit.getText().toString().equals("")) {
                 nameEdit.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
-                nameEdit.setHint("Please provide Full Name");
+                nameEdit.setHint(getString(R.string.name_invalid_message));
             }else{
                 nameEntered = true;
                 name = nameEdit.getText().toString();
             }
             if(schoolEdit.getText().toString().equals("")){
-                school = "NA";
+                school = getString(R.string.na);
             }else {
                 school = schoolEdit.getText().toString();
             }
@@ -190,12 +190,12 @@ public class Signup extends AppCompatActivity {
                 task.execute(this.getString(R.string.mathest_heroku_endpoint) + "sheet?uid=" + UID);
 
                 if (userAdded) {
-                    Toast.makeText(this, "Unable to add user, please try again..", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, getString(R.string.signup_unsuccessful_message), Toast.LENGTH_LONG).show();
                 }
             }
 
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
     }
 

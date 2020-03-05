@@ -104,10 +104,10 @@ public class Login extends AppCompatActivity {
                             }
                         });
             } else {
-                Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(this, "Please enter a valid UID", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.invalid_uid_message), Toast.LENGTH_LONG).show();
         }
 
 
@@ -118,7 +118,7 @@ public class Login extends AppCompatActivity {
         if(isNetworkConnected()) {
             startActivity(new Intent(this, Signup.class));
         }else {
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
     }
 

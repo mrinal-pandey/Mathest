@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -43,9 +44,9 @@ public class TestPage extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             Log.d(TAG, "Starting classifier");
-            if(message.equals("Correct!")){
+            if(message.equals(getString(R.string.correct_prompt))){
                 correctAnswerDialogHandler.showDialog();
-            }else if(message.equals("Wrong!")){
+            }else if(message.equals(getString(R.string.wrong_prompt))){
                 wrongAnswerDialogHandler.showDialog();
             }
         }
@@ -87,19 +88,23 @@ public class TestPage extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            if(message.equals("Correct!")) {
+            if(message.equals(getString(R.string.correct_prompt))) {
                 correctAnswerDialogHandler.hideDialog();
-            }else if(message.equals("Wrong!")) {
+            }else if(message.equals(getString(R.string.wrong_prompt))) {
                 wrongAnswerDialogHandler.hideDialog();
                 try {
                     JSONArray jsonArray = new JSONArray(s);
                     for (int i = 0; i < jsonArray.length(); ++i) {
                         JSONObject details = jsonArray.getJSONObject(i);
-                        feedbackMessage = details.getString("comment");
+                        Resources res = getResources();
+                        String pkg = getPackageName();
+                        feedbackMessage = res.getString(res.getIdentifier(details.getString("comment"),
+                                "string",
+                                pkg));
                         new AlertDialog.Builder(TestPage.this)
                                 .setMessage(feedbackMessage)
-                                .setTitle("Please read this!")
-                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                .setTitle(getString(R.string.read_instruction))
+                                .setPositiveButton(getString(R.string.okay_dialog_button), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -113,7 +118,7 @@ public class TestPage extends AppCompatActivity {
             }
             Log.i("Content: ", s);
             userAnswer.getText().clear();
-            userAnswer.setHint("Enter Numeric answer");
+            userAnswer.setHint(getString(R.string.hint_answer_edit_box));
             userAnswer.setHintTextColor(getResources().getColor(R.color.disableColor));
             answerEntered = false;
             getQuestionDetails(++nextQuestion);
@@ -179,9 +184,9 @@ public class TestPage extends AppCompatActivity {
                     if(details.has("error")){
                         questionsExhausted = true;
                         new AlertDialog.Builder(TestPage.this)
-                                .setMessage("Congratulations! You have answered all questions of this category. Please press 'Okay' and then 'Save progress' to exit.")
-                                .setTitle("Questions exhausted!")
-                                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                                .setMessage(getString(R.string.question_exhaust_message))
+                                .setTitle(getString(R.string.question_exhaust_title))
+                                .setPositiveButton(getString(R.string.okay_dialog_button), new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -194,24 +199,24 @@ public class TestPage extends AppCompatActivity {
                 }
                 dialogHandler.hideDialog();
                 if(!questionsExhausted) {
-                    questionNumber.setText("Question " + (nextQuestion + 1));
+                    questionNumber.setText(getString(R.string.question_number_display) + " " + (nextQuestion + 1));
                     switch (sheetNo) {
                         case 1:
-                            questionBody.setText("Add " + number1 + " and " + number2);
+                            questionBody.setText(getString(R.string.add_instruction) + " " + number1 + " " + getString(R.string.and) + " " + number2);
                             break;
                         case 2:
-                            questionBody.setText("Subtract " + number2 + " from " + number1);
+                            questionBody.setText(getString(R.string.subtract_instruction) + " " + number2 + " " + getString(R.string.from) + " " + number1);
                             break;
                         case 3:
-                            questionBody.setText("Mutliply " + number1 + " with " + number2);
+                            questionBody.setText(getString(R.string.multiply_instruction) + " " + number1 + " " + getString(R.string.with) + " " + number2);
                             break;
                         case 4:
-                            questionBody.setText("Divide " + number1 + " by " + number2);
+                            questionBody.setText(getString(R.string.divide_instruction) + " " + number1 + " " + getString(R.string.by) + " " + number2);
                             break;
                     }
                 }else{
-                    questionNumber.setText("Congratulations!");
-                    questionBody.setText("You have mastered this category!");
+                    questionNumber.setText(getString(R.string.congratulations_display));
+                    questionBody.setText(getString(R.string.mastered_category_message));
                     userAnswer.setEnabled(false);
                     userAnswer.setBackgroundColor(getResources().getColor(R.color.disableColor));
                     submitButton.setEnabled(false);
@@ -249,9 +254,9 @@ public class TestPage extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(TestPage.this)
-                .setMessage("You can't go back from here")
-                .setTitle("Please press Save progress to exit")
-                .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                .setMessage(getString(R.string.back_press_message))
+                .setTitle(getString(R.string.back_press_title))
+                .setPositiveButton(getString(R.string.okay_dialog_button), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -292,7 +297,7 @@ public class TestPage extends AppCompatActivity {
         if(isNetworkConnected()) {
             getQuestionDetails(nextQuestion);
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
 
     }
@@ -319,7 +324,7 @@ public class TestPage extends AppCompatActivity {
             String userAnswerText = userAnswer.getText().toString();
             if (userAnswerText.equals("")) {
                 userAnswer.setHintTextColor(getResources().getColor(R.color.wrongAnswerColor));
-                userAnswer.setHint("Please provide an answer");
+                userAnswer.setHint(getString(R.string.provide_answer_hint));
             } else {
                 answerEntered = true;
             }
@@ -328,40 +333,40 @@ public class TestPage extends AppCompatActivity {
                 switch (sheetNo) {
                     case 1:
                         if (Integer.valueOf(number1) + Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                            message = "Correct!";
+                            message = getString(R.string.correct_prompt);
                             ++correctAnswersCounter;
                         } else {
-                            message = "Wrong!";
+                            message = getString(R.string.wrong_prompt);
                         }
                         classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "addition?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                     case 2:
                         if (Integer.valueOf(number1) - Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                            message = "Correct!";
+                            message = getString(R.string.correct_prompt);
                             ++correctAnswersCounter;
                         } else {
-                            message = "Wrong!";
+                            message = getString(R.string.wrong_prompt);
                         }
                         classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "subtraction?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                     case 3:
                         if (Integer.valueOf(number1) * Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                            message = "Correct!";
+                            message = getString(R.string.correct_prompt);
                             ++correctAnswersCounter;
                         } else {
-                            message = "Wrong!";
+                            message = getString(R.string.wrong_prompt);
                         }
                         classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "multiplication?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
 
                     case 4:
                         if (Integer.valueOf(number1) / Integer.valueOf(number2) == Integer.valueOf(userAnswerText)) {
-                            message = "Correct!";
+                            message = getString(R.string.correct_prompt);
                             ++correctAnswersCounter;
                         } else {
-                            message = "Wrong!";
+                            message = getString(R.string.wrong_prompt);
                         }
                         classifier.execute(this.getString(R.string.mathest_heroku_endpoint) + "division?uid=" + UID + "&row=" + (nextQuestion + 2) + "&answer=" + userAnswerText);
                         break;
@@ -370,7 +375,7 @@ public class TestPage extends AppCompatActivity {
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -463,7 +468,7 @@ public class TestPage extends AppCompatActivity {
                     break;
             }
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -482,10 +487,10 @@ public class TestPage extends AppCompatActivity {
                 intent.putExtra("UID", UID);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "Functionality not available!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.functionality_unavailable), Toast.LENGTH_SHORT).show();
             }
         }else{
-            Toast.makeText(this, "No internet detected", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show();
         }
     }
 
